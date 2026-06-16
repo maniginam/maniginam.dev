@@ -11,6 +11,11 @@
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://maniginam.dev/">
 
+  <!-- Agent Discovery (RFC 8288 / RFC 9727) -->
+  <link rel="api-catalog" href="/.well-known/api-catalog" type="application/linkset+json">
+  <link rel="alternate" href="/feed.xml" type="application/rss+xml" title="Gina Martiny Blog">
+  <link rel="sitemap" href="/sitemap.xml" type="application/xml">
+
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Gina Martiny — Software Engineering & AI">
@@ -832,6 +837,52 @@
     }, { passive: true });
   </script>
 
+  <!-- WebMCP: Expose site tools to AI agents -->
+  <script>
+  if (navigator.modelContext && navigator.modelContext.provideContext) {
+    navigator.modelContext.provideContext({
+      tools: [
+        {
+          name: 'get_site_info',
+          description: 'Get information about Gina Martiny and ManiGinaM, LLC — software engineering, AI consulting, Port Allen LA',
+          inputSchema: { type: 'object', properties: {} },
+          execute: function() {
+            return {
+              name: 'Gina Martiny',
+              business: 'ManiGinaM, LLC',
+              location: 'Port Allen, Louisiana',
+              services: ['Software Engineering', 'AI Integration', 'Industrial Automation', 'Web Development'],
+              sites: {
+                portfolio: 'https://maniginam.dev',
+                blog: 'https://maniginam.dev/blog/',
+                wbr: 'https://wbr.maniginam.dev',
+                legacyleaps: 'https://legacyleaps.com',
+                aileapers: 'https://aileapers.com'
+              },
+              feed: 'https://maniginam.dev/feed.xml',
+              resume: 'https://maniginam.dev/resume.html'
+            };
+          }
+        },
+        {
+          name: 'list_blog_posts',
+          description: 'List all blog posts by Gina Martiny on software craftsmanship, AI, TDD, and life',
+          inputSchema: { type: 'object', properties: {} },
+          execute: function() {
+            var posts = [];
+            document.querySelectorAll('.blog-card, .post-link, article a[href*="blog/"]').forEach(function(el) {
+              posts.push({ title: el.textContent.trim(), url: el.href || el.querySelector('a')?.href });
+            });
+            if (!posts.length) {
+              posts.push({ note: 'Blog index at https://maniginam.dev/blog/', feed: 'https://maniginam.dev/feed.xml' });
+            }
+            return posts;
+          }
+        }
+      ]
+    });
+  }
+  </script>
 
 </body>
 </html>

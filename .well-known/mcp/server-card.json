@@ -1,0 +1,44 @@
+{
+  "serverInfo": {
+    "name": "maniginam.dev",
+    "version": "1.0.0",
+    "description": "Gina Martiny — Software engineer in Port Allen, LA. Blog, resume, and portfolio."
+  },
+  "capabilities": {
+    "resources": true,
+    "tools": false,
+    "prompts": false
+  },
+  "resources": [
+    {
+      "uri": "https://maniginam.dev/",
+      "name": "Homepage",
+      "description": "Portfolio and services overview for ManiGinaM, LLC",
+      "mimeType": "text/html"
+    },
+    {
+      "uri": "https://maniginam.dev/blog/index.html",
+      "name": "Blog",
+      "description": "Blog posts on software craftsmanship, AI, TDD, and life in Louisiana",
+      "mimeType": "text/html"
+    },
+    {
+      "uri": "https://maniginam.dev/resume.html",
+      "name": "Resume",
+      "description": "Professional resume — software engineering, AI, industrial automation",
+      "mimeType": "text/html"
+    },
+    {
+      "uri": "https://maniginam.dev/feed.xml",
+      "name": "RSS Feed",
+      "description": "RSS feed of all blog posts",
+      "mimeType": "application/rss+xml"
+    },
+    {
+      "uri": "https://maniginam.dev/sitemap.xml",
+      "name": "Sitemap",
+      "description": "XML sitemap of all pages",
+      "mimeType": "application/xml"
+    }
+  ]
+}

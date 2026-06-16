@@ -1,0 +1,26 @@
+{
+  "$schema": "https://agentskills.io/schema/v0.2.0/index.json",
+  "skills": [
+    {
+      "name": "blog-feed",
+      "type": "rss",
+      "description": "RSS feed of Gina Martiny's blog posts on software engineering, AI, and clean code",
+      "url": "https://maniginam.dev/feed.xml",
+      "sha256": ""
+    },
+    {
+      "name": "sitemap",
+      "type": "sitemap",
+      "description": "XML sitemap listing all pages on maniginam.dev",
+      "url": "https://maniginam.dev/sitemap.xml",
+      "sha256": ""
+    },
+    {
+      "name": "resume",
+      "type": "document",
+      "description": "Gina Martiny's professional resume — software engineering, AI consulting, industrial automation",
+      "url": "https://maniginam.dev/resume.html",
+      "sha256": ""
+    }
+  ]
+}

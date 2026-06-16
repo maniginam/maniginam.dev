@@ -2,3 +2,8 @@ User-agent: *
 Allow: /
 
 Sitemap: https://maniginam.dev/sitemap.xml
+
+# Agent Discovery
+# API Catalog (RFC 9727): https://maniginam.dev/.well-known/api-catalog
+# Agent Skills: https://maniginam.dev/.well-known/agent-skills/index.json
+# MCP Server Card: https://maniginam.dev/.well-known/mcp/server-card.json

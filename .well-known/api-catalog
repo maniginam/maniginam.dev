@@ -1,0 +1,25 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://maniginam.dev/",
+      "service-desc": [
+        {
+          "href": "https://maniginam.dev/sitemap.xml",
+          "type": "application/xml"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://maniginam.dev/",
+          "type": "text/html"
+        }
+      ],
+      "alternate": [
+        {
+          "href": "https://maniginam.dev/feed.xml",
+          "type": "application/rss+xml"
+        }
+      ]
+    }
+  ]
+}
