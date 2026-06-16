@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Gina Martiny</title>
+  <meta name="description" content="Blog posts by Gina Martiny on software craftsmanship, AI agents, chemical manufacturing leadership, and the messy reality of building things that work.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://maniginam.dev/blog">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Gina Martiny Blog" href="/feed.xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Blog — Gina Martiny">
+  <meta property="og:description" content="Writing on software craftsmanship, responsible AI, leadership, and the messy reality of building things that work.">
+  <meta property="og:url" content="https://maniginam.dev/blog">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta property="og:image" content="https://maniginam.dev/og-default.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --navy-light: #243352; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+    nav ul li a.active { color: var(--accent-light); }
+    .page-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .page-header h1 { font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
+    .page-header .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 600px; margin: 0 auto; }
+    .container { max-width: 800px; margin: 0 auto; padding: 2.5rem 2rem; }
+    .year-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin: 2rem 0 1rem; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .year-label:first-child { margin-top: 0; }
+    .post-card { display: block; text-decoration: none; padding: 1.25rem; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.75rem; transition: box-shadow 0.2s, border-color 0.2s; }
+    .post-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(196,135,91,0.3); }
+    .post-card h3 { font-size: 1rem; color: var(--navy); margin-bottom: 0.35rem; font-weight: 600; }
+    .post-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; }
+    .post-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
+    .post-date { font-size: 0.75rem; color: var(--text-light); }
+    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 2rem; text-align: center; margin-top: 3rem; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .page-header h1 { font-size: 1.7rem; }
+    }
+  </style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog" class="active">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Blog</h1>
+    <p class="subtitle">Software craftsmanship, responsible AI, leadership lessons from chemical plants, and the messy reality of building things that work.</p>
+  </div>
+
+  <div class="container">
+
+    <div class="year-label">2026</div>
+
+    <!-- 5 draft posts hidden pending review: building-autonomous-ai-agents-in-clojure, why-tdd-still-matters-in-the-age-of-ai, from-side-project-to-passive-income, the-real-cost-of-technical-debt, clojure-for-the-skeptical-java-developer -->
+
+    <!-- AI Tools + CounselAI posts hidden per request -->
+
+    <a href="/blog/twenty-kills-per-second" class="post-card">
+      <h3>Twenty Kills Per Second</h3>
+      <p>My oldest came skidding around the corner in socks on hardwood — eyes wide, voice cracking with the particular urgency that only an eight-year-old whose Minecraft world is under siege can produce.</p>
+      <div class="post-meta">
+        <span class="post-date">May 21, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/the-board-doesnt-lie" class="post-card">
+      <h3>The Board Doesn't Lie</h3>
+      <p>Every morning at 6:15, before the coffee kicked in, we stood in front of the board. Five letters. Big. Color-coded. Red or green. Just the board, telling you the truth about your operation whether you wanted to hear it or not.</p>
+      <div class="post-meta">
+        <span class="post-date">May 8, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/build-it-once" class="post-card">
+      <h3>Build It Once</h3>
+      <p>Your MVP has a procurement process to survive. A security review. A compliance checklist. A VP who put their name on the approval. It has to live in that world from day one.</p>
+      <div class="post-meta">
+        <span class="post-date">May 4, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/bland-confidence" class="post-card">
+      <h3>Bland Confidence</h3>
+      <p>One of our AI agents rewrote a function, ran the tests, watched them pass, and shipped it. Except the function was wrong. The tests passed because the agent had also written the tests, and the tests were checking for the wrong thing.</p>
+      <div class="post-meta">
+        <span class="post-date">April 17, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/we-build-software-with-responsible-ai" class="post-card">
+      <h3>We Build Software with Responsible AI</h3>
+      <p>Teams are building AI features with none of the discipline they'd apply to literally any other part of their system. No tests around the AI integration. No clean interface. No fallback behavior when the model hallucinates.</p>
+      <div class="post-meta">
+        <span class="post-date">April 16, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/the-hive-is-open" class="post-card">
+      <h3>The Hive is Open</h3>
+      <p>I was sitting at my desk with six AI agents running in six terminal panes, and I couldn't tell what any of them were doing. I was the air traffic controller, except the radar was broken and the planes were texting me in paragraphs.</p>
+      <div class="post-meta">
+        <span class="post-date">April 15, 2026</span>
+      </div>
+    </a>
+
+    <a href="/blog/i-made-some-mistakes" class="post-card">
+      <h3>I Made Some Mistakes. The Robot Made Them Faster.</h3>
+      <p>Last week I committed a Secure cookie flag to production that only worked on localhost. The AI helped with all of it. Enthusiastically.</p>
+      <div class="post-meta">
+        <span class="post-date">April 8, 2026</span>
+      </div>
+    </a>
+
+    <div class="year-label">2025</div>
+
+    <a href="/blog/leadership-is-hard" class="post-card">
+      <h3>Heat Disappearing Ink is Dangerous...</h3>
+      <p>I decided to save my original EPIC drawings by laminating them, only to remember I'd drawn them with a heat-sensitive erasable pen. In that one decision, the original drawings were gone.</p>
+      <div class="post-meta">
+        <span class="post-date">May 21, 2025</span>
+      </div>
+    </a>
+
+    <div class="year-label">2024</div>
+
+    <a href="/blog/navigating-the-unknown" class="post-card">
+      <h3>Navigating the Unknown &amp; Avoiding the Money Pit</h3>
+      <p>Spending ten years in chemical manufacturing is not the typical path to preparing for a career in software development. But that's what I did. Here's what I learned about shopping for software solutions.</p>
+      <div class="post-meta">
+        <span class="post-date">February 6, 2024</span>
+      </div>
+    </a>
+
+    <div class="year-label">2022</div>
+
+    <a href="/blog/epic-growth" class="post-card">
+      <h3>EPIC Growth</h3>
+      <p>From a toddler's one-word school report to building a full production platform — a reflection on growth, persistence, and the slow accumulation of craft.</p>
+      <div class="post-meta">
+        <span class="post-date">April 7, 2022</span>
+      </div>
+    </a>
+
+    <div class="year-label">2021</div>
+
+    <a href="/blog/dont-get-stranded-testlessly" class="post-card">
+      <h3>Don't Get Stranded Testlessly</h3>
+      <p>On the importance of testing and what happens when you skip it — told through the lens of learning TDD from scratch.</p>
+      <div class="post-meta">
+        <span class="post-date">September 1, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/car-soup-is-too-hot" class="post-card">
+      <h3>Car Soup is Too Hot</h3>
+      <p>Life lessons from toddlers, applied to software development. Sometimes the simplest observations cut the deepest.</p>
+      <div class="post-meta">
+        <span class="post-date">August 31, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/milk-is-in-a-cup" class="post-card">
+      <h3>Milk is in a Cup</h3>
+      <p>Observations from raising kids while learning to code — where the mundane becomes metaphor.</p>
+      <div class="post-meta">
+        <span class="post-date">August 25, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/pee-youp" class="post-card">
+      <h3>Pee-Yoop!</h3>
+      <p>The apprenticeship continues. Learning, failing, growing — with colorful commentary from the peanut gallery at home.</p>
+      <div class="post-meta">
+        <span class="post-date">August 17, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/stuck-and-growing-fast" class="post-card">
+      <h3>Stuck and Growing Fast</h3>
+      <p>That particular feeling when you're stuck on a problem and growing at the same time. The apprenticeship grind, unvarnished.</p>
+      <div class="post-meta">
+        <span class="post-date">August 16, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/the-start-of-two-recurs" class="post-card">
+      <h3>The Start of Two Recurs</h3>
+      <p>Recursion, explained — twice. When code calls itself and toddlers repeat themselves, the parallels are uncanny.</p>
+      <div class="post-meta">
+        <span class="post-date">August 12, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/cheeky-butt" class="post-card">
+      <h3>Cheeky Butt</h3>
+      <p>Kids say the darndest things. So do error messages. Reflections from the intersection of parenting and programming.</p>
+      <div class="post-meta">
+        <span class="post-date">August 9, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/refactor-refactor-drop" class="post-card">
+      <h3>Refactor, Refactor, Drop!</h3>
+      <p>Learning to refactor code while learning to let go. The apprenticeship diaries continue.</p>
+      <div class="post-meta">
+        <span class="post-date">August 6, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/cats-vs-http" class="post-card">
+      <h3>Cats VS HTTP</h3>
+      <p>HTTP status codes explained through the universal language of cats. Because sometimes the best way to learn protocols is through memes.</p>
+      <div class="post-meta">
+        <span class="post-date">August 4, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/roadmaps" class="post-card">
+      <h3>Roadmaps</h3>
+      <p>Planning the path forward — apprenticeship roadmaps, learning plans, and figuring out what to tackle next.</p>
+      <div class="post-meta">
+        <span class="post-date">August 2, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/choo-choo-peanut-poop" class="post-card">
+      <h3>Choo Choo Peanut Poop</h3>
+      <p>The title says it all. Parenthood meets apprenticeship in the most unglamorous way possible.</p>
+      <div class="post-meta">
+        <span class="post-date">July 31, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/dragon-drops" class="post-card">
+      <h3>Dragon Drops</h3>
+      <p>Drag and drop, explained. Also dragons. The early apprenticeship blog entries where code concepts meet creative storytelling.</p>
+      <div class="post-meta">
+        <span class="post-date">July 21, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/eleventeen" class="post-card">
+      <h3>Eleventeen</h3>
+      <p>The very beginning. Starting a software apprenticeship with two small kids, a chemical engineering background, and zero idea what I was getting into.</p>
+      <div class="post-meta">
+        <span class="post-date">July 20, 2021</span>
+      </div>
+    </a>
+
+    <a href="/blog/a-path-for-beginners" class="post-card">
+      <h3>A Beginner's Path</h3>
+      <p>I wanted to learn how to code, but I neither knew where to start or what that path forward might look like. A decade of false starts before finding the right approach.</p>
+      <div class="post-meta">
+        <span class="post-date">May 3, 2021</span>
+      </div>
+    </a>
+
+  </div>
+
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> &middot;
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> &middot;
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> &middot;
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> &middot;
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+
+</html>

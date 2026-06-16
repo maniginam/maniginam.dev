@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pee-Yoop! — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="A breakthrough TDD moment linking two applications — and the joy of tests passing when you least expect it.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Pee-Yoop!">
+  <meta property="og:description" content="A breakthrough TDD moment linking two applications — and the joy of tests passing when you least expect it.">
+  <meta property="og:url" content="https://maniginam.dev/blog/pee-youp">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pee-Yoop!">
+  <meta name="twitter:description" content="A breakthrough TDD moment linking two applications — and the joy of tests passing when you least expect it.">
+  <link rel="canonical" href="https://maniginam.dev/blog/pee-youp">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Pee-Yoop!",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-08-17",
+    "description": "A breakthrough TDD moment linking two applications — and the joy of tests passing when you least expect it.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/pee-youp"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-header">
+    <h1>Pee-Yoop!</h1>
+    <p class="post-date">August 17, 2021</p>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Ok, today was pretty cool.</p>
+<p>I met with Micah to let him know I was blocked.  He gave me some guidance there on possible ways to get through it.  Then I asked him the question that’s been consuming my time for a while, and that was about who should drive the linking--the client-side or the server-side?  In hindsight, I think I always knew it should come from the server, but for whatever reason, i was really struggling with the chain of events.</p>
+<p>I got to it though.  Spent most of the time on the estimates and getting them sorted with the stories that were estimated--both new stories received from Poker as well as any duplicately-named stories that already existed in both EPIC &amp; Poker--otherwise, they would have been nil-ified!</p>
+<p>Then of course, I also had to deal with getting the sent-story-ids into the project-&gt;poker-&gt;story map (I know, it’s a mouthful, but that’s it’s name).  With that I had my very first wonderfully-awed non-kata TDD surprise!  Let me tell you how exciting that was.  Granted I was all alone, so I don’t actually remember if I said anything allowed (Keith says I often fabricate stories to make them more interesting--it’s true), but I’m pretty sure I let out a “wtf?!  This is passing?!  No Way!”  It wasn’t supposed to be passing.  I double checked my tests, and sure enough (and okay okay, a little fabrication, i did have to make one very small change to add this list to the Poker-list, but it was nothing like I was expecting”) the tests were correct and everything was passing.  I was kind of floored.</p>
+<p>So at this point, i was ready to give it a shot in the browser.  I knew fully well, from all my experience thus far, that I was going to get a giant error from the browser either from EPIC or from Poker.  I braced myself.  I linked.  I waited for the error in so much anticipation, and what I got…  What I got was a big fat blue “You are now Linked to Poker Room: Oval Office and received 2 stories”!!!!!!</p>
+<p>And, those stories came in correctly--one with an estimate and one without!  I was speechless…  i almost didn’t believe it--well, actually, I didn’t believe it.  I thought for use it had cached some old js, so I did a clear &amp; refresh, a clean of both Poker &amp; EPIC, then a recompile of them both, and I did it again.  Same Result!</p>
+<p>I’ve not had many days like these, but these days are worth trucking on for.  It was a lot of work today, on a task that I felt was mostly complete already and that fixing should have taken only an hour or two top--I’m not going to admit how long I spent doing this, but it was all worth it to do it the right way and see the correct results!</p>
+<p>Then of course I broke it all by merging into an old version that had crap in it, but that wasn’t too big of a deal, plus it had some design stuff in it that I’d wanted to keep.  So yay!</p>
+<hr />
+<p>Rex:
+So one of my toy nemesis is hot wheel ramps at the moment.  Rex always wants ramps with loops, but it actually takes a lot of precision to get those things lined up right.  They require the right slope to give the car the momentum it needs to get around the loop while also not making it so steep that the car just drives off the ramp.  It is hard to get it here, and when I do, I have a solid 30 seconds to a minute before someone walks into it, falls on it, or drives into it with a monster truck and I have to fix it again with all the same precision.</p>
+<p>While they were gone, i missed them and so went out to get them a toy.  I got them the MarioKart hotwheels race track.  This thing is awesome!  It is sturdy.  Rex can easily make it go all the way around the loop--sometimes the karts fall off, but that’s actually part of the game.  It’s very “real” to the videogame, and that’s fun.  And Rex loves it!  And he can do it over and over by himself all while I am able to make dinner without having to stop every 30 - 60 seconds.  This toy was a win!</p>
+<p>Leo:</p>
+<p>Leo was sitting on the potty this evening--his normal 25 minute evening poop…  But amidst his trials, he kept point at the big potty and the floor and Rex’s little froggy urinal with the spinning-tongue-target (yes, it’s weird, but I highly recommend it as it’s been very effective for Rex), and as he’d point, he say “yuckieeee”.  I’d affirm and agree “Yes, that’s yucky.”</p>
+<p>Then he said “eieeww.”, put his fingers on his nose to pinch it shut, “peee-yoop”.  I died laughing it was so funny and so darn cute.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/dont-get-stranded-testlessly">Don't Get Stranded Testlessly</a></li>
+      <li><a href="/blog/roadmaps">Roadmaps</a></li>
+      <li><a href="/blog/milk-is-in-a-cup">Milk is in a Cup</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

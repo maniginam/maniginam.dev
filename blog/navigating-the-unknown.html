@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigating the Unknown & Avoiding the Money Pit — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="How to successfully shop for software solutions — avoiding waterfall traps, owning your code, and finding a trusted software partner.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Navigating the Unknown & Avoiding the Money Pit">
+  <meta property="og:description" content="How to successfully shop for software solutions — avoiding waterfall traps, owning your code, and finding a trusted software partner.">
+  <meta property="og:url" content="https://maniginam.dev/blog/navigating-the-unknown">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Navigating the Unknown & Avoiding the Money Pit">
+  <meta name="twitter:description" content="How to successfully shop for software solutions — avoiding waterfall traps, owning your code, and finding a trusted software partner.">
+  <link rel="canonical" href="https://maniginam.dev/blog/navigating-the-unknown">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Navigating the Unknown & Avoiding the Money Pit",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2026-02-06",
+    "description": "How to successfully shop for software solutions — avoiding waterfall traps, owning your code, and finding a trusted software partner.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/navigating-the-unknown"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-hero">
+    <img src="/blog/img/navigating-the-unknown/hero.jpg" alt="Navigating the Unknown & Avoiding the Money Pit">
+    <div class="hero-text">
+      <h1>Navigating the Unknown & Avoiding the Money Pit</h1>
+      <p class="post-date">February 6, 2024</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<h2>How to Successfully Shop for Software Solutions</h2>
+<p>You may be unaware of something that you need to know.</p>
+<p>Spending ten years in chemical manufacturing is not the typical path to preparing for a career in software development;
+but that’s what I did. It came with some perks as the operations &amp; manufacturing expertise I developed couples very
+nicely with writing software for the industry.</p>
+<p>I worked at four different sites across three different companies. Each of these companies had the same habit. Seeing as
+it was a 3 out of 3, I must assume that this habit exists in all manufacturing.</p>
+<p>Each company that I worked for had a lot of high-tech software. In fact, they had different high tech software for each
+division within the company. Safety had incident management software, Operations had Management of Change software and
+version control software amongst others. Accounting had an ERP like SAP or Oracle, and may have even had other software
+they worked with on top of that to meet the needs that the ERP did not.</p>
+<p>None of these systems worked together, and so in order to build reports and tools using common data, each company would
+call upon their engineers to build those in MS Excel or MS Access.</p>
+<p>If I had to estimate, I would say that I spent half of my time in manufacturing building these types of reports and
+tools. That’s five man-years!  I built production &amp; yields reports for the business, round sheets for the operators
+which then fed into the former report, and so many other forms.</p>
+<p>As I write this now, I can’t help but wonder:  Who is maintaining those tools now?</p>
+<p>My guess is no one. After all, once I left the companies, all it would take to make the tool obsolete and unusable is a
+single input writing over a single formula in a single cell. Or in the instances where I intended to prevent just that,
+maybe I included a password – maybe the password was even blank. But when a new tag gets added in the field that needs
+to be added to the report, no one will know the password. If they call me, I’ll give it to them – if I remember it.</p>
+<p>Having seen it so many times, my guess is that many of you have reports &amp; tools that your business heavily relies on,
+and if the person who built them leaves, your business could be in trouble.</p>
+<p>Wouldn't it be nice to have a trusted software partner who could help you maintain your business continuity. Wouldn’t it
+be nice to have a partner who could manage all that data and those reports you currently track in excel, so that you
+don’t have to worry about your engineers leaving? Wouldn’t that be nice?</p>
+<p>But how do you find this trusted software partner? Where do you even begin?</p>
+<p>Last year I attended the Supply Chain Conference of Baton Rouge. It was my third time attending as I find this
+conference not only completely fascinating, but also fully engaging.</p>
+<p>After the event, they host an after party. At the after party last year, I met Cody.</p>
+<p>Cody was both excited and a little apprehensive about the fact that his company had just signed a contract with a
+development team to build their production and inventory reports.</p>
+<p>I love production reports!  So, I couldn’t help but to ask all about it. Here’s how this conversation went:</p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>This is so exciting! When are you going to be able to use it and try it out?</code></p>
+<p><strong>Cody:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>The company said it would take them 18 months to build it.</code></p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>Ok, but when are you going to be able to test  it out and make sure that it’s on track?</code></p>
+<p><strong>Cody:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>…18 months?</code></p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>18 months?!</code> </p>
+<p><code>Cody, this is a huge red flag!</code></p>
+<p><code>You should be able to use your software along the process, and typically within one week of kicking off the project.</code></p>
+<p><code>When are you paying for it?</code></p>
+<p><strong>Cody:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>We had to pay most of it up front and will pay the final invoice before they turn it over to us.</code></p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>So you have already paid for this software even though you will not be able to use it for 18 months?</code></p>
+<p><code>And when it is “complete”, do you expect it to work?</code> </p>
+<p><code>Oh Cody… You are headed full speed toward a brick wall.</code></p>
+<p>What Cody was experiencing is called the “Waterfall” approach; you may know it better as “Turn Key”. </p>
+<p>This approach in software was deprecated 25 years ago. It is when you meet with the team, you all discuss the project, and then you hand it off to them to build with the expectation that they provide you with your working solution at some future time.</p>
+<h4>It does not work...</h4>
+<p>When you are working with a trusted and professional software partner, you should be able to both try and use your application by the end of the first <strong>iteration</strong> (typically the first week).  Then you, as the client, have all the decision power to prioritize the features you would like to have implemented.  </p>
+<p>Up front, you describe the features that are important to you (we like to call these descriptions stories.) Your software partner is allowed to help guide you in this process, especially up front as you are learning how to write the stories.  </p>
+<p>Each <strong>story</strong> will have thorough <strong>acceptance criteria</strong> outlining exactly what you expect the feature to do and how you expect it to behave. </p>
+<p>For each <strong>iteration</strong>, you select the stories to be implemented. Your software partners then spend that <strong>iteration</strong> implementing those <strong>stories</strong>. At the end of the <strong>iteration</strong> they demonstrate them to you; and if they meet your <strong>acceptance criteria</strong>, you approve, and pay for, the <strong>iteration</strong>.  </p>
+<p>I continued with Cody (who had lost all color in his face).</p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp; <code>What’s your exit plan?</code></p>
+<p><strong>Cody:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;<code>What do you mean?</code></p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <code>I mean, when things go wrong how do you get out from working with this company?</code>
+              <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+              <code>You are going to own the software that they build for you right?</code></p>
+<p><strong>Cody:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>…</code></p>
+<p><strong>Gina:</strong>     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>Cody, you need to go back and reread your contract and make sure that you own your code!</code></p>
+<p>You!  You own your software!  You own not only your software, but you also own your data. And you should have a clause
+in the contract for how you will get your data in the case you need a bulk export.</p>
+<p>I had a friend at one of the plants that I worked at who got into just this kind of pickle. The company had a Software
+as a Service (SaaS) that they stored all of their ultrasonic thickness readings in. They wanted to divest from this
+service and so requested all of their data. The SaaS said, “Sure. It’s yours. You can download it all from the app.”</p>
+<p>There was no bulk export though, so they had to download tens of thousands of PDFs, which my friend had sole
+responsibility for inputting into Excel. He was pretty savvy though, and used this opportunity to learn VBA to automate
+the inputs–Excel &amp; VBA do have their place for sure. Very impressively, he did just this, and he did it well. So, I
+married him.</p>
+<p>Make sure you have a clause for a bulk export of your data in a format that you can easily consume!</p>
+<p>OK. So now you’ve been iteratively working with your trusted software partner, and all of a sudden your application is
+“DONE”!  The quotes are to emphasize that software is an evolving medium that may never be fully done.</p>
+<p>Now what?</p>
+<p>Oh no!  A short time after, you discover a bug. If you have a trusted software partner, then all you need to do is call
+them up and say, “Hi Gina, so I was using the app, and I discovered this bug…”, and I would say, “That shouldn’t be
+happening!  I will get on this as soon as reasonably possible!”</p>
+<p>As soon as reasonably possible means (typically) within 1 iteration/week. And I’m going to fix it for you – at no cost
+to you.</p>
+<p>For instance, if you were to order Kung Pao Chicken at a restaurant, and discovered that one of the thai chilis was
+actually a camouflaged cricket, would you expect to have to pay to have the restaurant remake it cricketless?  (true
+story…)</p>
+<p>Same thing. If there is a bug that shouldn’t be there, as expected by the acceptance criteria, then why should you have
+to pay for it? At ManiginaM, we have a bug free guarantee!</p>
+<p>What about post-development maintenance?</p>
+<p>Well, hopefully by now, you’ve developed a solid relationship with your trusted software partner. Even still, before
+signing, there would have been a clause or section in the contract regarding post-development maintenance.</p>
+<p>For instance:  Will they continue to host your server? What if there are library updates; will they take care of this?
+And the answer to all is: yes; simply because your trusted software partner is not going to want you to ever have to
+worry about your software meeting your business needs–even years after development.</p>
+<p>Finally, and I’m not going to go into depth on these items, but please feel free to get in touch if you want to know
+more about them. When interviewing a potential software partner, keep these questions in your back pocket and be sure to
+ask them.</p>
+<p><img alt="is-it?" src="/blog/img/navigating-the-unknown/is-it.png" /></p>
+<h3>And now, and as promised,</h3>
+<h2>The Money Pit!</h2>
+<p>So here are a bunch of lines.</p>
+<p><img alt="cost1" src="/blog/img/navigating-the-unknown/cost1.png" /></p>
+<p>The green one represents your engineers building excel or access reports &amp; tools.</p>
+<p>Of course, right off the bat, you’re going to notice that it’s nearly half that of the other lines.</p>
+<p>Sure. But let’s factor in the lost opportunity cost associated with dedicating an engineer to building &amp; maintaining
+these reports.</p>
+<p><img alt="cost2" src="/blog/img/navigating-the-unknown/cost2.png" /></p>
+<p>Don’t forget that this also represents only one engineer–if your company is anything like the ones that I’ve worked at,
+then you can probably multiply this by upwards of 5 or 10.</p>
+<p>Let that sink in… On top of the risk this habit adds to your business continuity.</p>
+<p>Sunk?</p>
+<p>Ok. The orange line represents custom waterfall or turn-key software. This is where you are promised a working
+application in 18 months, like Cody was. It typically starts out with a proposal promising a cost that looks less
+expensive than an agile custom project might look, but upon the first trial of the software (at 18 months), more is
+needed to make it fit your needs. Not only will these adjustments cost you double, this is often where companies
+backtrack, seek out a new team, and follow the blue line of Agile Custom Software.</p>
+<p>Lastly is SaaS, which is unbounded. If you were to expand this chart out, that pink line would continue upwards forever.</p>
+<p>Now, I’m not saying don’t buy or implement SaaS. It is a necessary part of your business, and a lot of it is needed. All
+I’m saying is that the next time you are considering implementing a new SaaS, I encourage you and I implore you, that
+before you add yet another software to your stack, that you talk to your trusted software partner to see if you could
+add a valuable asset to your balance sheet instead.</p>
+<p>Thank you!</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/build-it-once">Build It Once</a></li>
+      <li><a href="/blog/epic-growth">Epic Growth</a></li>
+      <li><a href="/blog/we-build-software-with-responsible-ai">We Build Software with Responsible AI</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-T361VBY3C1');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gina Martiny — Software Engineering & AI Integration</title>
+  <meta name="description" content="Gina Martiny — West Baton Rouge Parish's software engineer. AI consulting, custom development, and industrial tech in Port Allen and greater Baton Rouge, LA.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://maniginam.dev/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gina Martiny — Software Engineering & AI">
+  <meta property="og:description" content="West Baton Rouge Parish's software engineer. AI consulting, custom development, and industrial tech in Port Allen and greater Baton Rouge, LA.">
+  <meta property="og:url" content="https://maniginam.dev/">
+  <meta property="og:site_name" content="Gina Martiny">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gina Martiny — Software Engineering & AI">
+  <meta name="twitter:description" content="West Baton Rouge Parish's software engineer. AI consulting, custom development, and industrial tech in Port Allen and greater Baton Rouge, LA.">
+
+  <!-- Person Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Gina Martiny",
+    "url": "https://maniginam.dev",
+    "jobTitle": "Software Engineer",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Port Allen",
+      "addressRegion": "LA"
+    },
+    "sameAs": [
+      "https://github.com/maniginam",
+      "https://maniginam.com",
+      "https://legacyleaps.com",
+      "https://aileapers.com",
+      "https://wbr.maniginam.dev"
+    ]
+  }
+  </script>
+
+  <!-- LocalBusiness Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "ManiGinaM, LLC",
+    "url": "https://maniginam.dev",
+    "description": "Software engineering and AI consulting in West Baton Rouge Parish. Custom software, AI integration, industrial automation.",
+    "founder": {"@type": "Person", "name": "Gina Martiny"},
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Port Allen",
+      "addressRegion": "LA",
+      "postalCode": "70767"
+    },
+    "areaServed": ["West Baton Rouge Parish", "Baton Rouge", "Louisiana"],
+    "serviceType": ["Software Engineering", "AI Integration", "Industrial Automation", "Web Development"],
+    "sameAs": ["https://github.com/maniginam", "https://wbr.maniginam.dev", "https://legacyleaps.com", "https://aileapers.com"]
+  }
+  </script>
+
+  <!-- FAQ Schema (AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What services does ManiGinaM offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Custom software development, AI integration, industrial automation, web applications, and community technology projects in the greater Baton Rouge area."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does ManiGinaM work with industrial companies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Gina Martiny has extensive experience bridging chemical manufacturing and software engineering, modernizing legacy industrial systems."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is ManiGinaM located?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Port Allen, Louisiana — serving West Baton Rouge Parish, Baton Rouge, and all of Louisiana."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #0c2340;
+      --navy-mid: #1a3a5c;
+      --navy-light: #1e4d7b;
+      --gold: #d4a843;
+      --gold-light: #f0d68a;
+      --gold-dim: rgba(212,168,67,0.15);
+      --text: #0f1729;
+      --text-mid: #3d4b63;
+      --text-muted: #6b7a8d;
+      --bg: #ffffff;
+      --bg-alt: #f5f7fa;
+      --border: #d5dbe5;
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    a { color: var(--navy-mid); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--gold); }
+
+    /* ===== NAV ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 2rem;
+      background: rgba(48,20,80,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.3s;
+    }
+    .nav-logo {
+      font-size: 1.2rem; font-weight: 800; color: #fff; letter-spacing: -0.02em;
+    }
+    .nav-logo .nav-logo-white { color: #fff; }
+    .nav-logo .nav-logo-gold { color: var(--gold-light); }
+    .nav-logo span:last-child { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7); font-size: 0.88rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+
+    /* ===== HERO (Live Map) ===== */
+    .hero {
+      margin-top: 64px;
+      min-height: calc(100vh - 64px);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 4rem 2rem;
+    }
+
+    /* Gradient layers for time-of-day crossfade */
+    .hero-gradient-out,
+    .hero-gradient-in {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; transition: opacity 2s ease;
+    }
+    .hero-gradient-out { opacity: 1; }
+    .hero-gradient-in  { opacity: 0; }
+
+    .hero-weather-tint {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 1; pointer-events: none; transition: background 1s ease;
+    }
+
+    .hero-traffic-canvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 2; transition: opacity 1s ease;
+    }
+
+    .hero-weather-canvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 3;
+    }
+
+    .hero-road-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 4; pointer-events: none;
+    }
+    .hero-road-layer svg { width: 100%; height: 100%; }
+
+    .hero-content {
+      position: relative; z-index: 5; max-width: 720px; text-align: center;
+    }
+    .hero-intro {
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 0.6s ease-out both;
+    }
+    .hero-headshot {
+      width: 120px; height: 120px; border-radius: 50%; object-fit: cover;
+      object-position: center top;
+      border: 3px solid rgba(212,168,67,0.6);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.3);
+      padding: 0.4rem 1.2rem; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 600; color: var(--gold-light);
+      letter-spacing: 0.04em; margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease-out both;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
+      color: #fff; line-height: 1.2; letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      animation: fadeUp 0.8s 0.15s ease-out both;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.15rem); color: rgba(255,255,255,0.7);
+      max-width: 540px; margin: 0 auto 2.5rem; line-height: 1.75;
+      animation: fadeUp 0.8s 0.3s ease-out both;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--gold); color: var(--navy); padding: 0.85rem 2rem;
+      border-radius: 8px; font-weight: 700; font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeUp 0.8s 0.45s ease-out both;
+    }
+    .hero-cta:hover {
+      transform: translateY(-2px); color: var(--navy);
+      box-shadow: 0 8px 30px rgba(212,168,67,0.35);
+    }
+    .hero-cta svg { width: 18px; height: 18px; transition: transform 0.2s; }
+    .hero-cta:hover svg { transform: translateX(3px); }
+
+    /* Daylight meter */
+    .hero-daylight-meter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      z-index: 6;
+    }
+    .hero-meter-label {
+      font-size: 0.7rem; color: #ffcc02; font-family: var(--font); margin-top: 2px;
+    }
+
+    /* Weather badge */
+    .hero-weather-badge {
+      position: absolute; top: 10px; right: 10px;
+      background: rgba(26,26,46,0.8); padding: 3px 7px; border-radius: 6px;
+      z-index: 7; display: flex; align-items: center; gap: 4px;
+      font-family: var(--font);
+    }
+    .hero-weather-badge .weather-icon { font-size: 0.75rem; }
+    .hero-weather-badge .weather-temp { font-size: 0.7rem; font-weight: 600; color: #e0e0e0; }
+    .hero-weather-badge .weather-details { font-size: 0.45rem; color: #9e9e9e; line-height: 1.2; }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute; bottom: 2rem; right: 2rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+      color: rgba(255,255,255,0.3); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; font-weight: 600; z-index: 6;
+      animation: fadeUp 0.8s 0.7s ease-out both;
+    }
+    .scroll-dot {
+      width: 24px; height: 38px; border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px; position: relative;
+    }
+    .scroll-dot::after {
+      content: ''; width: 4px; height: 8px; border-radius: 2px;
+      background: var(--gold); position: absolute; top: 6px; left: 50%;
+      transform: translateX(-50%);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { top: 6px; opacity: 1; }
+      50% { top: 18px; opacity: 0.3; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: 6rem 2rem; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800;
+      color: var(--navy); letter-spacing: -0.02em; margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 1.05rem; color: var(--text-mid); max-width: 540px;
+      line-height: 1.7; margin-bottom: 3rem;
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ===== SERVICES ===== */
+    .services { background: var(--bg-alt); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    }
+    .svc-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 14px;
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    }
+    .svc-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--navy-mid), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease-out;
+    }
+    .svc-card:hover::before { transform: scaleX(1); }
+    .svc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(12,35,64,0.1);
+      border-color: transparent;
+    }
+    .svc-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .svc-icon svg {
+      width: 22px; height: 22px; stroke: var(--gold-light); fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .svc-card h3 {
+      font-size: 1.1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.75rem; letter-spacing: -0.01em;
+    }
+    .svc-card ul { list-style: none; }
+    .svc-card li {
+      font-size: 0.9rem; color: var(--text-mid); padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+    }
+    .svc-card li::before {
+      content: ''; position: absolute; left: 0; top: 0.75rem;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); opacity: 0.5;
+    }
+
+    /* ===== WHY ===== */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;
+    }
+    .why-card {
+      padding: 2rem; border-radius: 14px; position: relative;
+      background: linear-gradient(135deg, rgba(12,35,64,0.03), rgba(212,168,67,0.04));
+      border: 1px solid var(--border);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .why-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .why-card .why-num {
+      font-size: 2.5rem; font-weight: 900; color: var(--gold);
+      opacity: 0.2; line-height: 1; margin-bottom: 0.5rem;
+      font-feature-settings: 'tnum';
+    }
+    .why-card h3 {
+      font-size: 1rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 0.6rem;
+    }
+    .why-card p {
+      font-size: 0.92rem; color: var(--text-mid); line-height: 1.7;
+    }
+
+    /* ===== ABOUT ===== */
+    .about { background: var(--bg-alt); }
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start;
+    }
+    .about-sidebar { position: sticky; top: 100px; }
+    .about-headshot {
+      width: 280px; height: 280px; border-radius: 16px; object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--border);
+      box-shadow: 0 8px 30px rgba(12,35,64,0.12);
+      margin-bottom: 1.5rem;
+    }
+    .about-name {
+      font-size: 2rem; font-weight: 900; color: var(--navy);
+      letter-spacing: -0.02em; margin-bottom: 0.75rem;
+    }
+    .brand-palindrome {
+      margin-bottom: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212,168,67,0.2);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .bp-visual {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-family: 'Inter', monospace;
+    }
+    .bp-forward {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+    .bp-arrow {
+      font-size: 0.75rem;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .bp-result {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--navy);
+      letter-spacing: 0.15em;
+      font-family: 'Inter', monospace;
+    }
+    .bp-hi {
+      color: var(--gold);
+    }
+    .bp-note {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+    .about-role {
+      font-size: 0.88rem; color: var(--gold); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 1.5rem;
+    }
+    .about-stats { display: flex; flex-direction: column; gap: 1rem; }
+    .stat-item { display: flex; align-items: baseline; gap: 0.75rem; }
+    .stat-num {
+      font-size: 1.8rem; font-weight: 900; color: var(--navy);
+      letter-spacing: -0.02em; font-feature-settings: 'tnum';
+    }
+    .stat-label { font-size: 0.82rem; color: var(--text-muted); font-weight: 500; }
+    .about-text p {
+      font-size: 1.05rem; color: var(--text); line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .fun-fact {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      color: #fff; border-radius: 14px; padding: 1.5rem 2rem;
+      margin-top: 2rem; position: relative; overflow: hidden;
+    }
+    .fun-fact::before {
+      content: ''; position: absolute; top: -20px; right: -20px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: rgba(212,168,67,0.1);
+    }
+    .fun-fact .ff-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--gold-light); margin-bottom: 0.5rem;
+    }
+    .fun-fact p {
+      font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0;
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-box {
+      background: linear-gradient(160deg, var(--navy), var(--navy-mid), var(--navy-light));
+      border-radius: 20px; padding: 4rem; position: relative; overflow: hidden;
+      display: flex; justify-content: space-between; align-items: center; gap: 3rem;
+    }
+    .contact-box::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(212,168,67,0.08);
+    }
+    .contact-box::after {
+      content: ''; position: absolute; bottom: -40px; left: -40px;
+      width: 150px; height: 150px; border-radius: 50%;
+      background: rgba(30,77,123,0.15);
+    }
+    .contact-text { position: relative; z-index: 2; }
+    .contact-text h2 {
+      font-size: 1.75rem; font-weight: 800; color: #fff;
+      margin-bottom: 0.5rem; letter-spacing: -0.02em;
+    }
+    .contact-text p { color: rgba(255,255,255,0.6); font-size: 1rem; }
+    .contact-info { position: relative; z-index: 2; text-align: right; }
+    .contact-info a {
+      display: block; color: var(--gold-light); font-size: 1.1rem;
+      font-weight: 700; margin-bottom: 0.6rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .contact-info a:hover { color: #fff; transform: translateX(-3px); }
+    .contact-loc { color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 500; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy); padding: 2rem;
+      text-align: center; border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
+    .footer a { color: rgba(255,255,255,0.4); }
+    .footer a:hover { color: var(--gold-light); }
+
+    /* ===== CURSOR GLOW ===== */
+    .cursor-glow {
+      position: fixed; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(212,168,67,0.04) 0%, transparent 70%);
+      border-radius: 50%; pointer-events: none; z-index: 0;
+      transform: translate(-50%, -50%); transition: opacity 0.3s;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .services-grid, .why-grid { grid-template-columns: 1fr; }
+      .about-layout { grid-template-columns: 1fr; gap: 2rem; }
+      .about-sidebar { position: static; }
+      .about-stats { flex-direction: row; gap: 2rem; flex-wrap: wrap; }
+    }
+    @media (max-width: 768px) {
+      .nav { padding: 0 1rem; }
+      .nav-links { gap: 1.25rem; }
+      .nav-links a { font-size: 0.82rem; }
+      .hero { padding: 3rem 1.5rem; min-height: auto; }
+      .hero-road-layer text { display: none; }
+      .hero-daylight-meter svg { width: 120px; height: 30px; }
+      .hero-weather-badge { padding: 4px 8px; }
+      .scroll-hint { right: 1rem; bottom: 1rem; }
+      section { padding: 4rem 1.5rem; }
+      .contact-box {
+        flex-direction: column; text-align: center; padding: 3rem 2rem;
+      }
+      .contact-info { text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .nav-links { gap: 0.75rem; }
+      .svc-card { padding: 1.5rem; }
+      .contact-box { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <nav class="nav">
+    <a href="#" class="nav-logo"><span class="nav-logo-white">Mani</span><span class="nav-logo-gold">GinaM</span><span>.dev</span></a>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#why">Why Me</a>
+      <a href="#about">About</a>
+      <a href="resume.html">Resume</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <section class="hero" id="hero">
+    <div class="hero-gradient-out"></div>
+    <div class="hero-gradient-in"></div>
+    <div class="hero-weather-tint"></div>
+    <canvas class="hero-traffic-canvas" role="img" aria-label="Animated traffic flow on Baton Rouge road network"></canvas>
+    <canvas class="hero-weather-canvas" role="img" aria-label="Live weather particle effects"></canvas>
+    <div class="hero-road-layer"></div>
+
+    <div class="hero-content">
+      <div class="hero-intro">
+        <img src="img/headshot.jpg" alt="Gina Martiny" class="hero-headshot" width="120" height="120">
+        <div class="hero-badge">West Baton Rouge Parish's Software Engineer</div>
+      </div>
+      <h1>I build systems that <span class="highlight">work as hard</span> as you do.</h1>
+      <p class="hero-sub">Your local WBR software and AI partner. Custom software, autonomous AI agents, and industrial-grade integrations for Louisiana businesses &mdash; built to last, not to impress a demo.</p>
+      <a href="#contact" class="hero-cta">
+        Start a Conversation
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-daylight-meter"></div>
+    <div class="hero-weather-badge"></div>
+
+    <div class="scroll-hint">
+      <div class="scroll-dot"></div>
+      scroll
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <p class="section-label reveal">What I Do</p>
+      <h2 class="section-title reveal">Services</h2>
+      <p class="section-sub reveal">End-to-end engineering for businesses that need reliable software, not science projects.</p>
+
+      <div class="services-grid">
+        <div class="svc-card reveal reveal-delay-1">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>AI Integration & Automation</h3>
+          <ul>
+            <li>Autonomous AI agents</li>
+            <li>Process automation</li>
+            <li>Document processing & OCR</li>
+            <li>Predictive analytics</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-2">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="14" y1="4" x2="10" y2="20"/></svg>
+          </div>
+          <h3>Custom Software Development</h3>
+          <ul>
+            <li>Full-stack web applications</li>
+            <li>Enterprise system integrations</li>
+            <li>API development</li>
+            <li>Database design & migration</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-1">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M17 12h.01"/><path d="M7 12h.01"/></svg>
+          </div>
+          <h3>Construction & Industrial Tech</h3>
+          <ul>
+            <li>ERP integration (Viewpoint Vista)</li>
+            <li>Process control systems</li>
+            <li>Compliance automation</li>
+            <li>Equipment & rental management</li>
+          </ul>
+        </div>
+
+        <div class="svc-card reveal reveal-delay-2">
+          <div class="svc-icon">
+            <svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3>Data & Analytics</h3>
+          <ul>
+            <li>Pipeline development</li>
+            <li>Dashboards & reporting</li>
+            <li>Data migration</li>
+            <li>Business intelligence</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why-section" id="why">
+    <div class="container">
+      <p class="section-label reveal">Differentiators</p>
+      <h2 class="section-title reveal">Why Work With Me</h2>
+      <p class="section-sub reveal">Not every consultant has run a chemical plant and written production software.</p>
+
+      <div class="why-grid">
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-num">01</div>
+          <h3>Software Craftsmanship</h3>
+          <p>Clean, tested, maintainable code built on SOLID principles and test-driven development. Systems designed to be understood and extended, not just deployed.</p>
+        </div>
+
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-num">02</div>
+          <h3>Industrial Background</h3>
+          <p>Chemical plant operations experience means I speak your language. I understand process control, safety systems, and the realities of industrial environments.</p>
+        </div>
+
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-num">03</div>
+          <h3>Construction ERP Expertise</h3>
+          <p>Deep integration experience with Viewpoint Vista &mdash; a rare specialty in software consulting. I understand construction workflows from the ground up.</p>
+        </div>
+
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-num">04</div>
+          <h3>Louisiana Tax Advantage</h3>
+          <p>As a Louisiana-based consultant, my clients can recoup 25-35% of engagement costs through the state's Digital Interactive Media and Software Development Tax Credit.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-layout">
+        <div class="about-sidebar reveal">
+          <img src="img/headshot.jpg" alt="Gina Martiny" class="about-headshot" width="280" height="280">
+          <p class="section-label">About</p>
+          <h2 class="about-name">Gina Martiny</h2>
+          <div class="brand-palindrome">
+            <div class="bp-visual">
+              <span class="bp-forward"><span class="bp-hi">M</span>artiny, <span class="bp-hi">G</span>ina <span class="bp-hi">M</span>artiny</span>
+              <span class="bp-arrow">&darr;</span>
+              <span class="bp-result"><span class="bp-hi">m</span>a<span class="bp-hi">n</span>i<span class="bp-hi">g</span>i<span class="bp-hi">n</span>a<span class="bp-hi">m</span></span>
+            </div>
+            <p class="bp-note">My last name, first name, last name &mdash; reads the same forwards and backwards.</p>
+          </div>
+          <p class="about-role">Software Engineer & AI Specialist</p>
+
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num">10+</span>
+              <span class="stat-label">years in chemical manufacturing</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">6+</span>
+              <span class="stat-label">years building software</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">2</span>
+              <span class="stat-label">industries bridged</span>
+            </div>
+          </div>
+
+          <div class="fun-fact">
+            <div class="ff-label">Fun Fact</div>
+            <p>I went from running chemical plant operations on the Mississippi River to building autonomous AI systems. The safety-first mindset stuck &mdash; I just traded PPE for test suites.</p>
+          </div>
+        </div>
+
+        <div class="about-text reveal reveal-delay-2">
+          <p>I'm a software engineer with a background that bridges two worlds: a decade in chemical manufacturing operations along Louisiana's industrial corridor, and six-plus years of professional software craftsmanship.</p>
+          <p>Those ten years in manufacturing weren't just technical &mdash; they were leadership. Managing teams, running operations, navigating safety-critical systems, and making decisions under real constraints. That experience shapes everything I build today: practical, reliable, built for people who don't have time for things that break.</p>
+          <p>On the software side, I practice clean code, SOLID principles, and test-driven development &mdash; the kind of engineering discipline that delivers systems which hold up under real conditions, not just demos.</p>
+          <p>Today, I build AI-integrated software systems for businesses across the greater Baton Rouge metro area and beyond. From autonomous agents that handle repetitive work to construction ERP integrations that connect the field to the back office, every engagement is grounded in the same principle: <strong>build it right, build it to last.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-box reveal">
+        <div class="contact-text">
+          <h2>Let's talk about your project.</h2>
+          <p>No sales pitch. Just a straightforward conversation about what you need.</p>
+        </div>
+        <div class="contact-info">
+          <a href="mailto:gina@maniginam.dev">gina@maniginam.dev</a>
+          <span class="contact-loc">Port Allen, Louisiana &mdash; Greater Baton Rouge</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p style="margin-bottom:0.5rem;">
+      <a href="https://wbr.maniginam.dev">WBR Local</a> &middot;
+      <a href="https://legacyleaps.com">LegacyLeaps</a> &middot;
+      <a href="https://aileapers.com">AI Leapers</a> &middot;
+      <a href="https://sideline.maniginam.dev">Sideline Sports</a> &middot;
+      <a href="https://tradeup.maniginam.dev">TradeUp</a>
+    </p>
+    <p>ManiGinaM, LLC &mdash; West Baton Rouge Parish's Software Engineer &middot; Port Allen, LA</p>
+  </footer>
+
+  <!-- Hero map system -->
+  <script src="js/vendor/suncalc.min.js"></script>
+  <script src="js/hero/gradient.js"></script>
+  <script src="js/hero/roads.js"></script>
+  <script src="js/hero/traffic.js"></script>
+  <script src="js/hero/weather.js"></script>
+  <script src="js/hero/daylight-meter.js"></script>
+  <script src="js/hero/hero.js"></script>
+
+  <script>
+    // Scroll reveal
+    var revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      revealObserver.observe(el);
+    });
+
+    // Cursor glow (desktop only)
+    var glow = document.getElementById('cursorGlow');
+    if (window.matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mousemove', function (e) {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+      });
+    } else {
+      glow.style.display = 'none';
+    }
+
+    // Nav background on scroll
+    var nav = document.querySelector('.nav');
+    window.addEventListener('scroll', function () {
+      nav.style.background = window.scrollY > 50
+        ? 'rgba(48,20,80,0.97)'
+        : 'rgba(48,20,80,0.92)';
+    }, { passive: true });
+  </script>
+
+
+</body>
+</html>

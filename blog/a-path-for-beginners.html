@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Beginner's Path — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="A step-by-step guide for absolute beginners to set up Clojure development locally — from installation to first lines of code.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="A Beginner's Path">
+  <meta property="og:description" content="A step-by-step guide for absolute beginners to set up Clojure development locally — from installation to first lines of code.">
+  <meta property="og:url" content="https://maniginam.dev/blog/a-path-for-beginners">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="A Beginner's Path">
+  <meta name="twitter:description" content="A step-by-step guide for absolute beginners to set up Clojure development locally — from installation to first lines of code.">
+  <link rel="canonical" href="https://maniginam.dev/blog/a-path-for-beginners">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "A Beginner's Path",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-05-03",
+    "description": "A step-by-step guide for absolute beginners to set up Clojure development locally — from installation to first lines of code.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/a-path-for-beginners"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-hero">
+    <img src="/blog/img/a-path-for-beginners/hero.jpg" alt="A Beginner's Path">
+    <div class="hero-text">
+      <h1>A Beginner's Path</h1>
+      <p class="post-date">May 3, 2021</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>When an individual encounters a new obstacle in his or her life, no matter the significance or severity, the odds are that said obstacle has stood in the way of challengers before.  In most situations this individual is probably not the first to face this challenge.  Depending on the difficulty of the challenge being faced, some challengers will succeed, while others will not--some may even find a way around it.</p>
+<p>I experienced an obstacle that, for me, turned into a roadblock that over the past decade, I revisited several times with the same outcome until I finally asked for help.  I wanted to learn how to code, but I neither knew where to start or what that path forward might look like.</p>
+<p>I learned the basics of a couple languages by playing around with online platforms like codecademy and online koans.  These tools are great for learning the basics of a language while exercising dusty, old math skills to solve simple albeit, sometimes challenging mathematical problems like those you find in Project Euler.</p>
+<p>The problem is that all of this learning is restricted to the online platform that does all the real stuff for you.  I wasn't going to be able to write my own application in an online interface.  I needed to learn how to run these problems locally on my own machine, but I struggled to find references to even get set up.</p>
+<p>Now that I’m past this roadblock that kept me stationary for so long and because I simply cannot believe that I was the first or the only one who has ever faced this roadblock, I want to share how to get your computing machine set up to do the basics locally.</p>
+<p>The following procedure is for beginners; those who have had only a taste of learning a language, but are blocked from getting any further.  It provides the steps and tools necessary to get your machine setup and running small, basic programs locally for solving problems from ProjectEuler.net as well as the ClojureKoans.</p>
+<p>Let’s get started!</p>
+<h2>Software Descriptions</h2>
+<p>Before diving into all the downloads &amp; installations, I felt it was important to share an overview of the software we will be installing on your machine.  No need to do any downloads or installs in this first section as some of them are Operating System dependent.</p>
+<h3><a href="https://clojure.org">Clojure</a></h3>
+<p>Clojure is a very powerful &amp; efficient language.  It is a functional, lisp language.  I've chosen clojure for this outline for three reasons.</p>
+<ol>
+<li>It's what I know best--I’m still technically pretty new at this coding thing too..</li>
+<li>While the syntax is a little confusing at first, maneuvering over lists and functions to create simple algorithms is actually easier and more straightforward in Clojure than in other languages I’ve used.</li>
+<li>In everything that I've read, those who start with a procedural language like java or python, are often intimidated by functional languages, and I've observed that they often don't take the opportunity to learn one.</li>
+</ol>
+<p>Starting with a functional language like Clojure, gets you comfortable with it from the start.  There's no doubt that you will learn procedural, object-oriented languages down the line.</p>
+<h3><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">Java8</a></h3>
+<p>There are newer versions, but for now, stick with <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">version 8</a> as it is the most commonly used.
+Because of this, using newer versions could cause you unnecessary and seemingly unsolvable problems.</p>
+<h3><a href="https://homebrew.sh">Homebrew</a> &amp; <a href="https://chocolate.org">Chocolatey</a></h3>
+<p>Homebrew and Chocolatey are Package Managers, which are essentially programs that do the work of downloading &amp; installing other applications on the correct path for you.  To learn more about Homebrew or Chocolatey, visit their sites <a href="https://homebrew.sh">Homebrew</a> and <a href="https://chocolate.org">Chocolatey</a>.
+Macs will be using Homebrew; Windows will be using Chocolatey.</p>
+<h3><a href="https://leiningen.org">Leiningen</a></h3>
+<p>Leiningen is a tool that automates clojure and helps to manage dependencies.  Trust me, you’ll want it and will come to need it, if you continue to use clojure.</p>
+<h3><a href="https://dotnet.microsoft.com/download">.NET Framework 4.5+</a></h3>
+<p>This is for windows only and is a .NET Framework which is required for clojure &amp; chocolatey to run.</p>
+<h3>Terminal &amp; PowerShell</h3>
+<p>While this little shell may look unimpressive upon opening, it is literally the window into your computer.  With the right commands, it can read files, download data, search websites, and run applications.  In fact, it is the command line for your computer.  Anything that you do on your computer could theoretically be commanded through this little shell window.
+Terminal is for Mac while PowerShell is for Windows.</p>
+<h2>Installations, Downloads, &amp; Setup</h2>
+<p><em>All instructions except downloading java (and .NET for Windows), will all be performed in Terminal/PowerShell.</em></p>
+<h3>Mac Instructions</h3>
+<h4><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">Java8</a></h4>
+<ul>
+<li>Download &amp; Install for macOSx64</li>
+</ul>
+<h4>Maybe Set Environment Variables</h4>
+<ul>
+<li>Ensure java is installed  <code>which java</code>    </li>
+<li>Double check the version type  <code>java -version</code> <br />
+<img alt="Mac JAVA_HOME Set" src="/blog/img/a-path-for-beginners/00.png" /></li>
+<li><strong><em>If the return value includes Java 1.8.xx, skip the rest of the Java8 section and go to the Homebrew section below.</em></strong></li>
+<li>
+<p>Find the shell you’re using  <code>echo $SHELL</code>        </p>
+<p><img alt="Mac Check Shell" src="/blog/img/a-path-for-beginners/01.png" /><br />
+<em>Note either /bin/bash or /bin/zsh</em>
+*   If /bin/bash, type:  <code>vim ~/.bashrc</code>
+*   If /bin/zsh, type:  <code>vim ~/.zshrc</code>
+*   You've now opened vim, which allows you to edit documents within the terminal
+*   Push “i” to INSERT text
+*   Copy/Paste:   <br />
+<code>export JAVA_HOME=/usr/libexec/java_home -v {{enter version i.e. 1.8}}</code></p>
+<p><img alt="vim export JAVA_HOME" src="/blog/img/a-path-for-beginners/02.png" />  </p>
+</li>
+<li>
+<p>Push esc, then type:  <code>:wq</code></p>
+</li>
+<li>Check that it’s been set:           <code>echo $JAVA_HOME</code></li>
+</ul>
+<h4><a href="https://homebrew.sh">Homebrew</a></h4>
+<ul>
+<li>Download &amp; install Homebrew:<br />
+<code>/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></li>
+</ul>
+<h4><a href="https://clojure.org">Clojure</a></h4>
+<ul>
+<li>Download &amp; install Clojure:<br />
+<code>brew install clojure/tools/clojure</code></li>
+<li>Pay attention.  Your terminal is going to ask you for your password a couple times and then prompt you to accept terms.  Do these things.*</li>
+</ul>
+<h4><a href="https://leiningen.org">Leiningen</a></h4>
+<ul>
+<li>Download &amp; install Leiningen: <br />
+<code>brew install leiningen</code></li>
+</ul>
+<h3>Windows 10 Instructions</h3>
+<h4><a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">Java8</a></h4>
+<ul>
+<li>Download &amp; Install for your System Type</li>
+<li>If you're not sure of your system type, go to your Settings and click About.  System Type should be listed--mine is x64.</li>
+</ul>
+<h4><a href="https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer">.NET Framework 4.5+</a></h4>
+<ul>
+<li>Download &amp; Install <a href="https://dotnet.microsoft.com/download/dotnet-framework/thank-you/net48-developer-pack-offline-installer">.NET Framework 4.8 Dev Pack</a></li>
+</ul>
+<hr />
+<p>Open Powershell as <strong><em>Administrator</em></strong>.
+First things first,
+*   Make sure you have at least version 5 of PowerShell:<br />
+<code>Get-Host</code>
+*   Confirm your version.  Upgrade if you have an earlier version than 5:<br />
+<code>Update-Module PowerShell</code>
+*   If it asks you to update NuGet, please do so.</p>
+<p>The rest of the instructions will be in PowerShell.  If you get errors between installations, close &amp; reopen PowerShell as <strong><em>Administrator</em></strong>.</p>
+<h4>Set Environment Variables</h4>
+<p>Note: If you are not using PowerShell, this part of the instructions may not work.</p>
+<ul>
+<li>Find the java path:                <br />
+<code>$Env:JAVA_HOME</code></li>
+<li>Confirm the java version:       <br />
+<code>java -version</code></li>
+<li>If it spits out jdk1.8.0_xxx, then you are good to go, and don't need to set your Environment Variables.</li>
+<li>Confirm path of Java8:            <br />
+<code>Get-ChildItem "C:\Program Files\Java"</code></li>
+<li>If you see a folder called jdk1.8.0_xxx, then that's the one.</li>
+<li>If you don't then we'll need to find it:
+    Note: These commands will be further explained in a later section: A Path Forward - Directories, so don't sweat about not knowing what you're doing right now.<ul>
+<li>Go to root directory:      <br />
+<code>cd /</code></li>
+<li>List it's items:           <br />
+<code>ls ".\Program Files\Java"</code></li>
+<li>Visually check the list.  Do you see it?<ul>
+<li>If not, then you'll need to search for it.  It will likely be in Program Files and probably be in a directory that contains "Java" or "JDK".</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set JAVA_HOME:                    <br />
+<code>$env:JAVA_HOME="C:\Program Files\Java\jdk1.8.***X_XXX***\"</code></li>
+<li>Confirm it was set:               <br />
+<code>$Env:JAVA_HOME</code></li>
+</ul>
+<p>This is what it should look like in the end:</p>
+<p><img alt="win JAVA_HOME" src="/blog/img/a-path-for-beginners/04.png" /></p>
+<h4><a href="https://chocolatey.org">Chocolatey</a></h4>
+<ul>
+<li>Check your access:<br />
+<code>Get-ExecutionPolicy</code></li>
+<li>It will probably say Restricted, so</li>
+<li>Set your access:  <br />
+<code>Set-ExecutionPolicy Bypass -Scope Process</code></li>
+<li>When it asks for permission, enter <code>Y</code></li>
+<li>Download &amp; install Chocolatey:<br />
+<code>Set-ExecutionPolicy Bypass -Scope Process -Force; iwr https://community.chocolatey.org/install.ps1 -UseBasicParsing | iex</code></li>
+</ul>
+<h4><a href="https://clojure.org">Clojure</a></h4>
+<p>Unfortunately chocolatey only has version 6, and we need 7, so we’ll do this manually.
+*   Download &amp; install Clojure: 
+    <code>iwr -useb download.clojure.org/install/win-install-1.10.3.822.ps1 | iex</code>
+*   It’s going to prompt you for an installation location.  Per Clojure’s instructions, choose option <code>1</code>.</p>
+<h4><a href="https://leiningen.org">Leiningen</a></h4>
+<ul>
+<li>Download &amp; install Leiningen: <br />
+<code>choco install lein</code></li>
+</ul>
+<h2>Let's Code!</h2>
+<p><strong><em>Congrats!</em></strong>  Whether you are a Mac or a PC, you have just made your first true requests, downloads, &amp; installations through your powerful little shell!  Pretty cool!</p>
+<p>And, I know what you’re probably thinking: coding is really just a bunch of copying &amp; pasting, isn’t it?!  Here you thought we did truly special things...  I hate to break it to you that your conclusion is not entirely untrue, but I promise, it does get better.  In fact, let’s have some fun!</p>
+<p>These instructions will also be in your shell.
+*   Start the REPL:         <code>lein repl</code><br />
+    The REPL is Clojure's free-coding arena.  It stands for Read-Eval-Print-Loop.  I use it frequently as my trial &amp; error space while I’m working on projects.
+*   Try something like this:         <code>(+ 3 3)</code>  </p>
+<ul>
+<li>
+<p>Did it return 6?<br />
+<img alt="repl (+ 3 3)" src="/blog/img/a-path-for-beginners/05.png" />  </p>
+</li>
+<li>
+<p>Now try this:                  <code>(def hello “Hello, World!”)</code>  </p>
+</li>
+<li>
+<p>and now:                     <code>hello</code><br />
+<img alt="Hello, World" src="/blog/img/a-path-for-beginners/06.png" />  </p>
+</li>
+<li>
+<p>Let’s write a function:          <code>(defn hello [name] “Hello, ” name “!”)</code>  </p>
+</li>
+<li>
+<p>Call your function:             <code>(hello “Gina”)</code><br />
+<img alt="Hello, Gina" src="/blog/img/a-path-for-beginners/07.png" />   </p>
+</li>
+<li>
+<p>Set your name:                  <code>(def my-name “Gina”)</code>  </p>
+</li>
+<li>Call your function again with my-name:     <code>(hello my-name)</code><br />
+<img alt="Hello, My Name" src="/blog/img/a-path-for-beginners/08.png" /></li>
+</ul>
+<p>Cool!</p>
+<p>The book Programming Clojure by Alex Miller is a part of The Pragmatic Programmer series, and is a very good resource for learning clojure.</p>
+<h2>Gitting to the Gist</h2>
+<p>This section is to get you setup and acquainted with github as well as to give you resources to learn the language basics of Clojure by way of the Clojure Koans and the practice of Test-Driven-Development (TDD) using the problems from <a href="https://projecteuler.net/">Project Euler</a>.</p>
+<ul>
+<li>Stop the REPL:                       <code>^d</code></li>
+</ul>
+<h3><a href="https://git-scm.com/">Git</a></h3>
+<ul>
+<li>Check for Git:                       <code>git --version</code>  </li>
+<li>if not already installed:</li>
+<li>Mac:                         <code>brew install git</code>  </li>
+<li>Windows:                         <code>choco install git</code>  </li>
+</ul>
+<h3><a href="https://github.com">GitHub</a>.</h3>
+<p>Go ahead and sign up for or sign in into <a href="https://github.com">GitHub</a>, so we can fork some stuff!</p>
+<p>Forking puts copies of repositories created by others under your own repository.  Anything you change in your repository will not affect the master repository, so don’t worry.</p>
+<p>At the top right of each page I'm about to direct you to, there will be a button called Fork.  That's the button to push when I say "Fork It!"<br />
+<img alt="Fork" src="/blog/img/a-path-for-beginners/09.png" /></p>
+<ul>
+<li>Go to the <a href="https://github.com/functional-koans/clojure-koans.git">clojure koans</a></li>
+<li>Fork it!</li>
+<li>Go to <a href="https://github.com/slagyr/euler.git">euler specs</a></li>
+<li>Fork it!</li>
+</ul>
+<h3>Directories</h3>
+<p>Let’s get your projects directory set up.</p>
+<p>In your shell, note what directory you are in.  It’s probably Users/{{user name}}.  This is probably a good place, but feel free to select a different location:</p>
+<p>The following commands will get you to where you want to go:
+*   List all directories in the current directory:    <code>ls</code>
+*   Change Directories to a lower directory
+    *   Mac:                                            <code>cd /name-of-directory/</code>
+    *   Windows:                                        <code>cd .\name-of-directory\\</code>
+*   Change to a higher directory:                    <code>cd ..</code></p>
+<p>Once you’re in the directory where you want your projects folder
+*   Make your projects directory:                     <code>mkdir projects</code>
+*   Change into it:                                  <code>cd projects</code><br />
+<img alt="mkdir &amp; cd projects" src="/blog/img/a-path-for-beginners/10.png" /></p>
+<h3>Local Repositories</h3>
+<p>We need to make local repositories also for you to be able to do your work.</p>
+<p>In your projects directory
+*   clone koans:              <br />
+<code>git clone https://github.com/functional-koans/clojure-koans.git</code><br />
+*   clone euler:              <br />
+<code>git clone https://github.com/slagyr/euler.git</code></p>
+<h3>IDE</h3>
+<p>Finally, you are going to want a textEditor or IDE.
+I personally suggest using intelliJ by <a href="https://www.jetbrains.com/idea/download/#section=mac">jetBrains</a>.  If you're using it for personal use only, they do offer a free community edition.
+One note on intelliJ, it does a lot for you!  This is great, but you will come to depend on some of the tools and hints that intelliJ offers, which will impede your overall understanding of what you are doing especially while you are a novice.  I started with intelliJ, so I’m not saying don’t, just be aware that it does things for you that you might need to understand as you progress in your new hobby/education/career.</p>
+<p>There are also editors like <a href="https://www.sublimetext.com/">SublimeText</a>, <a href="https://macromates.com/">TextMate</a>, etc.</p>
+<p>For the tasks I've supplied you with, any of those will do. Just save the files properly: .clj</p>
+<h2>Good Luck!</h2>
+<p>I’ll leave you with that.</p>
+<p>I’d walk you through starting &amp; running each of these tools, but my goal today was to help you get over the biggest hurdle: installation of all the pieces and then direction forward.  Perhaps in a future piece, we can mock-pair together to knock-out some of these puzzles.</p>
+<p>The truth is that learning to code involves a great deal of figuring things out on your own.  That being said, it doesn’t mean that you <em>are</em> on your own, so if you do get stuck, remember that you are probably not the first or the only person to have ever gotten stuck at your block.  If you've tried everything and still can't get there, look me up; maybe I could help.</p>
+<p>One last hint: I highly suggest that you read the READMEs!  They will tell you how to run the program and/or the specs/tests.</p>
+<h3>Sources:</h3>
+<ol>
+<li>ParallelsDesktop - windows 10</li>
+<li>Setting JAVA_HOME on mac:<br />
+    a.  Jonas Rabbe; Oct 29. 2013 &amp; Arv; Sept 27, 2018; https://stackoverflow.com/questions/14702702/how-to-set-java-home-in-mac-permanently<br />
+    b.  https://mkyong.com/java/how-to-set-java_home-environment-variable-on-mac-os-x/<br />
+    c.  (Temporary) http://www.sajeconsultants.com/how-to-set-java_home-on-mac-os-x/  </li>
+<li>Setting JAVA_HOME on Win: https://putridparrot.com/blog/environment-variables-in-powershell/</li>
+<li>Homebrew: https://brew.sh</li>
+<li>Chocolatey: https://chocolatey.org/install</li>
+<li>Install Leiningen: https://community.chocolatey.org/packages/lein</li>
+<li>Clojure:   https://clojure.org</li>
+<li>Install &amp; Setup:<br />
+    a. Mac: https://clojure.org/guides/getting_started<br />
+    b. Windows:  https://github.com/clojure/tools.deps.alpha/wiki/clj-on-Windows</li>
+<li>Leiningen: https://leiningen.org/</li>
+<li>Script Mac: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein</li>
+<li>Script Window: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein.bat</li>
+<li>.NET: https://dotnet.microsoft.com/download</li>
+<li>Oracle; Java8: https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html</li>
+<li>Git: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</li>
+<li>Clojure Koans:  https://github.com/functional-koans/clojure-koans</li>
+<li>Euler:
+    a.  https://github.com/slagyr/euler
+    b.  https://projecteuler.net/</li>
+<li>PowerShell Commands: https://docs.microsoft.com/en-us/powershell/module/powershellget/update-module?view=powershell-7.1</li>
+</ol>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/eleventeen">Eleventeen</a></li>
+      <li><a href="/blog/epic-growth">Epic Growth</a></li>
+      <li><a href="/blog/navigating-the-unknown">Navigating the Unknown</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bland Confidence — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Why AI agents produce confident but wrong answers, explained through a crawfish boil and computational complexity research.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bland Confidence">
+  <meta property="og:description" content="Why AI agents produce confident but wrong answers, explained through a crawfish boil and computational complexity research.">
+  <meta property="og:url" content="https://maniginam.dev/blog/bland-confidence">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Bland Confidence">
+  <meta name="twitter:description" content="Why AI agents produce confident but wrong answers, explained through a crawfish boil and computational complexity research.">
+  <link rel="canonical" href="https://maniginam.dev/blog/bland-confidence">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Bland Confidence",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2026-04-17",
+    "description": "Why AI agents produce confident but wrong answers, explained through a crawfish boil and computational complexity research.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/bland-confidence"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-hero">
+    <img src="/blog/img/bland-confidence/hero.jpg" alt="Bland Confidence">
+    <div class="hero-text">
+      <h1>Bland Confidence</h1>
+      <p class="post-date">April 17, 2026</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Last week one of our AI agents rewrote a function, ran the tests, watched them pass, and shipped it. Clean. Fast. Impressive. Except the function was wrong. Not wrong in a "missed an edge case" way — wrong in a "this looks plausible but does not actually do what was asked" way. The tests passed because the agent had also written the tests, and the tests were checking for the wrong thing. Confidently. Beautifully formatted.</p>
+<p>Alex caught it in a code review. A human, reading the code, who knew what the function was supposed to do. And that right there is the whole argument for why peer review still matters — not as ceremony, but as a safety net with actual eyes. I sat there afterward staring at this perfectly structured, entirely incorrect code thinking: <em>how does something so smart get something so wrong and not notice?</em></p>
+<p>Turns out there's a paper for that.</p>
+<hr />
+<h2>The Kitchen Timer Problem</h2>
+<p>A research paper came across my desk recently that finally gave me language for something I've been feeling in my gut for a year. The core idea is deceptively simple, so I'm going to explain it with a kitchen timer.</p>
+<p>If you've never been to a crawfish boil, here's the deal: you dump forty pounds of live crawfish into a massive pot of seasoned, boiling water along with corn, potatoes, sausage, garlic, and enough cayenne to make your eyes water from across the yard. Newspaper on the table. No plates. You eat with your hands and you argue about seasoning the entire time. It's chaos, and it's perfect.</p>
+<p>Now imagine you have a chef running this boil. Talented, fast, well-trained. But there's a catch: for every ingredient you hand them, they get a fixed number of seconds to cook. Not total seconds — seconds <em>per ingredient</em>. A small batch? No problem. But a real boil — forty pounds of crawfish, timed against the corn and potatoes, seasoning ratios that shift with batch size, heat that has to be managed differently when the pot is full versus half-full — the coordination steps don't just grow. They <em>explode</em>. Double the crawfish doesn't mean double the time and spice. The proportions shift in non-obvious ways. And your chef still gets the same fixed ratio of seconds per ingredient.</p>
+<p>They'll serve something. It'll look like a crawfish boil. But the crawfish are mush, the potatoes are raw, and the seasoning is so far off that nobody's arguing about it because nobody's eating it.</p>
+<p>That's what's happening inside an LLM.</p>
+<p>For every token the model reads, it does a fixed amount of computation. Same amount, every time, no matter what you asked. Simple question? It's got cycles to spare. But some problems — combining things in every possible order, multiplying big matrices, figuring out the shortest route through a bunch of cities — require work that grows <em>way</em> faster than that fixed budget allows. Cubically. Exponentially. Factorially.</p>
+<p>The model doesn't know it's out of budget. It doesn't throw an error. It doesn't say "this is beyond me." It just... dumps the pot out on the table. Confidently. With extra lemon wedges.</p>
+<hr />
+<h2>The Part That Made Me Put My Coffee Down</h2>
+<p>Here's what got me. The paper argues that you can't fix this by having a <em>second</em> LLM check the first one's work.</p>
+<p>I'll admit — this was my instinct for a while. Agent writes code, second agent reviews it, problems caught, everybody's happy. And sometimes that works! For the easy stuff, it works great. But the paper's point is almost painfully obvious once you hear it: the second chef has the same kitchen timer. If the boil was too complex for Chef #1 to get right, it's too complex for Chef #2 to verify. They'll both stand there nodding at the mushy crawfish like it's a masterpiece.</p>
+<blockquote>
+<p>The failure mode isn't "the AI said <em>I don't know</em>." The failure mode is "the AI said <em>here you go!</em> with a smiley face and a green checkmark."</p>
+</blockquote>
+<p>Now here's the thing — there's a nuance the paper doesn't quite explore. You don't <em>have</em> to ask the second chef "is this the best possible boil?" That's the hard problem. That's the one that requires evaluating every possible combination of timing and seasoning. But you <em>can</em> ask: "are the crawfish cooked through?" That's a simpler question. A pass/fail check against a known standard, not an open-ended evaluation of perfection. And that distinction matters a lot in practice, because most of the time we don't need the mathematically optimal answer. We need the answer that meets the spec.</p>
+<p>But here's where it gets interesting. Not everything <em>has</em> a clean spec. A turkey, sure — stick a thermometer in it, check for 165°F. But crawfish? There's no thermometer for a crawfish boil. You know it's right by the color, the curl of the tail, the way the shell pulls. It's feel. It's experience. Did you know that senior operators at paper plants can detect a problem with their pulping process before the instrumentation catches it, just by the smell of the black liquor? Heck, anyone two towns over can tell you when something's off at the mill. My point is, some things are really hard to reduce to a number.</p>
+<p>And that's the part that keeps me up at night with AI. For the problems that have a clear, measurable spec, we can build checks. Write the test first, define "done," let the machine verify against it. But for the problems that require taste, intuition, domain wisdom — the ones where "correct" is something a human <em>recognizes</em> more than <em>measures</em> — there's no shortcut. You need the person who knows what a good boil smells like.</p>
+<p>Which brings me back to staring at the wall.</p>
+<p>Because I've <em>seen</em> the other version of this. We've had review agents approve code that a human later flagged. We've had agents generate test suites that test the wrong behavior and then pass their own tests. (That one still haunts me.) The failure mode isn't "the AI said I don't know." The failure mode is "the AI said here you go! with a smiley face and a green checkmark."</p>
+<hr />
+<h2>What the Kitchen Timer Can't Cook</h2>
+<p>The paper talks about reasoning models — the newer ones that "think step by step" — and basically says: each step still has the same timer. Chain-of-thought doesn't give the model more computational power per token. It's like telling the chef they can write out a plan before firing the burner. Great, that helps with organization. But if the boil needs an hour of careful heat management and you've got ninety seconds, no amount of planning changes the physics.</p>
+<p>I want to be really clear here: I'm not dunking on AI. We use agents every day where I work. They write code, manage tasks, coordinate with each other. They're genuinely good at a shocking number of things. When the problem fits within that computational budget — and <em>most</em> everyday programming problems do — they're fast, reliable, and frankly better than me at remembering syntax.</p>
+<p>But I came to software from chemical manufacturing. And on a factory floor, you learn something fast: every material has a failure point. Every single one. Steel fatigues. Concrete cracks. Gaskets degrade. The question is never "does this material fail?" The question is <em>"under what conditions does it fail, and what happens when it does?"</em></p>
+<p>That's the question we should be asking about LLMs. Not "are they useful" — obviously yes. Not "will they get better" — obviously yes. But: <em>what's the failure mode, and what's the plan for it?</em></p>
+<hr />
+<h2>Garnish Isn't a Guardrail</h2>
+<p>This is why I'm so stubborn about craftsmanship disciplines. TDD. Code review. <em>Human</em> code review. Not because I don't trust the AI — I work with it every single day — but because I understand what the kitchen timer means.</p>
+<p>When an agent writes code, it needs to be tested against specifications that a <em>human</em> defined. Not tests the agent wrote to match its own output. That's the chef eating their own mushy crawfish and saying "yep, that's how crawfish taste." The test has to come from outside the system. Red-green-refactor isn't just a methodology preference anymore. It's a computational necessity. The red test — the one written <em>before</em> the code, by someone who knows what correct looks like — is the only thing standing between you and a confident, well-formatted, completely wrong answer.</p>
+<p>And verification can't just be "ask another LLM." It has to involve something with a different computational model. An actual algorithm. A compiler. A type checker. A human who knows the domain. Something that doesn't have the same kitchen timer limitation.</p>
+<p>I think about this every time someone tells me AI will replace developers. Maybe. Someday. But right now, today, in the actual work we do? The AI is the world's fastest, most confident junior developer. It needs code review. It needs guardrails. It needs someone who knows what a good boil tastes like.</p>
+<hr />
+<h2>The Part Where I Get Tender About It</h2>
+<p>Here's what I'm actually learning, underneath all the computational complexity stuff: <em>trust has to be earned at every level of difficulty.</em> I trust our agents with straightforward tasks because they've proven reliable there. I don't trust them with architectural decisions because I've watched them dump mushy crawfish on the table and call it done. That's not pessimism. That's paying attention.</p>
+<p>The paper gave me math for something I already knew from working a factory floor: understand your materials, know their limits, build systems that account for failure. The AI isn't magic. It's a material. A really, really good one. With a kitchen timer that never changes.</p>
+<p>So we keep writing the tests first. We keep reviewing the code. We keep the humans in the loop — not because we're Luddites, but because we read the spec sheet.</p>
+<p>The crawfish have got to actually be cooked.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/twenty-kills-per-second">Twenty Kills Per Second</a></li>
+      <li><a href="/blog/i-made-some-mistakes">I Made Some Mistakes. The Robot Made Them Faster.</a></li>
+      <li><a href="/blog/the-board-doesnt-lie">The Board Doesn't Lie</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

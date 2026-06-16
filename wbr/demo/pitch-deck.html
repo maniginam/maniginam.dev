@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ManiGinaM — What Gina Can Do For You</title>
+<style>
+  :root {
+    --lilac: #c4a0ff;
+    --lilac-light: #dbc4ff;
+    --lilac-dim: #9a7acc;
+    --coral: #ff8a8a;
+    --coral-light: #ffb3b3;
+    --charcoal: #1e1e2e;
+    --charcoal-light: #2a2a3e;
+    --charcoal-mid: #33334a;
+    --text: #e8e8f0;
+    --text-dim: #9999aa;
+    --mint: #7ddfb0;
+    --soft-red: #ff7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--charcoal);
+    color: var(--text);
+  }
+  .slide {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    position: relative;
+    background: var(--charcoal);
+  }
+  .slide.center-slide {
+    text-align: center;
+    align-items: center;
+  }
+  .slide.accent-bg {
+    background: var(--charcoal-light);
+  }
+  .slide.coral-bg {
+    background: linear-gradient(135deg, #3a1a2a, #2e1a1a);
+  }
+  h1 { font-size: 3em; color: var(--lilac); font-weight: 700; margin-bottom: 0.3em; }
+  h2 { font-size: 2.2em; color: var(--lilac); font-weight: 700; margin-bottom: 0.4em; }
+  h3 { font-size: 1.15em; color: var(--coral); font-weight: 700; margin-bottom: 0.2em; }
+  p { font-size: 1.1em; line-height: 1.5; margin: 0.3em 0; }
+  .subtitle { color: var(--coral-light); font-size: 1.4em; }
+  .meta { color: var(--text-dim); font-size: 1em; margin-top: 1em; }
+  .highlight { color: var(--coral); font-weight: 700; }
+
+  ul { list-style: none; padding-left: 0; margin: 0.3em 0; }
+  ul li { padding: 0.25em 0; padding-left: 1.5em; position: relative; font-size: 1.05em; line-height: 1.4; }
+  ul li::before { content: "\2192"; position: absolute; left: 0; color: var(--coral); font-weight: bold; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.6em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2em; margin-top: 0.6em; }
+  .card { background: var(--charcoal-light); border-radius: 12px; padding: 1em 1.2em; border-left: 5px solid var(--lilac); }
+  .card h3 { margin-bottom: 0.2em; }
+  .card-warm { border-left-color: var(--coral); }
+  .card-green { border-left-color: var(--mint); }
+
+  .takeaway-box { background: linear-gradient(135deg, rgba(196,160,255,0.2), rgba(255,138,138,0.15)); border: 1px solid rgba(196,160,255,0.3); color: var(--text); border-radius: 12px; padding: 1em 1.4em; margin: 0.5em 0; font-size: 1.05em; }
+
+  .persona-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; margin-top: 0.6em; }
+  .persona {
+    background: var(--charcoal-light); border-radius: 12px; padding: 1em 1.2em;
+    border-top: 4px solid var(--lilac);
+  }
+  .persona .name { font-weight: 700; font-size: 1.15em; color: var(--lilac); }
+  .persona .who { font-size: 0.9em; color: var(--coral); margin-bottom: 0.3em; }
+  .persona .need { font-size: 0.95em; color: var(--text-dim); }
+
+  .pricing-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2em; margin-top: 0.6em; }
+  .price-card {
+    background: var(--charcoal-light); border-radius: 12px; padding: 1.2em;
+    text-align: center; border-top: 4px solid var(--lilac);
+    border: 1px solid rgba(196,160,255,0.1);
+  }
+  .price-card.featured { border-top-color: var(--coral); background: rgba(255,138,138,0.05); }
+  .price-card .tier { font-size: 0.9em; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+  .price-card .price { font-size: 1.8em; font-weight: 700; color: var(--lilac); margin: 0.2em 0; }
+  .price-card.featured .price { color: var(--coral); }
+  .price-card .desc { font-size: 0.9em; color: var(--text-dim); }
+  .price-card ul li { font-size: 0.9em; text-align: left; }
+
+  .cta-box {
+    background: linear-gradient(135deg, rgba(255,138,138,0.25), rgba(255,138,138,0.1));
+    border: 1px solid rgba(255,138,138,0.3);
+    color: var(--text); border-radius: 12px;
+    padding: 1.2em 1.5em; text-align: center; margin-top: 0.8em;
+    font-size: 1.15em;
+  }
+  .cta-box strong { font-size: 1.2em; color: var(--coral-light); }
+
+  .footer-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--charcoal-mid); color: var(--text-dim);
+    font-size: 0.8em; padding: 8px 30px;
+    display: flex; justify-content: space-between;
+    z-index: 100;
+    border-top: 1px solid rgba(196,160,255,0.15);
+  }
+  .footer-bar a { color: var(--lilac-light); text-decoration: none; }
+
+  .slide-num {
+    position: absolute; top: 20px; right: 30px;
+    font-size: 0.8em; color: var(--text-dim);
+  }
+
+  @media (max-width: 900px) {
+    .slide { padding: 40px 30px; }
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.6em; }
+    .two-col, .three-col, .persona-grid, .pricing-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide center-slide">
+  <span class="slide-num">1 / 12</span>
+  <h1 style="font-size:3em;">ManiGinaM</h1>
+  <p class="subtitle">What Gina Can Do For You</p>
+  <p class="meta">
+    Gina Martiny &nbsp;|&nbsp; Software Engineer &amp; AI Consultant<br>
+    Port Allen, LA &nbsp;|&nbsp; ManiGinaM.dev
+  </p>
+</div>
+
+<!-- SLIDE 2: The Problem -->
+<div class="slide">
+  <span class="slide-num">2 / 12</span>
+  <h2>The Problem Everyone Has</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Businesses</h3>
+      <ul>
+        <li>Drowning in manual processes nobody has time to fix</li>
+        <li>Heard AI can help but don't know where to start</li>
+        <li>Burned by consultants who talk but don't build</li>
+        <li>Legacy systems nobody wants to touch</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>Communities</h3>
+      <ul>
+        <li>Government sites nobody can use</li>
+        <li>Local info scattered across Facebook groups</li>
+        <li>Youth programs run on paper and spreadsheets</li>
+        <li>Small businesses invisible online</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="text-align:center; margin-top:0.8em;">
+    Technology exists to fix all of this. What's missing is someone local who builds it <strong>with</strong> you, not <strong>at</strong> you.
+  </div>
+</div>
+
+<!-- SLIDE 3: Who is Gina -->
+<div class="slide">
+  <span class="slide-num">3 / 12</span>
+  <h2>Who I Am</h2>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li><strong>Software engineer</strong> — 15+ years building real systems</li>
+        <li><strong>Industrial + software</strong> — chemical plants to SaaS platforms</li>
+        <li><strong>AI practitioner</strong> — I use AI tools every day to build faster</li>
+        <li><strong>Port Allen native</strong> — this is my community</li>
+        <li><strong>ManiGinaM</strong> — my brand for 27 years</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">What makes me different</h3>
+      <ul>
+        <li>I build things. Not slide decks about building things.</li>
+        <li>I speak plant AND software — rare combo</li>
+        <li>I live here. I'm not flying in from Houston.</li>
+        <li>I charge fair rates and do pro bono community work</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: What I Do -->
+<div class="slide">
+  <span class="slide-num">4 / 12</span>
+  <h2>What I Do</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>Custom Software</h3>
+      <ul>
+        <li>Web applications</li>
+        <li>Internal business tools</li>
+        <li>Data dashboards</li>
+        <li>Workflow automation</li>
+        <li>API integrations</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>AI Integration</h3>
+      <ul>
+        <li>AI-powered workflows</li>
+        <li>Document processing</li>
+        <li>Chatbots for your business</li>
+        <li>Legacy system migration</li>
+        <li>AI training for your team</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Community Projects</h3>
+      <ul>
+        <li>Local business directories</li>
+        <li>Youth sports platforms</li>
+        <li>Educational content</li>
+        <li>Free AI seminars</li>
+        <li>Open community tools</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: Who Needs Me -->
+<div class="slide">
+  <span class="slide-num">5 / 12</span>
+  <h2>Who Needs Gina?</h2>
+  <div class="persona-grid">
+    <div class="persona">
+      <div class="name">The Small Business Owner</div>
+      <div class="who">Restaurant, shop, service company, contractor</div>
+      <div class="need">"I need a website that actually works, social media I don't have to think about, and someone to set up that AI stuff I keep hearing about."</div>
+    </div>
+    <div class="persona">
+      <div class="name">The Plant / Industrial Company</div>
+      <div class="who">Chemical, manufacturing, energy, utilities</div>
+      <div class="need">"We have 20-year-old systems nobody understands. We need someone who speaks our language AND can modernize without breaking production."</div>
+    </div>
+    <div class="persona">
+      <div class="name">The Local Government Office</div>
+      <div class="who">Parish, city, public utilities, school board</div>
+      <div class="need">"Our website is from 2012. We're still doing permits on paper. We need to modernize but can't afford the big firms."</div>
+    </div>
+    <div class="persona">
+      <div class="name">The Nonprofit or Community Org</div>
+      <div class="who">Chamber, church, sports league, civic group</div>
+      <div class="need">"We need a better way to communicate with our members, manage events, and not lose everything in someone's email inbox."</div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: Real Examples -->
+<div class="slide">
+  <span class="slide-num">6 / 12</span>
+  <h2>Things I've Built (or Am Building)</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>ManiGinaM.dev</h3>
+      <p>My consulting hub — AI, custom software, industrial automation</p>
+    </div>
+    <div class="card card-warm">
+      <h3>wbr.ManiGinaM.dev</h3>
+      <p>WBR community guide — local businesses, resources, events</p>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">sideline.ManiGinaM.dev</h3>
+      <p>Youth sports management — schedules, rosters, communication</p>
+    </div>
+    <div class="card">
+      <h3>legacyleaps.com</h3>
+      <p>AI migration tool for industrial businesses with real consulting built in</p>
+    </div>
+    <div class="card card-warm">
+      <h3>3dprintand.com</h3>
+      <p>52-week 3D printing curriculum for schools and maker spaces</p>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Free AI Seminars</h3>
+      <p>Community education — WBR: We're Bot Ready at local libraries</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: How I Work -->
+<div class="slide">
+  <span class="slide-num">7 / 12</span>
+  <h2>How I Work</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>1. Listen</h3>
+      <p>Free consultation. Tell me what's broken, what's painful, what you wish existed. No jargon. No sales pitch.</p>
+    </div>
+    <div class="card card-warm">
+      <h3>2. Scope</h3>
+      <p>Written proposal with clear deliverables and fixed price. No surprise invoices. No scope creep without your approval.</p>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">3. Build</h3>
+      <p>I build it. You see progress weekly. You own everything I create. No lock-in. No hostage-ware.</p>
+    </div>
+  </div>
+  <div class="takeaway-box" style="text-align:center; margin-top:0.8em;">
+    <strong>You own your stuff.</strong> Your code. Your data. Your domain. If you fire me tomorrow, everything is still yours.
+  </div>
+</div>
+
+<!-- SLIDE 8: Pricing -->
+<div class="slide">
+  <span class="slide-num">8 / 12</span>
+  <h2>Investment Levels</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="tier">Quick Win</div>
+      <div class="price">$500–$2K</div>
+      <div class="desc">Small, focused projects</div>
+      <ul>
+        <li>Simple website or landing page</li>
+        <li>AI setup for your workflow</li>
+        <li>One-time automation</li>
+        <li>Team AI training session</li>
+      </ul>
+    </div>
+    <div class="price-card featured">
+      <div class="tier">Core Project</div>
+      <div class="price">$2K–$10K</div>
+      <div class="desc">Real business tools</div>
+      <ul>
+        <li>Custom web application</li>
+        <li>Business process automation</li>
+        <li>Legacy system migration</li>
+        <li>AI integration + training</li>
+      </ul>
+    </div>
+    <div class="price-card">
+      <div class="tier">Enterprise</div>
+      <div class="price">Custom</div>
+      <div class="desc">Ongoing partnership</div>
+      <ul>
+        <li>Full-stack development</li>
+        <li>Industrial system modernization</li>
+        <li>Long-term retainer</li>
+        <li>Complex AI solutions</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:0.6em; color:var(--text-dim);">Community orgs and nonprofits — ask about pro bono and reduced-rate work.</p>
+</div>
+
+<!-- SLIDE 9: Community Commitment -->
+<div class="slide center-slide coral-bg">
+  <span class="slide-num">9 / 12</span>
+  <h1 style="color:var(--coral-light);">I'm Not Just Selling Services</h1>
+  <p style="color:var(--coral-light); font-size:1.3em; max-width:700px; opacity:0.85;">
+    I live here. I'm raising my family here.<br>
+    I'm building community tools because WBR deserves them — not because someone's paying me to.
+  </p>
+  <p style="color:var(--text); font-size:1.1em; margin-top:1em;">
+    wbr.ManiGinaM.dev &nbsp;|&nbsp; sideline.ManiGinaM.dev &nbsp;|&nbsp; Free AI seminars
+  </p>
+</div>
+
+<!-- SLIDE 10: Who Should You Send My Way -->
+<div class="slide">
+  <span class="slide-num">10 / 12</span>
+  <h2>Who Should You Send My Way?</h2>
+  <div class="persona-grid">
+    <div class="persona">
+      <div class="name">"My website is terrible"</div>
+      <div class="need">Any business with a bad, broken, or missing website. I build sites that work and that you actually own.</div>
+    </div>
+    <div class="persona">
+      <div class="name">"We're still doing this on paper"</div>
+      <div class="need">Permits, scheduling, invoicing, inventory — if it's manual and painful, I can automate it.</div>
+    </div>
+    <div class="persona">
+      <div class="name">"We want to use AI but don't know how"</div>
+      <div class="need">Training, setup, or custom AI tools. From a 1-hour intro to a full integration.</div>
+    </div>
+    <div class="persona">
+      <div class="name">"Our systems are ancient"</div>
+      <div class="need">Industrial plants, utilities, government offices running on legacy software nobody else will touch.</div>
+    </div>
+  </div>
+  <div class="cta-box">
+    <strong>If someone says "I wish I had someone who could just..."</strong><br>
+    That's me. Send them to ManiGinaM.dev or give them my card.
+  </div>
+</div>
+
+<!-- SLIDE 11: The Ask -->
+<div class="slide">
+  <span class="slide-num">11 / 12</span>
+  <h2>What I'm Asking For</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Referrals</h3>
+      <ul>
+        <li>Know a business struggling with technology? Introduce us.</li>
+        <li>Know a parish or city office that needs modernizing? I want that conversation.</li>
+        <li>Know a nonprofit that needs help? I do pro bono work.</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>Connections</h3>
+      <ul>
+        <li>Parish council members and department heads</li>
+        <li>School board and education leaders</li>
+        <li>Industrial plant managers and operations folks</li>
+        <li>Chamber members who are tech-curious</li>
+      </ul>
+    </div>
+  </div>
+  <div class="two-col" style="margin-top:0.8em;">
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Speaking Opportunities</h3>
+      <ul>
+        <li>Rotary, Lions, civic clubs</li>
+        <li>Business association meetings</li>
+        <li>School career days</li>
+        <li>Library programs</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Partnership</h3>
+      <ul>
+        <li>Accountants, lawyers, insurance agents — your clients need tech help too</li>
+        <li>Marketing agencies — I build what you design</li>
+        <li>Other consultants — let's refer to each other</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 12: Contact -->
+<div class="slide center-slide accent-bg">
+  <span class="slide-num">12 / 12</span>
+  <h1>Let's Talk</h1>
+  <p class="subtitle" style="margin-bottom:1em;">No pressure. No pitch. Just a conversation.</p>
+  <div style="background:rgba(196,160,255,0.1); border:1px solid rgba(196,160,255,0.2); border-radius:16px; padding:1.5em 2em; display:inline-block; text-align:center;">
+    <p style="font-size:1.4em; color:var(--text);"><strong>Gina Martiny</strong></p>
+    <p style="color:var(--lilac-light);">ManiGinaM, LLC &nbsp;|&nbsp; Port Allen, LA</p>
+    <p style="color:var(--text); font-size:1.3em; margin-top:0.5em;">ManiGinaM.dev</p>
+    <p style="color:var(--lilac-light); margin-top:0.3em;">gina@maniginam.dev</p>
+  </div>
+  <p style="color:var(--text-dim); margin-top:1.5em; font-size:0.95em;">
+    "Know someone who needs help with tech? Just say 'Talk to Gina.'"
+  </p>
+</div>
+
+<div class="footer-bar">
+  <span>ManiGinaM, LLC &nbsp;|&nbsp; Gina Martiny</span>
+  <span><a href="https://ManiGinaM.dev">ManiGinaM.dev</a></span>
+</div>
+
+</body>
+</html>

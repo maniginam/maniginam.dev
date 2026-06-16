@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Start of Two Recurs — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="First pairing session with brother Justin on the Prime Factors Kata — different approaches, deliberate ugliness, and missing the kids.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Start of Two Recurs">
+  <meta property="og:description" content="First pairing session with brother Justin on the Prime Factors Kata — different approaches, deliberate ugliness, and missing the kids.">
+  <meta property="og:url" content="https://maniginam.dev/blog/the-start-of-two-recurs">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Start of Two Recurs">
+  <meta name="twitter:description" content="First pairing session with brother Justin on the Prime Factors Kata — different approaches, deliberate ugliness, and missing the kids.">
+  <link rel="canonical" href="https://maniginam.dev/blog/the-start-of-two-recurs">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Start of Two Recurs",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-08-12",
+    "description": "First pairing session with brother Justin on the Prime Factors Kata — different approaches, deliberate ugliness, and missing the kids.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/the-start-of-two-recurs"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-header">
+    <h1>The Start of Two Recurs</h1>
+    <p class="post-date">August 12, 2021</p>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Yesterday was a special day.  It was the very first time that my baby brother and I wrote lines of code as a pair.  We paired on the Prime Factors Kata and an episode of what we are calling Hot-Kata.  While I’m not looking forward to the actual performance of Hot-Kata, as it will be painful, I do think that it will be very funny--I hope so anyway.</p>
+<p>It was fun pairing with Justin as right off the bat, he started the kata differently than I do.  First he wrote a forever long description that I thought was funny.  Then, he started with 2!</p>
+<p><img alt="Justin starts with 2!" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/01.png" /></p>
+<p>Whereas I write short descriptions, I start with 1.</p>
+<p><img alt="Gina starts with 1" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/02.png" /></p>
+<p>I did think it was very interesting how right off the bat he was thinking ahead about optimization, and then he showed me the many ways that he has performed the prime kata and described the different behaviors of each one.  We used them to compare ours against.</p>
+<p>Then of course, especially for the purpose of this video, we gave each other several just ridiculous yet hilarious and also horribly ugly and difficult-to-correct solutions for each test.</p>
+<p>Some of these included:</p>
+<p>At (should= [2 2] (prime-factors 4)): nested-ifs--ahhhh!!  Why didn’t you just do a cond?!  “Because you have to fix it, not me”.</p>
+<p><img alt="nested-ifs" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/03.png" /></p>
+<p>At (should= [5] (prime-factors 5)): (odd? n)
+  <img alt="(odd? n)" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/04.png" /></p>
+<p>This was obviously payback for the ifs, but to my surprise</p>
+<p>At (should= [2 3] (prime-factors 6)):  even this was paid back with evil and an ugly, yet functional for up to 6, vector.</p>
+<p><img alt="[n (/ n 2)]" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/05.png" /></p>
+<p>We finally completed it by means of recursion without a:</p>
+<p><img alt="Tails!" src="https://raw.githubusercontent.com/maniginam/maniginam.github.io/master/_posts/blog/2021-08-12/img/06.jpeg#thumbnail" />
+(this is Tails)</p>
+<p>deliberately causing poor optimization, so that we could go on to optimize it.  Why not optimize right off the bat?  Well, first make it pass, then refactor.  Plus, for our episode, we were going to need a little bit more time, so we thought it would be fun to use our props as inspiration for a large number to factor.  We intended for this to blow the stack the first time around.</p>
+<p>It’s going to be interesting!</p>
+<h2>Why Deliberate Ugliness Matters</h2>
+<p>The deliberate ugliness part is worth dwelling on. In the TDD world, this is the Green phase -- write the minimum code to make the test pass, no matter how ugly. The instinct to write it "correctly" the first time is strong, but resisting that instinct is the whole point. If you optimize too early, you skip the refactoring step, and the refactoring step is where the real design happens.</p>
+<p>Justin and I took this to an extreme for the video, giving each other intentionally terrible solutions -- nested ifs, hardcoded vectors, special-case checks. But there is a genuine lesson buried in the comedy. When you see the ugly version first, the clean version becomes obvious. You cannot <a href="/blog/refactor-refactor-drop">refactor toward clean code</a> if you do not have ugly code to refactor from. The ugliness is not a failure; it is the first draft.</p>
+<p>Pairing with Justin also highlighted something about different approaches to the same problem. He started with 2, I started with 1. Neither was wrong. But the difference in starting point led to different design decisions at every step. This is exactly why pairing -- and later, <a href="/blog/bland-confidence">code review</a> -- matters so much. You see your own blind spots reflected in someone else’s choices.</p>
+<hr />
+<p>Rex &amp; Leo:</p>
+<p>Oh man.  It was a weird day.  This morning, at the normal leave for school time, Keith packed the boys into the car and headed for the airport to visit Keith’s family for the weekend--<em>without me!</em></p>
+<p>I’ve left the boys overnight on one occasion since really either was born--i’ve actually been away from Leo twice, since Rex came with me on a trip last December.  Other than that this will take me to exactly 14 [2 7] nights away from Rex in the 187 [11 17], actually, it’s closer to 188 [2 2 47] weeks that he’s been in my world and 17 [17] nights away from Leo in the exactly 97 [97] weeks (come to think of it, he was born on a Thursday) that he’s been in my world.  But who’s counting right?</p>
+<p>Today was weird though.  Today was the very first time that they left me.  I’ve left them a couple times as mentioned, and I’ve taken them away from home and away from Keith a number of times.</p>
+<p>I guess I’ve never been this far away from them either.  Usually upon them leaving for school at 6:30/7AM, I get right into work mode (after a few household chores) and push buttons all day as my time is very limited to do so.  Today, I did push probably all the buttons, but the house was painfully quiet.</p>
+<p>I’ve been nervously &amp; selfishly looking forward to this weekend, but as it approached, I became more and more apprehensive about it.  And when they left, I almost wanted to ask Keith to not take them--or to change up my own plans and just jump in the car without a suitcase.</p>
+<p>Even though morning took place as normal, the house felt everso silent and empty.  And then came 4, 5 &amp; 6PM, and they never came home.  Now it’s dark and way past their bedtime, so once again things are like ‘normal’, but they’re not…</p>
+<p>It’s weird how badly I can crave a break from this whole mom thing, but then when I get it, I’m just lost and lonely...</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/a-path-for-beginners">A Path for Beginners</a></li>
+      <li><a href="/blog/refactor-refactor-drop">Refactor, Refactor, Drop!</a></li>
+      <li><a href="/blog/pee-youp">Pee-Yoop!</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

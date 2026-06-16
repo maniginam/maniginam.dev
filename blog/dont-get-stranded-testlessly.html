@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Don't Get Stranded Testlessly — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="How test-driven development acts as instrumentation for your code — lessons from drag-and-drop implementation.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Don't Get Stranded Testlessly">
+  <meta property="og:description" content="How test-driven development acts as instrumentation for your code — lessons from drag-and-drop implementation.">
+  <meta property="og:url" content="https://maniginam.dev/blog/dont-get-stranded-testlessly">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Don't Get Stranded Testlessly">
+  <meta name="twitter:description" content="How test-driven development acts as instrumentation for your code — lessons from drag-and-drop implementation.">
+  <link rel="canonical" href="https://maniginam.dev/blog/dont-get-stranded-testlessly">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Don't Get Stranded Testlessly",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-09-01",
+    "description": "How test-driven development acts as instrumentation for your code — lessons from drag-and-drop implementation.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/dont-get-stranded-testlessly"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-header">
+    <h1>Don't Get Stranded Testlessly</h1>
+    <p class="post-date">September 1, 2021</p>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Now that EPIC is pretty much just waiting on a few design components and drag-n-drop, I’ve been tasked with finishing up what Micah started with the dnd.</p>
+<p>He walked me through it to start me off, and I think I gained a decent understanding pretty quickly, so I felt ready to get started on completing it--big life-pause for the hurricane--and I was off!</p>
+<p>I actually made a little progress over the weekend and yesterday, such that I was able to nearly complete the single list dnd this morning and push forward to a multi-list dnd.</p>
+<p>Now, because the expected results were not fully known, we started this without many (okay with no) tests--sometimes this is necessary when you just don’t know what the results should produce and thus don’t know what a passing test would call for.  I continued on as such, but got to an interesting point.</p>
+<p>It had to do with re-ordering the list items.  It was redundantly time-consuming to write a little code, refresh the browser, &amp; check the outcome.  It didn’t take long before I realized that writing a test for this would be faster--after all, i <strong>did</strong> know what the outcome for these functions should be--it was just list reorganization.</p>
+<p>I began with the easiest--move the first element down one.  I was doing all of this with a linked-list of items as this is likely how I will implement it in Poker &amp; EPIC.  Made it pass.  Then moved a middle element to a different location between first &amp; last.  Passed it.</p>
+<p>Then move the last element to a middle location.  Passed it.</p>
+<p>Then move the first element to the last position--this one passed on it’s own--I wasn’t expecting that…</p>
+<p>Then move the last element to the first location--this one passed after a single tweak--cool.</p>
+<p>Suddenly, I had all possible variations passing.  So i tried it out in the brower--beautiful!  With the exception of the yucky html that I was struggling with.</p>
+<p>The point here is that while i was coding on testlessly, I quickly recognized the power that testing can provide.  I’ve said before that tests are your eyes and ears into your code.  They are like your instrumentation for a vehicle or piece of machinery.</p>
+<p>To not have tests would be to drive your car without a speedometer or fuel gauge.  Sure as any seasoned driver can get a feel for his or her car and drive without the instrumentation, doing so comes with additional risks.  Let your tests guide you, so you don’t find yourself empty and miles away from the nearest fuel.</p>
+<p>But just as with instrumentation, you must have trust in the output of your tests.  A pressure gauge that reads up to 250psig, will do little good on a system that runs under vacuum perhaps to a max of 5 psia.  Similarly, using an odometer to measure something’s temperature is not going to get you very far (ooo--could that be a pun of some sort?).</p>
+<p>You must first know what your instrumentation will tell you in order to know what it means when it sends you an alarm.</p>
+<p>If the instrumentation is faulty, so can be your driving.  If your tests are faulty, so can be your code.</p>
+<h2>The Instrumentation Lesson, Years Later</h2>
+<p>I wrote this in 2021, and the instrumentation analogy has only gotten more relevant. When I started working with <a href="/blog/twenty-kills-per-second">AI agents that write code</a>, the testing question became existential. An AI agent will happily produce code without tests. It will also happily write tests that pass but verify nothing useful -- I wrote about exactly that problem in <a href="/blog/i-made-some-mistakes">I Made Some Mistakes</a>.</p>
+<p>The <a href="/blog/dragon-drops">drag-and-drop work</a> I was doing when I wrote this post was the perfect case study. Some things are genuinely hard to test up front because you do not know what the output should look like until you see it. But once you see it, once you understand the behavior, there is no excuse for not going back and writing the tests that lock it in. The test is the specification. Without it, you are just hoping the code still works tomorrow.</p>
+<p>In chemical plants, we had a saying: "If it's not instrumented, it's not controlled." In software, the equivalent is: if it is not tested, it is not known. You might think you know what that function does. You might even be right. But without a test, you are driving on feel, and feel does not scale to a team, or to a codebase you will not touch for six months, or to an AI agent that has no feel at all.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/refactor-refactor-drop">Refactor, Refactor, Drop!</a></li>
+      <li><a href="/blog/dragon-drops">Dragon Drops</a></li>
+      <li><a href="/blog/i-made-some-mistakes">I Made Some Mistakes. The Robot Made Them Faster.</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

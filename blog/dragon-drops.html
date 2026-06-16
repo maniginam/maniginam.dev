@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dragon Drops — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Implementing drag-and-drop in a web app — where dragons speak JavaScript and digital poop happens when drops go wrong.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Dragon Drops">
+  <meta property="og:description" content="Implementing drag-and-drop in a web app — where dragons speak JavaScript and digital poop happens when drops go wrong.">
+  <meta property="og:url" content="https://maniginam.dev/blog/dragon-drops">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Dragon Drops">
+  <meta name="twitter:description" content="Implementing drag-and-drop in a web app — where dragons speak JavaScript and digital poop happens when drops go wrong.">
+  <link rel="canonical" href="https://maniginam.dev/blog/dragon-drops">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Dragon Drops",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-07-21",
+    "description": "Implementing drag-and-drop in a web app — where dragons speak JavaScript and digital poop happens when drops go wrong.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/dragon-drops"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-header">
+    <h1>Dragon Drops</h1>
+    <p class="post-date">July 21, 2021</p>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Go figure, night two of writing for my own benefit/from my own free will, I don’t feel like writing.</p>
+<p>I feel like my writing should be much more professional or distinguished now that I’m officially a software craftsman--perhaps, i’ll stick with the term software developer to avoid the whole gender thing stemming from craftsman/craftswoman, which to be honest, I couldn’t care less about--but, back to the point, I feel like I have a tone already established, and distinguished as it may not be, it is my voice and thus I will stick with it.  If i try too hard, i’ll give up anyway…</p>
+<p>There is a lot of poop in my life these days, but have you ever thought about the poop of a dragon?  Turns out they are as magical as you may have imagined and compiled of little bits of 1’s &amp; 0’s.</p>
+<p>A dragon poops each time you click on an element, proceed to drag it into or across a DOM, and finally drop it somewhere within an allowable component of said DOM.</p>
+<p>So, these days, I am not only working on potty training Rex (as well as Leo--fingers crossed), but also my own personalized Night Fury, whom I call Epic, to both begin &amp; end pooping where I want whichever creature I’m working with to do so.</p>
+<p>Did you know dragons speak javascript?  Well, they do.  For me, this is an added challenge, because in the midst of a dragon drop, the trainer should ideally be able to witness every movement of the dragon to be sure the drop is positioned correctly.  If this doesn’t occur, things could get messy and even explosive…</p>
+<p>I’ve seen dragon diarrhea at this point…  The whole screen goes blank and the browser must be refreshed--sometimes it’s even worse, so you really want to control your dragon every time he drops.</p>
+<p>Good thing he’s cute!</p>
+<h2>Why Drag-and-Drop Matters</h2>
+<p>The thing about drag-and-drop that nobody tells you up front is that it is deceptively simple as a concept and absurdly complex as an implementation. The user just wants to grab a card and move it somewhere. That is it. But underneath, you need to track the drag start position, calculate valid drop zones, handle the visual feedback during the drag, update the data model on drop, and re-render the list -- all while making it feel smooth and not having the browser do something unexpected with its own drag behaviors.</p>
+<p>This was one of those features where I really felt the absence of good <a href="/blog/dont-get-stranded-testlessly">test coverage</a>. The browser is the only environment where you can truly see if the drag behavior is correct, which means trial-and-error development. Click, drag, see what happens, fix, repeat. It was slow, and it was the opposite of test-driven. That tension between "I should write a test first" and "I genuinely do not know what the correct output looks like yet" is one of the hardest parts of learning TDD in real applications.</p>
+<p>I eventually found a middle ground: write the exploratory code first to understand the behavior, then go back and write the tests to lock it in. <a href="/blog/refactor-refactor-drop">Refactoring came after that</a>, once I could see the shape of the solution. Not the textbook Red-Green-Refactor cycle, but an honest adaptation of it for the real world of browser APIs and JavaScript event handlers that do not behave the way the documentation suggests.</p>
+<hr />
+<p>Rex:
+Rex is for the most part nearly completely potty trained now--it seemed to happen suddenly over the last week.  He was getting better and better but was still scared of the potty for a long while.  Suddenly at home, while scared at first, he came to terms and has repeatedly either peed in his potty or outside.  He may have peed on Bossbo--one of our three chickens--today also.  He tends to just whip it out and go whenever we are outside--a habit to break on a different day.</p>
+<p>Leo:
+Leo Meo got his second “m’s” &amp; “b’s” in the last week.  Suddenly “Mah-ie” turned into “Mah-Mie!” and “Bah-ie” turned into “Bahb-ie!”.  The kid is however a magnet to mommy right now.  And he is the sort of magnet that when mommy is around, he is not only attached, but also freaks out.  When mommy is not in the room and thus there is nothing to attach to, he is apparently a perfect angel--but this is of course all hearsay, because I, myself, have never had the opportunity to witness this perfect child within my own absence.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/dont-get-stranded-testlessly">Don't Get Stranded Testlessly</a></li>
+      <li><a href="/blog/eleventeen">Eleventeen</a></li>
+      <li><a href="/blog/refactor-refactor-drop">Refactor, Refactor, Drop!</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cats VS HTTP — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Learning HTTP request patterns the hard way — multiple approaches to linking web applications and knowing when to ask for help.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Cats VS HTTP">
+  <meta property="og:description" content="Learning HTTP request patterns the hard way — multiple approaches to linking web applications and knowing when to ask for help.">
+  <meta property="og:url" content="https://maniginam.dev/blog/cats-vs-http">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Cats VS HTTP">
+  <meta name="twitter:description" content="Learning HTTP request patterns the hard way — multiple approaches to linking web applications and knowing when to ask for help.">
+  <link rel="canonical" href="https://maniginam.dev/blog/cats-vs-http">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Cats VS HTTP",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2021-08-04",
+    "description": "Learning HTTP request patterns the hard way — multiple approaches to linking web applications and knowing when to ask for help.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/cats-vs-http"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-header">
+    <h1>Cats VS HTTP</h1>
+    <p class="post-date">August 4, 2021</p>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>When it comes to skinning a cat (what a terrible metaphor), there are apparently a lot of ways to do it.  A few reasons come to mind: cats don’t sit still, they have sharp and irritating claws when they scratch, and they bite after only a moment of belly tickles, so the task is not easy.</p>
+<p>HTTP &amp; cats have a lot in common.</p>
+<p>Although HTTP doesn’t seem to have skin; just a head and a body.  Still, there are a lot of ways to achieve the desired result.</p>
+<p>Regardless, whether it be cats or HTTP, I have to imagine that with experience one learns the best, most efficient, and safest/most secure way to achieve said goal.</p>
+<p>For the last week, I’ve been working on linking Poker &amp; EPIC.  Last week, i began the process with the clientside of EPIC making a websocket call to the EPIC server, which then sent a request to the Poker server, which returned the data to the EPIC server, which finally gave the sorted data back to the clientside.</p>
+<p>What?!</p>
+<p>Yeah, that was a mouthful even just writing it out--trying to explain it today to Micah felt about the same, but he followed.</p>
+<p>Later in the week, I felt that this was incorrect, so despite having it all working, i opened a new branch and went about it another way and then yet another way.  Finally, I got on a call with Micah today to tell him all about my trials and get his expert opinion on which way this cat should be skinned.</p>
+<p>Turns out, it was the original way I’d done it with a little extra complexity.  Right in front of him (or rather over screen sharing), i stashed my branch, swapped back to my master branch--where I’d saved all my original work---and confirmed through that.  He seemed a little stunned with this possibly over confident move of mine, that I’d “deleted” all my work.  It was a weird feeling that not only was it not painful to stash my work with the possibility of not being able to retrieve it easily, as git sometimes makes stashing hard, but this move also felt really good that I was able to get rid of a bunch of bad messy code and go back to what had been working.  The work and effort didn’t bother me--nor had when I had to stash two months of work in Trello.</p>
+<p>When something isn’t working, the best this to do is just stash/trash it away.</p>
+<p>I spent the rest of the day focusing on the tests and building the connected interfaces that I needed, and suddenly, voila!  Everything was working again--but now even better and I had extra security checks in there.</p>
+<p>This week I learned that there are a lot of ways to get the same desired outcome.  I was never blocked or stuck on the task I was doing, but I was stuck at a multi-tined fork in the road for which way to go.  This is where experience is very important.</p>
+<p>For someone as novice as I am, it would be very easy to just go the easy route--the route with the least immediate resistance, and I could get the job done doing so.  But just because a path starts out “easy” or quick, doesn’t mean that it stays easy.  While it may be a shortcut, there could be some unforeseen, rough terrain ahead.</p>
+<p>When it comes to those times, I think it is especially important to ask those who have walked the path before.</p>
+<h2>The Bigger Lesson</h2>
+<p>This experience taught me something about confidence versus competence that I keep coming back to. I was confident enough to stash weeks of work on a live call, which felt bold. But I was not yet competent enough to evaluate the architectural options on my own. The willingness to throw away code is a strength. The inability to choose the right path without help is a gap that only closes with experience.</p>
+<p>The <a href="/blog/cheeky-butt">refactoring work</a> that came a few days later was the direct consequence of this decision. Once Micah confirmed the server-to-server approach, I had to clean up the EPIC side to match. And the <a href="/blog/stuck-and-growing-fast">circular dependency problems</a> that followed were, in hindsight, symptoms of the same underlying issue: the two applications were too tightly coupled, and no amount of HTTP routing was going to fix a design problem.</p>
+<p>Years later, when I started working with <a href="/blog/we-build-software-with-responsible-ai">AI agents</a> that could explore multiple implementation paths simultaneously, this early experience became incredibly relevant. An AI agent faces the same multi-tined fork at every decision point, but it cannot call Micah. It picks the path that looks most probable based on its training, which is often the easy route -- the one with the least immediate resistance. And as I learned with HTTP and cats, the easy route is not always the right one.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/cheeky-butt">Cheeky Butt</a></li>
+      <li><a href="/blog/stuck-and-growing-fast">Stuck and Growing Fast</a></li>
+      <li><a href="/blog/refactor-refactor-drop">Refactor, Refactor, Drop!</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

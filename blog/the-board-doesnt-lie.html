@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Board Doesn't Lie — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="From chemical plant floors to software dashboards — how the SQDIC board's boolean discipline applies to AI-augmented software development.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Board Doesn't Lie">
+  <meta property="og:description" content="From chemical plant floors to software dashboards — how the SQDIC board's boolean discipline applies to AI-augmented software development.">
+  <meta property="og:url" content="https://maniginam.dev/blog/the-board-doesnt-lie">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Board Doesn't Lie">
+  <meta name="twitter:description" content="From chemical plant floors to software dashboards — how the SQDIC board's boolean discipline applies to AI-augmented software development.">
+  <link rel="canonical" href="https://maniginam.dev/blog/the-board-doesnt-lie">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
+      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
+    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.35rem; }
+    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Board Doesn't Lie",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2026-05-08",
+    "description": "From chemical plant floors to software dashboards — how the SQDIC board's boolean discipline applies to AI-augmented software development.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/the-board-doesnt-lie"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/#why">Why Gina</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="post-hero">
+    <img src="/blog/img/the-board-doesnt-lie/hero.jpg" alt="The Board Doesn't Lie">
+    <div class="hero-text">
+      <h1>The Board Doesn't Lie</h1>
+      <p class="post-date">May 8, 2026</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>Every morning at 6:15, before the coffee kicked in, before anyone checked email, before anyone even said good morning — we stood in front of the board.</p>
+<p>Five letters. Big. Color-coded. Red or green. That was it. No slide decks. No "let me pull up the metrics." Just the board, hanging on the wall at the entrance to the plant floor, telling you the truth about your operation whether you wanted to hear it or not.</p>
+<p>S. Q. D. I. C.</p>
+<p>Safety. Quality. Delivery. Inventory. Cost.</p>
+<p>I was twenty-four the first time I stood in front of one. Honeywell. Night shift had just handed off. The board was mostly green — except Safety, which was red. Someone had tripped over a hose that shouldn't have been there. No injury, but a near-miss is a red. Period. No debate, no "well technically," no "but nobody got hurt." Red.</p>
+<p>The shift supervisor didn't flinch. Didn't make excuses. Just said, "We left a hose across a walkway. We fixed it. Here's what we're doing so it doesn't happen again." Thirty seconds. Done. Next letter.</p>
+<p>That stuck with me in a way I didn't fully understand until years later.</p>
+<hr />
+<p>Here's the thing about the board that took me a long time to appreciate: it's a set of boolean questions. Each letter gets exactly one answer. Red or green. Did anyone get hurt or nearly hurt? Red or green. Did we ship product that met spec on the first pass? Red or green. Did we hit our delivery targets? Red or green. Is work-in-progress within acceptable limits? Red or green. Are we operating within budget? Red or green.</p>
+<p>There is no yellow. There is no "trending in the right direction." There is no "it depends on how you measure it."</p>
+<p>Red. Or green.</p>
+<p>That level of clarity is uncomfortable for people who are used to narratives. You can't spin the board. You can't reframe a red as a "learning opportunity" while you're standing in front of your entire crew at shift handoff. The board is the board. It says what it says.</p>
+<p>But here's what most people miss — the boolean is the <em>starting point</em>, not the answer. Green doesn't mean "stop paying attention." Red doesn't mean "panic." The real work is the questions you ask <em>after</em> you see the color.</p>
+<p>Safety is red. Okay — what systems were involved? What's the blast radius if it had gone worse? Who reviewed the procedure, and did they understand the domain well enough to catch it?</p>
+<p>Quality is red. Okay — what failed first-pass? Was the spec clear before production started, or were we building to a moving target? What's our first-pass yield telling us about the process, not just the product?</p>
+<p>Inventory is red. How much finished work is sitting in a queue waiting for someone to look at it? What's the oldest thing in that pile? Is our production rate outpacing our ability to review and ship?</p>
+<p>The board gives you the boolean. <em>You</em> bring the curiosity.</p>
+<hr />
+<p>I think about the board a lot these days.</p>
+<p>Not because I'm still on a plant floor — though some mornings, wrangling a fleet of coding agents feels eerily similar to managing a production line. Same questions, different medium. And when I built my own board — the one I actually use now — I changed more than the letters. I changed the colors.</p>
+<p>Not red and green. Red and blue.</p>
+<p>It sounds small. It isn't. Green is what the plant floor gave me, and I'm grateful for it. But green belongs to that world — to chemical reactors and shift handoffs and hoses across walkways. When I sat down to build a board for software, for the work we do every day, I wanted it to look like <em>us</em>. Blue is the color of the craft. It's the color of the discipline. When a metric lights up blue, it means we did the work and it held. When it lights up red, it means we have work to do.</p>
+<p>Same boolean. Same honesty. Different house.</p>
+<p>So here's what my board asks every day:</p>
+<p>Did anything we shipped today cause harm? Blue or red. Was every layer locked down — least privilege, keys protected, access boundaries clear? Blue or red. Was it validated against a spec that a human actually wrote and understood? Blue or red. What's our first-pass yield on work coming off the line — how much of it is shippable without revision? Blue or red. How much work is sitting in a pile, unreviewed, right now? Blue or red. What's the fully loaded cost — including rework, review time, and the work that didn't happen because we were sorting garbage? Blue or red.</p>
+<p>Six questions. Six booleans. No yellow.</p>
+<hr />
+<p>I added a letter, by the way. The original board has five. Mine has six.</p>
+<p>Security.</p>
+<p>In manufacturing, safety and security blur together. They're both about "don't let bad things happen." But in software, they're distinct concerns with distinct disciplines. Safety asks: could this code hurt someone if it fails? Security asks: is every layer locked down? Least privilege? Keys protected? Access boundaries clear?</p>
+<p>They're both boolean questions. They both demand the deeper inquiry after the color. But they require different expertise, different reviews, different muscle memory. Collapsing them into one letter is how you miss things. And missing things in either category is how you end up on the news.</p>
+<p>So my board reads S-S-Q-D-I-C. Six letters. Six booleans. Six sets of questions that earn the right to light up blue.</p>
+<hr />
+<p>The discipline was never the board itself. The board is just paint and magnets — or pixels and a deploy pipeline. The discipline is showing up every morning, standing in front of it, and owning what it says. Not explaining. Not reframing. Owning.</p>
+<p>Blue means you did the work. Red means you have work to do. Both are fine. Both are honest. The only unacceptable color is the one you didn't bother to check.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/bland-confidence">Bland Confidence</a></li>
+      <li><a href="/blog/the-hive-is-open">The Hive is Open</a></li>
+      <li><a href="/blog/build-it-once">Build It Once</a></li>
+
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+</html>

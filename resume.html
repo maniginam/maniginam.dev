@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gina Martiny — Resume</title>
+  <meta name="description" content="Resume of Gina Martiny — Software engineer, technical leader, and business owner with 6 years building production systems and 10+ years in engineering leadership.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://maniginam.dev/resume">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Gina Martiny — Resume">
+  <meta property="og:description" content="10+ years in chemical manufacturing and 6+ years in software engineering. Clojure, AI agents, construction tech, cloud infrastructure.">
+  <meta property="og:url" content="https://maniginam.dev/resume">
+  <meta property="og:site_name" content="maniginam.dev">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Gina Martiny — Resume">
+  <meta name="twitter:description" content="10+ years in chemical manufacturing and 6+ years in software engineering. Clojure, AI agents, construction tech, cloud infrastructure.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243352;
+      --accent: #c4875b;
+      --accent-light: #d4a07a;
+      --text: #2c3e50;
+      --text-light: #5a6a7e;
+      --bg: #fafbfc;
+      --white: #ffffff;
+      --border: #e2e6ec;
+      --section-alt: #f4f6f8;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: var(--navy); padding: 0 2rem; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Header */
+    .page-header {
+      margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center;
+    }
+    .page-header h1 { font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
+    .page-header .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 600px; margin: 0 auto 1rem; }
+    .page-header .contact-line { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+    .page-header .contact-line a { color: var(--accent-light); text-decoration: none; }
+    .page-header .links { margin-top: 0.75rem; }
+    .page-header .links a {
+      display: inline-block; margin: 0 0.5rem; padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+      color: rgba(255,255,255,0.7); font-size: 0.8rem; text-decoration: none; transition: all 0.2s;
+    }
+    .page-header .links a:hover { border-color: var(--accent-light); color: var(--accent-light); }
+
+    /* Container */
+    .container { max-width: 800px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Section */
+    .resume-section { padding: 2.5rem 0; }
+    .resume-section + .resume-section { border-top: 1px solid var(--border); }
+
+    .resume-section h2 {
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;
+    }
+
+    /* Skills grid */
+    .skills-grid { display: grid; grid-template-columns: 110px 1fr; gap: 0.5rem 1rem; }
+    .skill-cat { font-weight: 600; color: var(--navy); font-size: 0.85rem; text-align: right; }
+    .skill-val { font-size: 0.85rem; color: var(--text-light); }
+
+    /* Job */
+    .job { margin-bottom: 1.75rem; }
+    .job:last-child { margin-bottom: 0; }
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
+    .company { font-weight: 700; font-size: 1rem; color: var(--navy); }
+    .dates { font-size: 0.8rem; color: var(--text-light); white-space: nowrap; }
+    .title-line { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .job-title { font-style: italic; font-size: 0.9rem; color: var(--text); }
+    .location { font-size: 0.8rem; color: var(--text-light); }
+    .job ul { margin-left: 1.25rem; }
+    .job li { font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.25rem; line-height: 1.6; }
+
+    /* Projects */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;
+    }
+    .project-card {
+      border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem;
+      transition: box-shadow 0.2s, border-color 0.2s; text-decoration: none; display: block;
+    }
+    .project-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(196,135,91,0.3); }
+    .project-card h3 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.35rem; font-weight: 600; }
+    .project-card p { font-size: 0.8rem; color: var(--text-light); line-height: 1.5; }
+    .project-card .tech { font-size: 0.7rem; color: var(--accent); margin-top: 0.5rem; font-weight: 500; }
+
+    /* Education */
+    .edu-line { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .edu-school { font-weight: 700; font-size: 0.95rem; color: var(--navy); }
+    .edu-degree { font-style: italic; font-size: 0.9rem; color: var(--text); }
+
+    /* Volunteer */
+    .vol-list { margin-left: 1.25rem; }
+    .vol-list li { font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.25rem; }
+
+    /* Footer */
+    footer {
+      background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 1.5rem 2rem; text-align: center; margin-top: 3rem;
+    }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+
+    /* Print */
+    @media print {
+      nav, .page-header .links, footer { display: none; }
+      .page-header { margin-top: 0; padding: 1rem 0; }
+      body { font-size: 10pt; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .page-header { padding: 3rem 1.5rem 2rem; }
+      .page-header h1 { font-size: 1.7rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+      .skill-cat { text-align: left; }
+      .job-header, .title-line, .edu-line { flex-direction: column; gap: 0.15rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+  <nav>
+    <a href="/" class="logo">maniginam<span>.dev</span></a>
+    <ul>
+      <li><a href="/#services">Services</a></li>
+      <li><a href="/resume">Resume</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <h1>Gina Martiny</h1>
+    <p class="subtitle">Software craftsman, technical leader, and business owner with 10+ years in chemical manufacturing and 6+ years in software engineering.</p>
+    <p class="contact-line">Port Allen, LA &ensp;|&ensp; <a href="/cdn-cgi/l/email-protection#5f3836313e1f323e31363836313e32713b3a29"><span class="__cf_email__" data-cfemail="ed8a84838cad808c83848a84838c80c389889b">[email&#160;protected]</span></a></p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/gina-martiny">LinkedIn</a>
+      <a href="https://github.com/maniginam">GitHub</a>
+      <a href="https://maniginam.com">maniginam.com</a>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Projects -->
+    <div class="resume-section">
+      <h2>Live Projects</h2>
+      <div class="projects-grid">
+        <a href="https://epic.cleancoders.com" target="_blank" class="project-card">
+          <h3>EPIC</h3>
+          <p>Full-stack project management and operations platform. Designed, built, and deployed autonomously.</p>
+          <div class="tech">Clojure &middot; ClojureScript &middot; Reagent &middot; Datomic &middot; AWS</div>
+        </a>
+        <a href="https://legacyleaps.com" target="_blank" class="project-card">
+          <h3>Legacy Leaps</h3>
+          <p>AI-integrated consulting practice. Custom software and automation for Louisiana industrial businesses.</p>
+          <div class="tech">Clojure &middot; AI Agents &middot; AWS &middot; Cloudflare</div>
+        </a>
+        <a href="https://wbr.maniginam.dev" target="_blank" class="project-card">
+          <h3>WBR Local</h3>
+          <p>Community resource site for West Baton Rouge Parish. Local guides, events, garbage schedules.</p>
+          <div class="tech">Static &middot; S3 &middot; CloudFront &middot; SEO</div>
+        </a>
+        <a href="https://aileapers.com" target="_blank" class="project-card">
+          <h3>AI Leapers</h3>
+          <p>Network of SEO-optimized content sites across 6 subdomains covering AI tools, home office, weather, sleep, and OCR.</p>
+          <div class="tech">Static &middot; S3 &middot; CloudFront &middot; Affiliate</div>
+        </a>
+        <a href="https://maniginam.dev" class="project-card">
+          <h3>maniginam.dev</h3>
+          <p>This site. Animated Baton Rouge road map with live traffic, weather, and daylight tracking.</p>
+          <div class="tech">Canvas &middot; SVG &middot; SunCalc &middot; Cloudflare Pages</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <div class="resume-section">
+      <h2>Technical Skills</h2>
+      <div class="skills-grid">
+        <span class="skill-cat">Languages</span>
+        <span class="skill-val">Language-agnostic; primary: Clojure, ClojureScript, Java, Python, C, Ruby, SQL, JavaScript, HTML, PHP</span>
+        <span class="skill-cat">Databases</span>
+        <span class="skill-val">Datomic, DynamoDB, PostgreSQL, MSSQL, MongoDB, SQLite, S3</span>
+        <span class="skill-cat">Cloud & Infra</span>
+        <span class="skill-val">AWS (IAM, EC2, S3, DynamoDB, CloudFormation, CloudFront), Terraform, Cloudflare, CI/CD</span>
+        <span class="skill-cat">Frontend</span>
+        <span class="skill-val">Reagent/React, ClojureScript, Angular</span>
+        <span class="skill-cat">Backend</span>
+        <span class="skill-val">Ring/Compojure, Spring Framework, REST APIs, Braintree</span>
+        <span class="skill-cat">Practices</span>
+        <span class="skill-val">TDD, SOLID, Clean Architecture, Agile, Pair Programming, Code Review</span>
+        <span class="skill-cat">AI & Data</span>
+        <span class="skill-val">Responsible AI, LLM integration, autonomous AI agents, legacy software migrations, data migrations</span>
+        <span class="skill-cat">Enterprise</span>
+        <span class="skill-val">SAP, ERP systems, ViewPoint Vista, Siemens DCS, data governance</span>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="resume-section">
+      <h2>Professional Experience</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Clean Coders Studio</span>
+          <span class="dates">June 2020 &ndash; Present</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Software Engineer / Technical Lead / Owner</span>
+          <span class="location">Port Allen, LA</span>
+        </div>
+        <ul>
+          <li>Completed rigorous software craftsmanship apprenticeship (first graduate), mastering TDD, SOLID principles, Clean Architecture, and Agile delivery</li>
+          <li>Autonomously designed, built, and deployed EPIC &mdash; a full-stack Clojure/ClojureScript production platform</li>
+          <li>Architected and delivered Poker &mdash; a real-time collaborative story estimation tool for distributed teams</li>
+          <li>Lead developer and technical lead across 4+ simultaneous client engagements spanning warehousing, construction, finance, UAV, additive manufacturing, and industrial domains</li>
+          <li>Modernized a legacy financial enterprise system &mdash; migrated data, refactored architecture, and extended functionality while maintaining production uptime</li>
+          <li>Built and maintained AWS cloud infrastructure: IAM policies, Datomic databases, EC2 provisioning, S3, DynamoDB, and CI/CD pipelines</li>
+          <li>Drove business development: authored proposals, won contracts, and managed client relationships</li>
+          <li>Mentored 3 apprentices from entry-level through promotion at Clean Coders Studio, designing curriculum and conducting rigorous code reviews</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Honeywell International Inc</span>
+          <span class="dates">June 2017 &ndash; June 2020</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Senior Unit Production Supervisor</span>
+          <span class="location">Baton Rouge, LA</span>
+        </div>
+        <ul>
+          <li>Managed operations across 5 production units, owning P&L performance against production targets, quality specs, and forecasted budgets</li>
+          <li>Acted as interim Operations Manager, overseeing cross-functional teams and customer-facing technical engagements</li>
+          <li>Saved $750K annually by leading the reclassification of hazardous waste materials to non-hazardous</li>
+          <li>Drove operational innovation by trialing alternate raw materials to eliminate supply-chain downtime</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Axiall, a Westlake Company</span>
+          <span class="dates">April 2014 &ndash; June 2017</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Utilities &amp; Water Treatment Supervisor / Process Engineer</span>
+          <span class="location">Plaquemine, LA</span>
+        </div>
+        <ul>
+          <li>Promoted to management in 6 months; supervised 17 operators and shift supervisors</li>
+          <li>Led SAP site deployment on-time; built VBA automation that reduced month-end accounting time by 90%</li>
+          <li>Implemented well-cleaning method saving &gt;$600K over 10 years; increased wastewater treatment capacity 30%</li>
+          <li>Reduced permit deviations &gt;50%; achieved zero deviations during the Great Flood of 2016</li>
+          <li>As Process Engineer, developed $5MM cost justification for equipment replacement using field data analysis</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">BASF</span>
+          <span class="dates">March 2013 &ndash; April 2014</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Production Engineer</span>
+          <span class="location">Geismar, LA</span>
+        </div>
+        <ul>
+          <li>Six Sigma Green Belt &mdash; led continuous improvement teams delivering capital-free operational improvements</li>
+          <li>Managed Siemens DCS to refactor controls and update safety instrumented systems across batch plants</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Honeywell International Inc</span>
+          <span class="dates">January 2012 &ndash; March 2013</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Production Engineer</span>
+          <span class="location">Baton Rouge, LA</span>
+        </div>
+        <ul>
+          <li>Built SAP reporting tools saving engineers 75% of inventory variance reporting time</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <span class="company">Honeywell International Inc</span>
+          <span class="dates">March 2011 &ndash; December 2011</span>
+        </div>
+        <div class="title-line">
+          <span class="job-title">Chemical Engineer</span>
+          <span class="location">Metropolis, IL</span>
+        </div>
+        <ul>
+          <li>Qualified as UF6 Distillation Board Operator on the world's only UF6 distillation process</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="resume-section">
+      <h2>Education</h2>
+      <div class="edu-line">
+        <span><span class="edu-school">Louisiana State University</span> &ensp;<span class="edu-degree">Master of Business Administration</span></span>
+        <span class="dates">December 2018</span>
+      </div>
+      <div class="edu-line">
+        <span><span class="edu-school">University of Illinois at Chicago</span> &ensp;<span class="edu-degree">B.S. Chemical Engineering</span></span>
+        <span class="dates">May 2010</span>
+      </div>
+    </div>
+
+    <!-- Volunteerism -->
+    <div class="resume-section">
+      <h2>Volunteerism &amp; Leadership</h2>
+      <ul class="vol-list">
+        <li>CASA &mdash; Sworn-in Court Appointed Special Advocate (July 2024 &ndash; Present)</li>
+        <li>West Baton Rouge Chamber of Commerce (2021 &ndash; Present)</li>
+        <li>Louisiana Additive Manufacturing Association</li>
+        <li>Dale Carnegie Leadership Course Graduate</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a069c36eecedadd7',t:'MTc4MDYwNTczOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

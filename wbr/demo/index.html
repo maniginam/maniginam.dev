@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WBR: We're Bot Ready — ManiGinaM</title>
+<style>
+  :root {
+    --lilac: #c4a0ff;
+    --lilac-light: #dbc4ff;
+    --lilac-dim: #9a7acc;
+    --coral: #ff8a8a;
+    --coral-light: #ffb3b3;
+    --charcoal: #1e1e2e;
+    --charcoal-light: #2a2a3e;
+    --charcoal-mid: #33334a;
+    --text: #e8e8f0;
+    --text-dim: #9999aa;
+    --mint: #7ddfb0;
+    --soft-red: #ff7070;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--charcoal);
+    color: var(--text);
+  }
+  .slide {
+    min-height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 15vw;
+    position: relative;
+    background: var(--charcoal);
+  }
+  .slide.center-slide {
+    text-align: center;
+    align-items: center;
+  }
+  .slide.accent-bg {
+    background: var(--charcoal-light);
+  }
+  .slide.coral-bg {
+    background: linear-gradient(135deg, #3a1a2a, #2e1a1a);
+  }
+  h1 { font-size: 3em; color: var(--lilac); font-weight: 700; margin-bottom: 0.3em; }
+  h2 { font-size: 2.2em; color: var(--lilac); font-weight: 700; margin-bottom: 0.4em; }
+  h3 { font-size: 1.1em; color: var(--coral); font-weight: 700; margin-bottom: 0.2em; }
+  p { font-size: 1.1em; line-height: 1.5; margin: 0.3em 0; }
+  .subtitle { color: var(--coral-light); font-size: 1.4em; }
+  .meta { color: var(--text-dim); font-size: 1em; margin-top: 1em; }
+  .meta a { color: var(--lilac-light); text-decoration: none; }
+  .highlight { color: var(--coral); font-weight: 700; }
+
+  .wbr-title { display: inline-grid; grid-template-columns: auto auto auto; column-gap: 0.3em; }
+  .wbr-title span { text-align: center; }
+  .wbr-main-word { font-size: 3.2em; font-weight: 800; color: var(--lilac); line-height: 1.1; }
+  .wbr-main-word::first-letter { color: var(--coral); }
+  .wbr-accent { color: var(--coral); }
+  .wbr-sub-word { font-size: 1.5em; font-weight: 600; color: var(--lilac-dim); line-height: 1.4; letter-spacing: 0.15em; }
+  .wbr-sub-word::first-letter { color: var(--coral); font-weight: 700; }
+
+  ul { list-style: none; padding-left: 0; margin: 0.3em 0; }
+  ul li { padding: 0.25em 0; padding-left: 1.5em; position: relative; font-size: 1.05em; line-height: 1.4; }
+  ul li::before { content: "\2192"; position: absolute; left: 0; color: var(--coral); font-weight: bold; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5em; margin-top: 0.6em; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2em; margin-top: 0.6em; }
+  .card { background: var(--charcoal-light); border-radius: 12px; padding: 1em 1.2em; border-left: 5px solid var(--lilac); }
+  .card h3 { margin-bottom: 0.2em; }
+  .card-warm { border-left-color: var(--coral); }
+  .card-red { border-left-color: var(--soft-red); }
+  .card-green { border-left-color: var(--mint); }
+
+  .big-emoji { font-size: 2.5em; margin-bottom: 0.15em; }
+
+  .demo-box { background: var(--charcoal-mid); color: var(--text); border-radius: 12px; padding: 1.2em; font-family: monospace; font-size: 0.95em; margin: 0.6em 0; line-height: 1.6; border: 1px solid rgba(196,160,255,0.15); }
+  .demo-box .prompt { color: var(--lilac-light); }
+  .demo-box .response { color: var(--mint); }
+
+  .takeaway-box { background: linear-gradient(135deg, rgba(196,160,255,0.2), rgba(255,138,138,0.15)); border: 1px solid rgba(196,160,255,0.3); color: var(--text); border-radius: 12px; padding: 1em 1.4em; margin: 0.5em 0; font-size: 1.05em; }
+
+  .company-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1em; margin-top: 0.6em; }
+  .company-card { background: var(--charcoal-light); border-radius: 10px; padding: 0.8em; text-align: center; border: 1px solid rgba(196,160,255,0.1); }
+  .company-card .co-name { font-weight: 700; font-size: 1.1em; color: var(--lilac); }
+  .company-card .co-product { font-size: 0.95em; color: var(--coral); }
+  .company-card .co-desc { font-size: 0.85em; color: var(--text-dim); margin-top: 0.2em; }
+
+  .site-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8em; margin-top: 0.6em; }
+  .site-card { background: var(--charcoal-light); border-radius: 10px; padding: 0.8em; text-align: center; border: 1px solid rgba(196,160,255,0.1); }
+  .site-card .site-url { color: var(--lilac-light); font-weight: 700; font-size: 1.05em; }
+  .site-card .site-desc { color: var(--text-dim); margin-top: 0.2em; font-size: 0.85em; }
+
+  .footer-bar {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--charcoal-mid); color: var(--text-dim);
+    font-size: 0.8em; padding: 8px 30px;
+    display: flex; justify-content: space-between;
+    z-index: 100;
+    border-top: 1px solid rgba(196,160,255,0.15);
+  }
+  .footer-bar a { color: var(--lilac-light); text-decoration: none; }
+
+  .slide-num {
+    position: absolute; top: 20px; right: 30px;
+    font-size: 0.8em; color: var(--text-dim);
+  }
+
+  @media (max-width: 900px) {
+    .slide { padding: 40px 20px; }
+    h1 { font-size: 2.2em; }
+    h2 { font-size: 1.6em; }
+    .two-col, .three-col, .company-row { grid-template-columns: 1fr; }
+    .site-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: Title -->
+<div class="slide center-slide">
+  <span class="slide-num">1 / 30</span>
+  <div class="wbr-title">
+    <span class="wbr-main-word">We're</span><span class="wbr-main-word"><span class="wbr-accent">B</span>ot</span><span class="wbr-main-word"><span class="wbr-accent">R</span>eady</span>
+    <span class="wbr-sub-word">West</span><span class="wbr-sub-word">Baton</span><span class="wbr-sub-word">Rouge</span>
+  </div>
+  <p class="subtitle" style="margin-top:0.3em;">What It Is. What It Does. How to Use It.</p>
+  <p class="meta">
+    Gina Martiny &nbsp;|&nbsp; ManiGinaM, LLC<br>
+    <a href="https://ManiGinaM.dev">ManiGinaM.dev</a>
+  </p>
+</div>
+
+<!-- SLIDE 2: About Me -->
+<div class="slide">
+  <span class="slide-num">2 / 30</span>
+  <h2>Hi, I'm Gina</h2>
+  <div class="two-col">
+    <div>
+      <ul>
+        <li>Software engineer in Port Allen</li>
+        <li>Career bridging <span class="highlight">industrial plants</span> and <span class="highlight">software</span></li>
+        <li>I build AI tools for businesses daily</li>
+        <li>Today: here to share, not sell</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Why this seminar?</h3>
+      <p>AI is too important to only be understood by tech companies. Our community deserves plain-talk access to tools shaping our future.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: What You've Heard -->
+<div class="slide center-slide">
+  <span class="slide-num">3 / 30</span>
+  <h2>What You've Heard About AI</h2>
+  <div class="two-col" style="text-align:center; margin-top:1em; max-width:700px;">
+    <div>
+      <div class="big-emoji">😨</div>
+      <p><strong>"It's going to take all our jobs"</strong></p>
+      <p><strong>"It's smarter than humans"</strong></p>
+      <p><strong>"It's dangerous"</strong></p>
+    </div>
+    <div>
+      <div class="big-emoji">🤔</div>
+      <p><strong>"What even IS it?"</strong></p>
+      <p><strong>"Is it safe to use?"</strong></p>
+      <p><strong>"Is it too late to learn?"</strong></p>
+    </div>
+  </div>
+  <p style="font-size:1.2em; margin-top:1em;">Let's sort the <span class="highlight">facts</span> from the <span class="highlight">fear</span>.</p>
+</div>
+
+<!-- SLIDE 4: What AI Actually Is -->
+<div class="slide">
+  <span class="slide-num">4 / 30</span>
+  <h2>What AI Actually Is</h2>
+  <div class="card" style="max-width:65%; margin:0.6em auto;">
+    <p style="font-size:1.3em; text-align:center;">
+      <strong>AI is autocomplete on steroids.</strong>
+    </p>
+    <p style="font-size:0.95em; text-align:center; color:var(--text-dim);">
+      It reads billions of pages of text, then predicts the most likely next word. That's the magic trick.
+    </p>
+  </div>
+  <ul style="margin-top:0.6em;">
+    <li>Not a brain — it has no understanding</li>
+    <li>Not alive — no feelings or goals</li>
+    <li>A <span class="highlight">very fast pattern matcher</span> trained on human writing</li>
+    <li>Think: a student who read everything but experienced nothing</li>
+    <li><span class="highlight">55% of adults over 50</span> already use AI without knowing it — predictive text, GPS, spam filters</li>
+  </ul>
+</div>
+
+<!-- SLIDE 5: Who Makes AI? -->
+<div class="slide">
+  <span class="slide-num">5 / 30</span>
+  <h2>Who Makes AI?</h2>
+  <div class="company-row">
+    <div class="company-card">
+      <div class="co-name">OpenAI</div>
+      <div class="co-product">ChatGPT</div>
+      <div class="co-desc">Most popular. Free tier. Started the craze. Microsoft investor.</div>
+    </div>
+    <div class="company-card">
+      <div class="co-name">Google</div>
+      <div class="co-product">Gemini</div>
+      <div class="co-desc">Built into Search, Gmail, Docs. Free. You may already use it.</div>
+    </div>
+    <div class="company-card">
+      <div class="co-name">Anthropic</div>
+      <div class="co-product">Claude</div>
+      <div class="co-desc">Safety-focused. What I use daily. Recently filed for IPO.</div>
+    </div>
+    <div class="company-card">
+      <div class="co-name">Meta</div>
+      <div class="co-product">Llama</div>
+      <div class="co-desc">Facebook's AI. Open source. Powers many apps behind the scenes.</div>
+    </div>
+  </div>
+  <div class="takeaway-box" style="margin-top:1em; text-align:center;">
+    <strong>They all do similar things.</strong> Pick one and try it — like Coke vs Pepsi. You can always switch.
+  </div>
+</div>
+
+<!-- SLIDE 6: Good At / Bad At -->
+<div class="slide">
+  <span class="slide-num">6 / 30</span>
+  <h2>What AI Is <span style="color:var(--mint)">Good</span> and <span style="color:var(--soft-red)">Bad</span> At</h2>
+  <div class="two-col">
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Good at:</h3>
+      <ul>
+        <li>Drafting emails, letters, posts</li>
+        <li>Summarizing long documents</li>
+        <li>Translating jargon to plain English</li>
+        <li>Brainstorming and planning</li>
+        <li>Answering questions patiently</li>
+      </ul>
+    </div>
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">Bad at:</h3>
+      <ul>
+        <li><strong>Facts</strong> — makes things up ("hallucinations")</li>
+        <li><strong>Math</strong> — surprisingly bad</li>
+        <li><strong>Recent events</strong> — knowledge cutoff</li>
+        <li><strong>Legal/medical advice</strong> — not a doctor</li>
+        <li><strong>Your situation</strong> — doesn't know you</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="text-align:center; margin-top:0.6em;">
+    <strong>Golden Rule:</strong> Use AI like a smart intern — helpful and fast, but always check their work.
+  </div>
+</div>
+
+<!-- SLIDE 7: Let's Try It -->
+<div class="slide center-slide accent-bg">
+  <span class="slide-num">7 / 30</span>
+  <h1>Let's Try It</h1>
+  <p class="subtitle">Live Demos — Real Tasks You'd Actually Do</p>
+</div>
+
+<!-- SLIDE 8: Demo - Email -->
+<div class="slide">
+  <span class="slide-num">8 / 30</span>
+  <h2>Demo: Write an Email</h2>
+  <h3>"Help me email my landlord about a leaky faucet"</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "Write a polite but firm email to my landlord. Kitchen faucet leaking two weeks. Reported May 15th. Need it fixed this week."</p>
+    <p class="response">AI: "Dear [Landlord], I'm writing to follow up on the maintenance request I submitted on May 15th regarding a leaking kitchen faucet..."</p>
+  </div>
+  <ul>
+    <li>You give context — AI gives a starting draft</li>
+    <li>Edit it, make it yours, then send</li>
+    <li>Works for: complaint letters, thank you notes, cover letters, professional emails</li>
+  </ul>
+</div>
+
+<!-- SLIDE 9: Demo - Jargon -->
+<div class="slide">
+  <span class="slide-num">9 / 30</span>
+  <h2>Demo: Translate Confusing Documents</h2>
+  <h3>"Explain my medical bill in plain English"</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "Explain this: 'EOB reflects contractual adjustment of $347. Patient responsibility after PPO allowable: $125. Copay applied to deductible.'"</p>
+    <p class="response">AI: "The hospital charged $347 more than your insurance agreed to pay — that's written off. You owe $125. That counts toward your yearly deductible..."</p>
+  </div>
+  <ul>
+    <li>Insurance letters, legal notices, tax documents, prescription info</li>
+    <li>AI translates jargon — <span class="highlight">you</span> make the decisions</li>
+  </ul>
+</div>
+
+<!-- SLIDE 10: Demo - Business -->
+<div class="slide">
+  <span class="slide-num">10 / 30</span>
+  <h2>Demo: Social Media in 30 Seconds</h2>
+  <h3>"Write a Facebook post for my crawfish boil business"</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "Casual Facebook post. Crawfish boil catering. Graduation party special, June. $15/lb, 30lb minimum. We bring everything."</p>
+    <p class="response">AI: "🦞 GRAD PARTY SEASON IS HERE! 🎓 Let us handle the boil so you can handle the bragging. $15/lb, 30lb min — we bring the pots, the spice, and the good times..."</p>
+  </div>
+  <ul>
+    <li>Adjust tone: "more professional" or "more fun"</li>
+    <li>Works for any business, any platform, any occasion</li>
+  </ul>
+</div>
+
+<!-- SLIDE 11: Demo - Reviews -->
+<div class="slide">
+  <span class="slide-num">11 / 30</span>
+  <h2>Demo: Understand Your Customers</h2>
+  <h3>"What are my Google reviews telling me?"</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "Here are my last 10 Google reviews. What are people loving? What should I improve?"</p>
+    <p class="response">AI: "Strengths: customers love your speed (6x) and friendliness (5x). To improve: 3 mention parking, 2 want online ordering..."</p>
+  </div>
+  <ul>
+    <li>Turns scattered feedback into actionable insights</li>
+    <li>No expensive consultant needed — ask AI, then use your judgment</li>
+  </ul>
+</div>
+
+<!-- SLIDE 12: Demo - Fun -->
+<div class="slide">
+  <span class="slide-num">12 / 30</span>
+  <h2>Demo: Just for Fun</h2>
+  <div class="two-col">
+    <div>
+      <h3>"Make my dog a superhero"</h3>
+      <ul>
+        <li>AI generates images from descriptions</li>
+        <li>"My garden with a koi pond and Japanese maple"</li>
+        <li>"What would my house look like painted blue?"</li>
+        <li>Great for gifts, cards, creative projects</li>
+      </ul>
+      <p style="margin-top:0.5em;"><em>AI isn't just for productivity — it's fun.</em></p>
+    </div>
+    <div class="card card-warm" style="text-align:center;">
+      <div class="big-emoji">🎨</div>
+      <p><strong>Free image tools:</strong></p>
+      <p style="font-size:0.95em;">Microsoft Copilot<br>ChatGPT (free tier)<br>Canva</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 13: FAQ Divider -->
+<div class="slide center-slide coral-bg">
+  <span class="slide-num">13 / 30</span>
+  <h1 style="color:var(--coral-light);">Real Questions</h1>
+  <p style="color:var(--coral-light); font-size:1.4em; opacity:0.8;">The stuff you actually want to know</p>
+</div>
+
+<!-- SLIDE 14: Will AI take my job? -->
+<div class="slide">
+  <span class="slide-num">14 / 30</span>
+  <h2>"Will AI take my job?"</h2>
+  <div class="card" style="max-width:70%; margin:0.4em auto;">
+    <p style="font-size:1.2em; text-align:center;"><strong>AI won't take your job. Someone who uses AI might.</strong></p>
+  </div>
+  <div class="two-col">
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">Jobs that will change</h3>
+      <ul>
+        <li>Data entry and repetitive paperwork</li>
+        <li>Basic customer service scripts</li>
+        <li>Simple content generation</li>
+        <li>Routine scheduling and admin</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Jobs that are safe</h3>
+      <ul>
+        <li>Anything requiring hands (plumbing, electrical, welding)</li>
+        <li>Relationship work (sales, caregiving, teaching)</li>
+        <li>Creative judgment and local knowledge</li>
+        <li>Trust-based work (your doctor, your lawyer)</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:0.5em;">Best move? <span class="highlight">Learn AI as a tool for YOUR job</span> — more valuable, not replaceable.</p>
+</div>
+
+<!-- SLIDE 15: Is it too late? -->
+<div class="slide">
+  <span class="slide-num">15 / 30</span>
+  <h2>"Is it too late to learn?"</h2>
+  <div class="card" style="max-width:60%; margin:0.4em auto; text-align:center;">
+    <p style="font-size:1.6em;"><strong>No.</strong></p>
+    <p style="color:var(--text-dim);">The iPhone came out in 2007. Were you "too late" to learn your phone in 2009?</p>
+  </div>
+  <div class="three-col">
+    <div class="card">
+      <h3>Right now</h3>
+      <p style="font-size:0.9em;">68% of small businesses use AI — up from 40% two years ago. Still early.</p>
+    </div>
+    <div class="card card-warm">
+      <h3>Your advantage</h3>
+      <p style="font-size:0.9em;">People learning AI now will teach it at their companies next year.</p>
+    </div>
+    <div class="card" style="border-left-color:var(--mint);">
+      <h3>Start today</h3>
+      <p style="font-size:0.9em;">Open ChatGPT or Claude tonight. Ask one question. You've started.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 16: Do I need to be technical? -->
+<div class="slide">
+  <span class="slide-num">16 / 30</span>
+  <h2>"Do I need to be technical?"</h2>
+  <div class="two-col">
+    <div>
+      <div class="card" style="text-align:center; margin-bottom:0.6em;">
+        <p style="font-size:1.5em;"><strong>No.</strong></p>
+        <p>If you can text a friend, you can use AI.</p>
+      </div>
+      <ul>
+        <li>Talk to it in plain English — no coding</li>
+        <li>Tools you already use have AI built in (Google, Canva, QuickBooks)</li>
+        <li>Best prompts = clear instructions, like telling an employee what you need</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>The only skill you need:</h3>
+      <ul>
+        <li>Be specific about what you want</li>
+        <li>Give context (who, what, why)</li>
+        <li>Review the output — don't blindly trust</li>
+        <li>Ask follow-ups if it's not right</li>
+      </ul>
+      <p style="font-size:0.9em; margin-top:0.3em; color:var(--text-dim);">That's communication skill. You already have it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17: Will it steal my data? -->
+<div class="slide">
+  <span class="slide-num">17 / 30</span>
+  <h2>"Will AI steal my business data?"</h2>
+  <div class="two-col">
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">Free tiers — be careful</h3>
+      <ul>
+        <li>Free ChatGPT, Gemini <strong>may use inputs to train</strong></li>
+        <li>Don't paste trade secrets, client data, or financials</li>
+        <li>Think of free AI like a public park — don't leave valuables</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Paid tiers — usually safe</h3>
+      <ul>
+        <li>Paid plans typically <strong>don't train on your data</strong></li>
+        <li>Enterprise plans guarantee data privacy in writing</li>
+        <li>Check the privacy policy — or ask AI to explain it!</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="margin-top:0.6em;">
+    <strong>Rule of thumb:</strong> If you wouldn't post it on Facebook, don't put it in free AI.
+  </div>
+</div>
+
+<!-- SLIDE 18: Can I use this in my company? -->
+<div class="slide">
+  <span class="slide-num">18 / 30</span>
+  <h2>"How do I start using AI in my company?"</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>Start here (free)</h3>
+      <ul>
+        <li>Draft emails and memos</li>
+        <li>Brainstorm marketing ideas</li>
+        <li>Summarize meeting notes</li>
+        <li>Write job postings</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>Level up ($20/mo)</h3>
+      <ul>
+        <li>Analyze spreadsheets</li>
+        <li>Create presentations</li>
+        <li>Build simple automations</li>
+        <li>Customer FAQ bots</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left-color:var(--mint);">
+      <h3>Go big (custom)</h3>
+      <ul>
+        <li>Custom AI for your workflow</li>
+        <li>Automate repetitive tasks</li>
+        <li>Integrate with your systems</li>
+        <li>That's where I come in 😊</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:0.5em;">Start small. See results. Scale up. Don't try to boil the ocean.</p>
+</div>
+
+<!-- SLIDE 19: Should I buy AI stock? -->
+<div class="slide">
+  <span class="slide-num">19 / 30</span>
+  <h2>"Should I buy Anthropic / AI stock?"</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>The AI industry is real</h3>
+      <ul>
+        <li>Not a fad — already embedded in daily tools</li>
+        <li>Google, Microsoft, Amazon investing billions</li>
+        <li>Anthropic (Claude), OpenAI (ChatGPT) are leaders</li>
+        <li>Revenue growing fast across the industry</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>But be careful</h3>
+      <ul>
+        <li>IPO hype often inflates prices — dot-com lesson</li>
+        <li>Competition fierce — no guaranteed winner</li>
+        <li>These companies burn cash fast</li>
+        <li>Never invest money you can't afford to lose</li>
+      </ul>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:0.5em;">Better investment? <span class="highlight">Learn to use AI in your own business.</span> That ROI is guaranteed.</p>
+</div>
+
+<!-- SLIDE 20: Should I build websites? -->
+<div class="slide">
+  <span class="slide-num">20 / 30</span>
+  <h2>"Should I use AI to build a bunch of websites?"</h2>
+  <div class="card card-red" style="margin-bottom:0.6em;">
+    <h3 style="color:var(--soft-red);">The trap</h3>
+    <p>AI makes it easy to generate 100 websites overnight. But Google penalizes low-quality AI content. A dozen empty sites = zero value.</p>
+  </div>
+  <div class="card card-green">
+    <h3 style="color:var(--mint);">The smart play</h3>
+    <ul>
+      <li><strong>AI helps you build faster</strong> — but you still need a real purpose</li>
+      <li><strong>Quality over quantity</strong> — one great site beats ten empty ones</li>
+      <li><strong>Your expertise + AI speed</strong> = the winning formula</li>
+      <li>Use AI to create content, but add your real knowledge and voice</li>
+    </ul>
+  </div>
+  <p style="text-align:center; margin-top:0.5em;">AI is a <span class="highlight">power tool</span>, not a <span class="highlight">magic wand</span>. Still need a carpenter behind it.</p>
+</div>
+
+<!-- SLIDE 21: Staying Safe -->
+<div class="slide">
+  <span class="slide-num">21 / 30</span>
+  <h2>Staying Safe with AI</h2>
+  <div class="two-col">
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">Never give AI:</h3>
+      <ul>
+        <li>Social Security numbers</li>
+        <li>Passwords or bank info</li>
+        <li>Medical records</li>
+        <li>Private photos of others</li>
+        <li>Client/customer data (on free tiers)</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Safe to share:</h3>
+      <ul>
+        <li>General questions</li>
+        <li>Public information</li>
+        <li>Writing you want help drafting</li>
+        <li>Ideas you want to brainstorm</li>
+        <li>Anything you'd say out loud in public</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="margin-top:0.6em;">
+    <strong>Scam Alert:</strong> "AI detected a problem with your account" = scam. AI doesn't monitor your accounts. Don't click.
+  </div>
+</div>
+
+<!-- SLIDE 22: Voice Cloning Scams -->
+<div class="slide">
+  <span class="slide-num">22 / 30</span>
+  <h2>AI Voice Cloning Scams</h2>
+  <div class="card card-red" style="max-width:75%; margin:0.4em auto;">
+    <p style="font-size:1.2em; text-align:center;"><strong>AI can clone anyone's voice from just 20 seconds of audio.</strong></p>
+    <p style="text-align:center; color:var(--text-dim);">Scammers pull clips from social media, voicemail, or video — then call you pretending to be your grandchild, your boss, or your bank.</p>
+  </div>
+  <div class="two-col">
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">The numbers</h3>
+      <ul>
+        <li>FBI: <strong>$893 million</strong> in AI fraud losses (2025)</li>
+        <li>34% success rate — up from 12% in 2024</li>
+        <li>Average victim loses <strong>$12,500</strong></li>
+        <li>Only 15% of victims report it — shame keeps them silent</li>
+      </ul>
+    </div>
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">Protect yourself</h3>
+      <ul>
+        <li><strong>Family code word</strong> — pick a word only your family knows</li>
+        <li>If someone calls asking for money urgently — <strong>hang up and call them back</strong></li>
+        <li>Don't trust caller ID — it can be spoofed</li>
+        <li>Tell your elderly relatives about this TODAY</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="margin-top:0.5em; text-align:center;">
+    <strong>Set up a family code word tonight.</strong> Free, takes 2 minutes, could save thousands.
+  </div>
+</div>
+
+<!-- SLIDE 23: Demo - Is This a Scam? -->
+<div class="slide">
+  <span class="slide-num">23 / 30</span>
+  <h2>Demo: "Is This Email a Scam?"</h2>
+  <h3>Use AI as your scam detector</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "Is this email legitimate? 'Dear valued customer, we've detected unusual activity on your account. Click here to verify your identity immediately or your account will be suspended.'"</p>
+    <p class="response">AI: "This is almost certainly a phishing scam. Red flags: urgency tactics ('immediately'), vague greeting ('valued customer'), threatening language ('suspended'), and a request to click a link..."</p>
+  </div>
+  <ul>
+    <li>Paste any suspicious email, text, or letter into AI</li>
+    <li>AI identifies red flags you might miss</li>
+    <li>Works for phone scripts too — describe what they said</li>
+    <li>Teach your parents and grandparents this trick</li>
+  </ul>
+</div>
+
+<!-- SLIDE 24: Demo - Hurricane Prep -->
+<div class="slide">
+  <span class="slide-num">24 / 30</span>
+  <h2>Demo: Hurricane Prep Checklist</h2>
+  <h3>AI + local knowledge = personalized prep</h3>
+  <div class="demo-box">
+    <p class="prompt">You: "I live in Port Allen, LA. I have an elderly parent, two dogs, and a generator. Build me a hurricane prep checklist for Category 2."</p>
+    <p class="response">AI: "72-Hour Hurricane Checklist for Port Allen: 1. Elderly parent: ensure 7-day medication supply, copy of medical records, mobility aids charged... 2. Pets: carriers, vaccination records, pet-friendly shelter options..."</p>
+  </div>
+  <ul>
+    <li>Personalized to <span class="highlight">your</span> situation — not a generic FEMA list</li>
+    <li>AI-powered weather forecasting is now more accurate than ever</li>
+    <li>Ask follow-ups: "What about flood insurance?" "Where's the nearest shelter?"</li>
+  </ul>
+</div>
+
+<!-- SLIDE 25: Is AI safe for kids? -->
+<div class="slide">
+  <span class="slide-num">25 / 30</span>
+  <h2>"Can my kids use AI? Is it safe?"</h2>
+  <div class="card" style="max-width:70%; margin:0.3em auto; text-align:center;">
+    <p style="font-size:1.1em;"><strong>89% of kids are already using AI.</strong> The question isn't "can they" — it's "how do we guide them."</p>
+  </div>
+  <div class="two-col">
+    <div class="card card-green">
+      <h3 style="color:var(--mint);">The good</h3>
+      <ul>
+        <li>Patient tutor — explains anything at their level</li>
+        <li>Study help, essay brainstorming, test prep</li>
+        <li>Creative outlet — stories, art, music ideas</li>
+        <li>Safe space to ask "dumb" questions</li>
+      </ul>
+    </div>
+    <div class="card card-red">
+      <h3 style="color:var(--soft-red);">The risks</h3>
+      <ul>
+        <li>Wrong answers that sound confident</li>
+        <li>Kids may stop thinking critically if they just copy</li>
+        <li>No built-in age filter — can discuss adult topics</li>
+        <li>Schools have mixed policies — check with teachers</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 26: Family Ground Rules -->
+<div class="slide">
+  <span class="slide-num">26 / 30</span>
+  <h2>Family AI Ground Rules</h2>
+  <div class="three-col">
+    <div class="card">
+      <h3>Ages 8–12</h3>
+      <ul>
+        <li>Use it together — family activity</li>
+        <li>"Let's ask AI about dinosaurs" then fact-check</li>
+        <li>Never share name, school, address, photos</li>
+        <li>Try: homework help, stories, "what if" questions</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>Ages 13–17</h3>
+      <ul>
+        <li>AI helps you learn, not do it for you</li>
+        <li>"Explain this" = good. "Write my essay" = not.</li>
+        <li>Check school policy — some ban, some encourage</li>
+        <li>Teach them to verify: "Is this actually true?"</li>
+      </ul>
+    </div>
+    <div class="card" style="border-left-color:var(--mint);">
+      <h3>Talk to them</h3>
+      <ul>
+        <li>"Show me how you use ChatGPT"</li>
+        <li>"What do your teachers say about AI?"</li>
+        <li>"Can you tell when AI wrote something?"</li>
+        <li>Stay curious, not scared — that protects them</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 27: What I Build -->
+<div class="slide">
+  <span class="slide-num">27 / 30</span>
+  <h2>What I'm Building — Right Here in Port Allen</h2>
+  <div class="site-grid">
+    <div class="site-card">
+      <div class="site-url">ManiGinaM.dev</div>
+      <div class="site-desc">Consulting — AI, custom software, industrial automation</div>
+    </div>
+    <div class="site-card">
+      <div class="site-url">wbr.ManiGinaM.dev</div>
+      <div class="site-desc">WBR community guide — local businesses and resources</div>
+    </div>
+    <div class="site-card">
+      <div class="site-url">sideline.ManiGinaM.dev</div>
+      <div class="site-desc">Youth sports management for WBR soccer and baseball</div>
+    </div>
+    <div class="site-card">
+      <div class="site-url">3dprintand.com</div>
+      <div class="site-desc">52-week 3D printing curriculum for all ages</div>
+    </div>
+    <div class="site-card">
+      <div class="site-url">legacyleaps.com</div>
+      <div class="site-desc">AI migration tool for industrial businesses — with real consulting built in</div>
+    </div>
+  </div>
+  <p style="text-align:center; margin-top:0.6em; color:var(--text-dim);">All built by one person using the same AI tools I showed you today.</p>
+</div>
+
+<!-- SLIDE 28: Try Tonight -->
+<div class="slide">
+  <span class="slide-num">28 / 30</span>
+  <h2>Try Tonight — All Free</h2>
+  <div class="two-col">
+    <div class="card">
+      <h3>Chat with AI</h3>
+      <ul>
+        <li><strong>ChatGPT</strong> — chat.openai.com</li>
+        <li><strong>Google Gemini</strong> — gemini.google.com</li>
+        <li><strong>Claude</strong> — claude.ai</li>
+        <li><strong>Microsoft Copilot</strong> — copilot.microsoft.com</li>
+      </ul>
+    </div>
+    <div class="card card-warm">
+      <h3>Create Images</h3>
+      <ul>
+        <li><strong>Microsoft Copilot</strong> — free image gen</li>
+        <li><strong>ChatGPT</strong> — free tier includes images</li>
+        <li><strong>Canva</strong> — canva.com (AI design)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="takeaway-box" style="text-align:center; margin-top:0.6em;">
+    <strong>Starter prompt:</strong> "I own a [your business]. Give me 5 ways I can use AI to save time this week."
+  </div>
+</div>
+
+<!-- SLIDE 29: Q&A -->
+<div class="slide center-slide accent-bg">
+  <span class="slide-num">29 / 30</span>
+  <h1>Questions?</h1>
+  <p class="subtitle">No question is too basic. Ask anything.</p>
+  <p class="meta" style="margin-top:1.5em;">
+    Think of a question later?<br>
+    <a href="https://ManiGinaM.dev" style="font-size:1.5em;">ManiGinaM.dev</a>
+  </p>
+</div>
+
+<!-- SLIDE 30: Thank You -->
+<div class="slide center-slide">
+  <span class="slide-num">30 / 30</span>
+  <h2>Thank You</h2>
+  <p style="font-size:1.3em;">AI isn't something to fear.<br>It's something to <span class="highlight">learn</span>, one question at a time.</p>
+  <div class="card" style="max-width:400px; margin:1em auto; text-align:center;">
+    <p style="font-size:1.2em;"><strong>Gina Martiny</strong></p>
+    <p>ManiGinaM, LLC &nbsp;|&nbsp; Port Allen, LA</p>
+    <p style="font-size:1.1em; color:var(--lilac-light);">ManiGinaM.dev</p>
+  </div>
+  <p style="color:var(--text-dim); margin-top:1em;">This presentation is free and always will be.<br>Just a neighbor helping neighbors figure this out.</p>
+</div>
+
+<div class="footer-bar">
+  <span>WBR: We're Bot Ready &nbsp;|&nbsp; Gina Martiny</span>
+  <span><a href="https://ManiGinaM.dev">ManiGinaM.dev</a></span>
+</div>
+
+</body>
+</html>
