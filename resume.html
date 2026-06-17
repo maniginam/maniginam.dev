@@ -26,21 +26,24 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --navy: #1a2744;
-      --navy-light: #243352;
-      --accent: #c4875b;
-      --accent-light: #d4a07a;
-      --text: #2c3e50;
-      --text-light: #5a6a7e;
-      --bg: #fafbfc;
+      --navy: #1e1e2e;
+      --navy-light: #2a2a3e;
+      --accent: #ff8a8a;
+      --accent-light: #ffb3b3;
+      --lilac: #c4a0ff;
+      --lilac-light: #dbc4ff;
+      --text: #e8e8f0;
+      --text-light: #9999aa;
+      --bg: #1e1e2e;
       --white: #ffffff;
-      --border: #e2e6ec;
-      --section-alt: #f4f6f8;
+      --border: #33334a;
+      --section-alt: #2a2a3e;
+      --display: 'Space Grotesk','Inter',sans-serif;
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -60,19 +63,19 @@
       display: flex; align-items: center; justify-content: space-between;
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
-    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
-    nav .logo span { color: var(--accent); }
+    nav .logo { font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
     nav ul li a:hover { color: var(--accent-light); }
 
     /* Header */
     .page-header {
-      margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center;
+      margin-top: 64px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center;
     }
-    .page-header h1 { font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
-    .page-header .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 600px; margin: 0 auto 1rem; }
-    .page-header .contact-line { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+    .page-header h1 { font-family: var(--display); font-weight: 700; font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
+    .page-header .subtitle { color: rgba(255,255,255,0.6); font-size: 1.1rem; max-width: 600px; margin: 0 auto 1rem; }
+    .page-header .contact-line { color: rgba(255,255,255,0.5); font-size: 0.95rem; }
     .page-header .contact-line a { color: var(--accent-light); text-decoration: none; }
     .page-header .links { margin-top: 0.75rem; }
     .page-header .links a {
@@ -89,27 +92,27 @@
     .resume-section { padding: 2.5rem 0; }
     .resume-section + .resume-section { border-top: 1px solid var(--border); }
 
-    .resume-section h2 {
+    .resume-section h2 { font-family: var(--display);
       font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em;
       color: var(--accent); margin-bottom: 1.5rem; font-weight: 700;
     }
 
     /* Skills grid */
     .skills-grid { display: grid; grid-template-columns: 110px 1fr; gap: 0.5rem 1rem; }
-    .skill-cat { font-weight: 600; color: var(--navy); font-size: 0.85rem; text-align: right; }
-    .skill-val { font-size: 0.85rem; color: var(--text-light); }
+    .skill-cat { font-weight: 600; color: var(--lilac); font-size: 0.95rem; text-align: right; }
+    .skill-val { font-size: 0.95rem; color: var(--text-light); }
 
     /* Job */
     .job { margin-bottom: 1.75rem; }
     .job:last-child { margin-bottom: 0; }
     .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; }
-    .company { font-weight: 700; font-size: 1rem; color: var(--navy); }
+    .company { font-family: var(--display); font-weight: 700; font-size: 1.12rem; color: var(--lilac); }
     .dates { font-size: 0.8rem; color: var(--text-light); white-space: nowrap; }
     .title-line { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
-    .job-title { font-style: italic; font-size: 0.9rem; color: var(--text); }
+    .job-title { font-style: italic; font-size: 1rem; color: var(--text); }
     .location { font-size: 0.8rem; color: var(--text-light); }
     .job ul { margin-left: 1.25rem; }
-    .job li { font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.25rem; line-height: 1.6; }
+    .job li { font-size: 0.98rem; color: var(--text-light); margin-bottom: 0.3rem; line-height: 1.65; }
 
     /* Projects */
     .projects-grid {
@@ -119,19 +122,19 @@
       border: 1px solid var(--border); border-radius: 6px; padding: 1.25rem;
       transition: box-shadow 0.2s, border-color 0.2s; text-decoration: none; display: block;
     }
-    .project-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(196,135,91,0.3); }
-    .project-card h3 { font-size: 0.95rem; color: var(--navy); margin-bottom: 0.35rem; font-weight: 600; }
-    .project-card p { font-size: 0.8rem; color: var(--text-light); line-height: 1.5; }
+    .project-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(255,138,138,0.3); }
+    .project-card h3 { font-family: var(--display); font-size: 1.08rem; color: var(--lilac); margin-bottom: 0.35rem; font-weight: 600; }
+    .project-card p { font-size: 0.92rem; color: var(--text-light); line-height: 1.55; }
     .project-card .tech { font-size: 0.7rem; color: var(--accent); margin-top: 0.5rem; font-weight: 500; }
 
     /* Education */
     .edu-line { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.5rem; }
-    .edu-school { font-weight: 700; font-size: 0.95rem; color: var(--navy); }
-    .edu-degree { font-style: italic; font-size: 0.9rem; color: var(--text); }
+    .edu-school { font-family: var(--display); font-weight: 700; font-size: 1.08rem; color: var(--lilac); }
+    .edu-degree { font-style: italic; font-size: 1rem; color: var(--text); }
 
     /* Volunteer */
     .vol-list { margin-left: 1.25rem; }
-    .vol-list li { font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.25rem; }
+    .vol-list li { font-size: 0.98rem; color: var(--text-light); margin-bottom: 0.3rem; }
 
     /* Footer */
     footer {
@@ -143,8 +146,13 @@
     /* Print */
     @media print {
       nav, .page-header .links, footer { display: none; }
-      .page-header { margin-top: 0; padding: 1rem 0; }
-      body { font-size: 10pt; }
+      .page-header { margin-top: 0; padding: 1rem 0; background: #fff; }
+      body { font-size: 10pt; background: #fff; color: #1a1a1a; }
+      .page-header h1, .page-header .subtitle, .page-header .contact-line { color: #1a1a1a; }
+      .resume-section h2 { color: #6b4ea0; }
+      .skill-cat, .company, .project-card h3, .edu-school { color: #1a1a1a; }
+      .job-title, .edu-degree, .skill-val, .job li, .dates, .location, .vol-list li, .project-card p { color: #333; }
+      .project-card { border-color: #ccc; }
     }
 
     /* Responsive */
@@ -161,21 +169,12 @@
   </style>
 </head>
 
-  <nav>
-    <a href="/" class="logo">maniginam<span>.dev</span></a>
-    <ul>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/resume">Resume</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/#about">About</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <site-nav active="resume"></site-nav>
 
   <div class="page-header">
     <h1>Gina Martiny</h1>
     <p class="subtitle">Software craftsman, technical leader, and business owner with 10+ years in chemical manufacturing and 6+ years in software engineering.</p>
-    <p class="contact-line">Port Allen, LA &ensp;|&ensp; <a href="/cdn-cgi/l/email-protection#5f3836313e1f323e31363836313e32713b3a29"><span class="__cf_email__" data-cfemail="ed8a84838cad808c83848a84838c80c389889b">[email&#160;protected]</span></a></p>
+    <p class="contact-line">Port Allen, LA &ensp;|&ensp; <a href="mailto:gina@maniginam.dev">gina@maniginam.dev</a></p>
     <div class="links">
       <a href="https://www.linkedin.com/in/gina-martiny">LinkedIn</a>
       <a href="https://github.com/maniginam">GitHub</a>
@@ -374,5 +373,6 @@
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
   </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a069c36eecedadd7',t:'MTc4MDYwNTczOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a069c36eecedadd7',t:'MTc4MDYwNTczOQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>  <script src="/js/site-nav.js" defer></script>
+</body>
 </html>

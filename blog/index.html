@@ -22,32 +22,35 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --navy: #1a2744; --navy-light: #243352; --accent: #c4875b; --accent-light: #d4a07a;
-      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+      --navy: #1e1e2e; --navy-light: #2a2a3e; --accent: #ff8a8a; --accent-light: #ffb3b3;
+      --lilac: #c4a0ff; --lilac-light: #dbc4ff;
+      --lilac-dim: #9a7acc;
+      --text: #e8e8f0; --text-light: #9999aa; --bg: #1e1e2e; --white: #ffffff; --border: #33334a;
+      --display: 'Space Grotesk', 'Inter', sans-serif;
     }
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; -webkit-font-smoothing: antialiased; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
-    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
-    nav .logo span { color: var(--accent); }
+    nav .logo { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
     nav ul li a:hover { color: var(--accent-light); }
     nav ul li a.active { color: var(--accent-light); }
-    .page-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
-    .page-header h1 { font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
+    .page-header { margin-top: 64px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .page-header h1 { font-family: var(--display); font-weight: 700; font-size: 2.2rem; color: var(--white); margin-bottom: 0.5rem; }
     .page-header .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 600px; margin: 0 auto; }
     .container { max-width: 800px; margin: 0 auto; padding: 2.5rem 2rem; }
-    .year-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin: 2rem 0 1rem; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+    .year-label { font-family: var(--display); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--lilac-dim, #9a7acc); margin: 2rem 0 1rem; font-weight: 700; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
     .year-label:first-child { margin-top: 0; }
     .post-card { display: block; text-decoration: none; padding: 1.25rem; border: 1px solid var(--border); border-radius: 6px; margin-bottom: 0.75rem; transition: box-shadow 0.2s, border-color 0.2s; }
-    .post-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(196,135,91,0.3); }
-    .post-card h3 { font-size: 1rem; color: var(--navy); margin-bottom: 0.35rem; font-weight: 600; }
-    .post-card p { font-size: 0.85rem; color: var(--text-light); line-height: 1.5; }
+    .post-card:hover { box-shadow: 0 4px 16px rgba(26,39,68,0.08); border-color: rgba(255,138,138,0.3); }
+    .post-card h3 { font-family: var(--display); font-size: 1.2rem; color: var(--lilac); margin-bottom: 0.35rem; font-weight: 600; }
+    .post-card p { font-size: 0.98rem; color: var(--text-light); line-height: 1.5; }
     .post-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; }
     .post-date { font-size: 0.75rem; color: var(--text-light); }
     footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 2rem; text-align: center; margin-top: 3rem; }
@@ -70,16 +73,7 @@
 </head>
 <body>
 
-  <nav>
-    <a href="/" class="logo">maniginam<span>.dev</span></a>
-    <ul>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/#why">Why Gina</a></li>
-      <li><a href="/resume">Resume</a></li>
-      <li><a href="/blog" class="active">Blog</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <site-nav active="blog"></site-nav>
 
   <div class="page-header">
     <h1>Blog</h1>
@@ -298,13 +292,14 @@
 
   <footer>
     <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
-      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> &middot;
-      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> &middot;
-      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> &middot;
-      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> &middot;
-      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+      <a href="https://wbr.maniginam.dev" style="color:#c4a0ff;">WBR Local</a> &middot;
+      <a href="https://legacyleaps.com" style="color:#c4a0ff;">LegacyLeaps</a> &middot;
+      <a href="https://aileapers.com" style="color:#c4a0ff;">AI Leapers</a> &middot;
+      <a href="https://sideline.maniginam.dev" style="color:#c4a0ff;">Sideline</a> &middot;
+      <a href="https://tradeup.maniginam.dev" style="color:#c4a0ff;">TradeUp</a>
     </p>
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
   </footer>
 
+  <script src="/js/site-nav.js" defer></script>
 </html>

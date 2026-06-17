@@ -20,47 +20,47 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
-      --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a;
-      --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; --border: #e2e6ec;
+      --navy: #1e1e2e; --accent: #ff8a8a; --accent-light: #ffb3b3; --lilac: #c4a0ff; --lilac-light: #dbc4ff; --display: 'Space Grotesk','Inter',sans-serif;
+      --text: #e8e8f0; --text-light: #9999aa; --bg: #1e1e2e; --white: #ffffff; --border: #33334a;
     }
     html { scroll-behavior: smooth; font-size: 16px; }
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
-    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
-    nav .logo span { color: var(--accent); }
+    nav .logo { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
     nav ul li a:hover { color: var(--accent-light); }
 
     /* Hero with full image — no cropping */
-    .post-hero { margin-top: 60px; background: var(--navy); text-align: center; }
+    .post-hero { margin-top: 64px; background: var(--navy); text-align: center; }
     .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
     .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
-    .post-hero h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero h1 { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
     .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
 
     /* Default header (no hero) */
-    .post-header { margin-top: 60px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
-    .post-header h1 { font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header { margin-top: 64px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
     .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
 
     .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
-    .post-content p { margin-bottom: 1.25rem; font-size: 1rem; }
-    .post-content h2 { font-size: 1.4rem; color: var(--navy); margin: 2rem 0 1rem; font-weight: 700; }
-    .post-content h3 { font-size: 1.15rem; color: var(--navy); margin: 1.75rem 0 0.75rem; font-weight: 600; }
-    .post-content h4 { font-size: 1rem; color: var(--navy); margin: 1.5rem 0 0.5rem; font-weight: 600; }
-    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(196,135,91,0.05); color: var(--text-light); font-style: italic; }
+    .post-content p { margin-bottom: 1.3rem; font-size: 1.13rem; }
+    .post-content h2 { font-family: var(--display); font-size: 1.4rem; color: var(--lilac); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-family: var(--display); font-size: 1.15rem; color: var(--lilac); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-family: var(--display); font-size: 1rem; color: var(--lilac-light); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(255,138,138,0.05); color: var(--text-light); font-style: italic; }
     .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
-    .post-content li { margin-bottom: 0.35rem; }
-    .post-content code { background: #f0f2f5; padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content li { margin-bottom: 0.4rem; font-size: 1.08rem; }
+    .post-content code { background: #2a2a3e; color: var(--lilac-light); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
     .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
     .post-content pre code { background: none; padding: 0; color: inherit; }
     .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
-    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(196,135,91,0.3); }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,138,138,0.3); }
     .post-content a:hover { border-bottom-color: var(--accent); }
     .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
     .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
@@ -75,10 +75,10 @@
       .post-header h1 { font-size: 1.5rem; }
     }
     .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
-    .related-posts h3 { font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts h3 { font-family: var(--display); font-size: 1.1rem; color: var(--lilac); margin-bottom: 1rem; font-weight: 700; }
     .related-posts ul { list-style: none; padding: 0; }
     .related-posts li { margin-bottom: 0.75rem; }
-    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(196,135,91,0.3); transition: border-color 0.2s; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(255,138,138,0.3); transition: border-color 0.2s; }
     .related-posts a:hover { border-bottom-color: var(--accent); }
   </style>
   <script type="application/ld+json">
@@ -113,16 +113,7 @@
 </script>
 </head>
 <body>
-  <nav>
-    <a href="/" class="logo">maniginam<span>.dev</span></a>
-    <ul>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/#why">Why Gina</a></li>
-      <li><a href="/resume">Resume</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <site-nav active="blog"></site-nav>
   <div class="post-header">
     <h1>The Start of Two Recurs</h1>
     <p class="post-date">August 12, 2021</p>
@@ -174,12 +165,13 @@
   </div>
   <footer>
     <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
-      <a href="https://wbr.maniginam.dev" style="color:#6b8acd;">WBR Local</a> · 
-      <a href="https://legacyleaps.com" style="color:#6b8acd;">LegacyLeaps</a> · 
-      <a href="https://aileapers.com" style="color:#6b8acd;">AI Leapers</a> · 
-      <a href="https://sideline.maniginam.dev" style="color:#6b8acd;">Sideline</a> · 
-      <a href="https://tradeup.maniginam.dev" style="color:#6b8acd;">TradeUp</a>
+      <a href="https://wbr.maniginam.dev" style="color:#c4a0ff;">WBR Local</a> · 
+      <a href="https://legacyleaps.com" style="color:#c4a0ff;">LegacyLeaps</a> · 
+      <a href="https://aileapers.com" style="color:#c4a0ff;">AI Leapers</a> · 
+      <a href="https://sideline.maniginam.dev" style="color:#c4a0ff;">Sideline</a> · 
+      <a href="https://tradeup.maniginam.dev" style="color:#c4a0ff;">TradeUp</a>
     </p>
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
   </footer>
+  <script src="/js/site-nav.js" defer></script>
 </html>

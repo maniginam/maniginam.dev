@@ -9,20 +9,20 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    :root { --navy: #1a2744; --accent: #c4875b; --accent-light: #d4a07a; --text: #2c3e50; --text-light: #5a6a7e; --bg: #fafbfc; --white: #ffffff; }
+    :root { --navy: #1e1e2e; --accent: #ff8a8a; --accent-light: #ffb3b3; --lilac: #c4a0ff; --text: #e8e8f0; --text-light: #9999aa; --bg: #1e1e2e; --white: #ffffff; --display: 'Space Grotesk','Inter',sans-serif; }
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text); background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; }
     nav { background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
-    nav .logo { font-size: 1.15rem; font-weight: 700; color: var(--white); text-decoration: none; }
-    nav .logo span { color: var(--accent); }
+    nav .logo { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; }
+    nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
     nav ul { list-style: none; display: flex; gap: 2rem; }
     nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; }
     nav ul li a:hover { color: var(--accent-light); }
     .content { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; }
-    .content h1 { font-size: 6rem; color: var(--navy); opacity: 0.15; font-weight: 800; line-height: 1; }
-    .content h2 { font-size: 1.5rem; color: var(--navy); margin: 1rem 0 0.5rem; }
+    .content h1 { font-family: var(--display); font-size: 6rem; color: var(--lilac); opacity: 0.25; font-weight: 700; line-height: 1; }
+    .content h2 { font-family: var(--display); font-size: 1.5rem; color: var(--lilac); margin: 1rem 0 0.5rem; }
     .content p { color: var(--text-light); margin-bottom: 2rem; max-width: 400px; }
     .content a { display: inline-block; padding: 0.75rem 2rem; background: var(--accent); color: var(--white); text-decoration: none; border-radius: 6px; font-weight: 600; transition: background 0.2s; }
     .content a:hover { background: var(--accent-light); }
@@ -39,16 +39,7 @@
 </script>
 </head>
 <body><a href="https://maniginam.dev/cdn-cgi/content?id=uWj3VYfweSUaFf8xAfUwf4iTHlNkmgB4evHWNLh.IM8-1780794479.8499367-1.2.1.1-2QJoBKT5Vk2pPojcA7ZUWcbjhQumgVZwMS4Ob2Kc0GI" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
-  <nav>
-    <a href="/" class="logo">maniginam<span>.dev</span></a>
-    <ul>
-      <li><a href="/#services">Services</a></li>
-      <li><a href="/#why">Why Gina</a></li>
-      <li><a href="/resume">Resume</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <site-nav active=""></site-nav>
   <div class="content">
     <h1>404</h1>
     <h2>Page not found</h2>
@@ -63,5 +54,6 @@
     </p>
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
   </footer>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07bc35b0812f0a1',t:'MTc4MDc5NDQ3OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07bc35b0812f0a1',t:'MTc4MDc5NDQ3OQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>  <script src="/js/site-nav.js" defer></script>
+</body>
 </html>
