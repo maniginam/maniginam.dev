@@ -1,0 +1,214 @@
+/* Bridezilla marketing site — single stylesheet, no render-blocking JS.
+   Mobile-first, system fonts (zero web-font cost), CWV-friendly. */
+
+:root {
+  --plum: #7b1e3b;
+  --plum-dark: #5c1530;
+  --blush: #fbeef0;
+  --gold: #c79a4b;
+  --ink: #221a1d;
+  --muted: #6b5b60;
+  --line: #e7d8dc;
+  --bg: #fffdfc;
+  --radius: 14px;
+  --max: 72rem;
+  --pad: clamp(1rem, 4vw, 2.5rem);
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+
+a { color: var(--plum); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 { line-height: 1.2; color: var(--ink); }
+h1 { font-size: clamp(2rem, 6vw, 3.4rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.4rem, 3.5vw, 2rem); }
+
+img { max-width: 100%; height: auto; }
+
+/* ---- header ---- */
+.site-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1rem var(--pad);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  background: rgba(255, 253, 252, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+}
+.brand {
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--plum);
+  letter-spacing: -0.01em;
+}
+.brand:hover { text-decoration: none; }
+.site-nav {
+  display: flex;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  margin-right: auto;
+  font-size: 0.95rem;
+}
+.site-nav a { color: var(--muted); }
+.site-nav a:hover { color: var(--plum); }
+
+/* ---- buttons ---- */
+.btn {
+  display: inline-block;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+}
+.btn-primary {
+  background: var(--plum);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(123, 30, 59, 0.25);
+}
+.btn-primary:hover { background: var(--plum-dark); text-decoration: none; }
+
+/* ---- main / article ---- */
+main {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--pad);
+}
+article > section, article > h1 { margin-bottom: 2.5rem; }
+
+/* ---- hero ---- */
+.hero {
+  text-align: center;
+  padding: clamp(2rem, 7vw, 4.5rem) 0;
+  background: linear-gradient(160deg, var(--blush), #fff);
+  border-radius: var(--radius);
+}
+.hero .lede {
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  color: var(--muted);
+  max-width: 46rem;
+  margin: 1rem auto 1.6rem;
+}
+.cta-row { margin: 1.4rem 0; }
+.reassure { font-size: 0.95rem; color: var(--muted); max-width: 40rem; margin: 0 auto; }
+
+/* ---- value grid ---- */
+.value-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+.value-grid > div {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.value-grid h2 { font-size: 1.2rem; margin-top: 0; }
+
+/* ---- strips & callouts ---- */
+.strip, .callout, .cta-end {
+  background: var(--blush);
+  border-radius: var(--radius);
+  padding: 1.6rem;
+}
+.callout { border-left: 4px solid var(--gold); }
+.cta-end { text-align: center; }
+
+/* ---- quick answer / AEO ---- */
+.quick-answer {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--plum);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+}
+.quick-answer h2 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--plum); margin: 0 0 0.4rem; }
+.quick-answer p { margin: 0; font-size: 1.12rem; }
+
+/* ---- steps ---- */
+.steps { list-style: none; padding: 0; display: grid; gap: 1rem; }
+.steps li { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.2rem; }
+.steps h3 { margin: 0 0 0.3rem; display: flex; align-items: center; gap: 0.6rem; }
+.step-n {
+  background: var(--plum); color: #fff; width: 1.8rem; height: 1.8rem;
+  border-radius: 50%; display: inline-grid; place-items: center; font-size: 0.95rem;
+}
+
+/* ---- tables ---- */
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: var(--radius); overflow: hidden; }
+th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid var(--line); }
+thead th { background: var(--plum); color: #fff; }
+tbody tr:last-child td { border-bottom: none; }
+.timeline th[scope="row"], .budget-table th[scope="row"] { white-space: nowrap; }
+.amt { font-variant-numeric: tabular-nums; }
+
+/* ---- pricing ---- */
+.pricing-grid { display: grid; gap: 1.4rem; grid-template-columns: 1fr; }
+.plan { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.6rem; }
+.plan-featured { border: 2px solid var(--plum); box-shadow: 0 10px 30px rgba(123, 30, 59, 0.12); }
+.plan .price { font-size: 1.6rem; }
+.plan .per { font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+.plan ul { padding-left: 1.1rem; }
+.plan .fine { font-size: 0.85rem; color: var(--muted); }
+
+/* ---- tools ---- */
+.tool form { margin-bottom: 1rem; }
+.tool label { display: block; font-weight: 700; margin-bottom: 0.3rem; }
+.tool input[type="number"] {
+  font-size: 1.3rem; padding: 0.6rem 0.8rem; width: 100%; max-width: 18rem;
+  border: 1px solid var(--line); border-radius: 10px;
+}
+.tool-note { font-size: 0.9rem; color: var(--muted); }
+.vendor-list { list-style: none; padding: 0; display: grid; gap: 0.8rem; }
+.vendor { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1rem 1.2rem; }
+.vendor label { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.v-need { font-size: 0.75rem; color: var(--plum); background: var(--blush); padding: 0.1rem 0.5rem; border-radius: 999px; font-weight: 600; }
+.v-q { margin: 0.5rem 0 0; color: var(--muted); font-size: 0.95rem; }
+
+/* ---- FAQ ---- */
+.faq-block { display: grid; gap: 0.6rem; }
+.faq { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 0.4rem 1.1rem; }
+.faq summary { cursor: pointer; list-style: none; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary h3 { display: inline; font-size: 1.05rem; }
+.faq summary::after { content: " +"; color: var(--plum); font-weight: 700; }
+.faq[open] summary::after { content: " –"; }
+
+/* ---- footer ---- */
+.site-footer {
+  max-width: var(--max);
+  margin: 2rem auto 0;
+  padding: 2rem var(--pad) 3rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.site-footer nav { display: flex; gap: 1.2rem; flex-wrap: wrap; margin: 0.8rem 0; }
+.footer-safe { font-size: 0.85rem; }
+
+/* ---- responsive ---- */
+@media (min-width: 48rem) {
+  .value-grid { grid-template-columns: repeat(3, 1fr); }
+  .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

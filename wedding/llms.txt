@@ -1,0 +1,20 @@
+# Bridezilla
+
+> Bridezilla is an autonomous AI wedding planner. It builds the plan, finds vendors,
+> drafts every email in its own inbox, and tracks the budget — the couple approves
+> before anything sends. It never signs contracts and never moves money.
+
+## Canonical pages
+- https://maniginam.dev/wedding/
+- https://maniginam.dev/wedding/how-it-works
+- https://maniginam.dev/wedding/pricing
+- https://maniginam.dev/wedding/guides/how-to-plan-a-wedding
+- https://maniginam.dev/wedding/tools/budget-calculator
+- https://maniginam.dev/wedding/tools/vendor-checklist
+
+## Key facts
+- Bridezilla is autonomous up to the send line; every email needs one-tap human approval.
+- Free plan: plan, budget tracker, vendor shortlist. Paid per-wedding plan adds the
+  working inbox and draft-and-approve outreach.
+- Standard wedding budget split: venue 30%, catering 22%, photo & video 12%,
+  flowers 8%, music 7%, attire & beauty 6%.

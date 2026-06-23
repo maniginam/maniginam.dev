@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Wedding Budget Calculator</title>
+  <meta name="description" content="Free wedding budget calculator: enter your total and see the standard breakdown across venue, catering, photo, flowers, music and more. No signup, no payment.">
+  <link rel="canonical" href="https://maniginam.dev/wedding/tools/budget-calculator">
+  <meta name="theme-color" content="#7b1e3b">
+  <link rel="icon" href="/wedding/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Bridezilla">
+  <meta property="og:title" content="Free Wedding Budget Calculator">
+  <meta property="og:description" content="Free wedding budget calculator: enter your total and see the standard breakdown across venue, catering, photo, flowers, music and more. No signup, no payment.">
+  <meta property="og:url" content="https://maniginam.dev/wedding/tools/budget-calculator">
+  <meta property="og:image" content="https://maniginam.dev/wedding/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Wedding Budget Calculator">
+  <meta name="twitter:description" content="Free wedding budget calculator: enter your total and see the standard breakdown across venue, catering, photo, flowers, music and more. No signup, no payment.">
+  <meta name="twitter:image" content="https://maniginam.dev/wedding/assets/og-card.png">
+  <link rel="stylesheet" href="/wedding/assets/styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Wedding Budget Calculator","description":"Free tool that splits a wedding budget across the standard category percentages.","applicationCategory":"BusinessApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much does the average wedding cost?","acceptedAnswer":{"@type":"Answer","text":"The average US wedding costs roughly $33,000, though it varies widely by region and guest count. Catering scales hardest with headcount, so trimming the guest list is the fastest way to cut the total."}},{"@type":"Question","name":"What is a standard wedding budget breakdown?","acceptedAnswer":{"@type":"Answer","text":"A common split is venue 30%, catering 22%, photo & video 12%, flowers & decor 8%, music 7%, attire & beauty 6%, with the rest across stationery, planning, transportation, ceremony, and a misc buffer."}},{"@type":"Question","name":"How much should I keep as a contingency?","acceptedAnswer":{"@type":"Answer","text":"Keep about 5% of your total budget untouched as a contingency for surprises and tips. Bridezilla holds that buffer aside automatically and flags any quote that blows past its category."}}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://maniginam.dev/wedding/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://maniginam.dev/wedding/tools/budget-calculator"},{"@type":"ListItem","position":3,"name":"Budget calculator","item":"https://maniginam.dev/wedding/tools/budget-calculator"}]}</script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/wedding/">Bridezilla</a>
+    <nav class="site-nav" aria-label="Primary"><a href="/wedding/how-it-works">How it works</a><a href="/wedding/pricing">Pricing</a><a href="/wedding/tools/budget-calculator">Budget calculator</a><a href="/wedding/tools/vendor-checklist">Vendor checklist</a><a href="/wedding/guides/how-to-plan-a-wedding">Plan a wedding</a></nav>
+    <a class="btn btn-primary" href="/wedding/app/" data-cta="start-free">Start free</a>
+  </header>
+  <main id="main">
+    <article>
+      <h1>Wedding budget calculator</h1>
+      <section class="quick-answer" aria-labelledby="quick-answer">
+      <h2 id="quick-answer">Quick answer</h2>
+      <p>Enter your total wedding budget and this calculator splits it across the standard categories: venue 30%, catering 22%, photo & video 12%, flowers 8%, music 7%, and the rest. The average US wedding costs about $33,000, but the percentages scale to whatever total you set.</p>
+    </section>
+
+      <section class="tool" aria-label="Budget calculator">
+        <form id="budget-form">
+          <label for="total">Total budget (USD)</label>
+          <input id="total" name="total" type="number" inputmode="numeric" min="0" step="100" placeholder="33000">
+        </form>
+        <table class="budget-table">
+          <thead><tr><th scope="col">Category</th><th scope="col">Share</th><th scope="col">Amount</th></tr></thead>
+          <tbody>
+          <tr><th scope="row">Venue</th><td>30%</td><td class="amt" data-pct="30">—</td></tr>
+          <tr><th scope="row">Catering</th><td>22%</td><td class="amt" data-pct="22">—</td></tr>
+          <tr><th scope="row">Photo & video</th><td>12%</td><td class="amt" data-pct="12">—</td></tr>
+          <tr><th scope="row">Flowers & decor</th><td>8%</td><td class="amt" data-pct="8">—</td></tr>
+          <tr><th scope="row">Music</th><td>7%</td><td class="amt" data-pct="7">—</td></tr>
+          <tr><th scope="row">Attire & beauty</th><td>6%</td><td class="amt" data-pct="6">—</td></tr>
+          <tr><th scope="row">Stationery</th><td>3%</td><td class="amt" data-pct="3">—</td></tr>
+          <tr><th scope="row">Planning</th><td>4%</td><td class="amt" data-pct="4">—</td></tr>
+          <tr><th scope="row">Transportation</th><td>2%</td><td class="amt" data-pct="2">—</td></tr>
+          <tr><th scope="row">Ceremony</th><td>1%</td><td class="amt" data-pct="1">—</td></tr>
+          <tr><th scope="row">Misc (rings, favors, 5% contingency)</th><td>5%</td><td class="amt" data-pct="5">—</td></tr>
+          </tbody>
+        </table>
+        <p class="tool-note">Works without JavaScript — the percentages are the answer. With it on, enter a total and the amounts fill in live.</p>
+      </section>
+
+      <section class="callout">
+        <h2>Save this budget</h2>
+        <p>Bridezilla tracks this allocation against real vendor quotes and flags any line that runs over. <a href="/wedding/how-it-works">See how →</a></p>
+        <p><a class="btn btn-primary" href="/wedding/app/" data-cta="start-free">Start free</a></p>
+      </section>
+
+      <section class="faq-block" aria-labelledby="faq-heading">
+      <h2 id="faq-heading">Frequently asked questions</h2>
+      <details class="faq" data-faq-q="How much does the average wedding cost?">
+        <summary><h3>How much does the average wedding cost?</h3></summary>
+        <p>The average US wedding costs roughly $33,000, though it varies widely by region and guest count. Catering scales hardest with headcount, so trimming the guest list is the fastest way to cut the total.</p>
+      </details>
+      <details class="faq" data-faq-q="What is a standard wedding budget breakdown?">
+        <summary><h3>What is a standard wedding budget breakdown?</h3></summary>
+        <p>A common split is venue 30%, catering 22%, photo & video 12%, flowers & decor 8%, music 7%, attire & beauty 6%, with the rest across stationery, planning, transportation, ceremony, and a misc buffer.</p>
+      </details>
+      <details class="faq" data-faq-q="How much should I keep as a contingency?">
+        <summary><h3>How much should I keep as a contingency?</h3></summary>
+        <p>Keep about 5% of your total budget untouched as a contingency for surprises and tips. Bridezilla holds that buffer aside automatically and flags any quote that blows past its category.</p>
+      </details>
+    </section>
+    </article>
+  </main>
+  <footer class="site-footer">
+    <p class="footer-tag">Bridezilla — the autonomous AI wedding planner. You approve before anything sends.</p>
+    <nav aria-label="Footer">
+      <a href="/wedding/">Home</a>
+      <a href="/wedding/how-it-works">How it works</a>
+      <a href="/wedding/pricing">Pricing</a>
+      <a href="/wedding/guides/how-to-plan-a-wedding">How to plan a wedding</a>
+      <a href="/wedding/tools/budget-calculator">Budget calculator</a>
+      <a href="/wedding/tools/vendor-checklist">Vendor checklist</a>
+    </nav>
+    <p class="footer-safe">Bridezilla never signs contracts and never moves money — every send needs your one-tap approval.</p>
+  </footer>
+  <script src="/wedding/assets/budget.js" defer></script>
+</body>
+</html>
