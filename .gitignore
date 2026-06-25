@@ -4,3 +4,9 @@
 node_modules/
 .env
 .security-session-start-sha
+wbr-drafts/credentials.json
+wbr-drafts/token.json
+wbr-drafts/oauth.txt
+
+# Local tooling, not deployed
+tools/
