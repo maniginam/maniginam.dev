@@ -16,7 +16,7 @@ class SiteNav extends HTMLElement {
     const root = this.attachShadow({ mode: 'open' });
     root.innerHTML = `
       <style>
-        :host { --charcoal: #1e1e2e; --lilac: #c4a0ff; --coral: #ff8a8a; --mani: #8a8b98;
+        :host { --charcoal: #1e1e2e; --lilac: #c4a0ff; --coral: #ff8a8a;
                 display: block; }
         nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
@@ -26,11 +26,8 @@ class SiteNav extends HTMLElement {
           border-bottom: 1px solid rgba(255,255,255,0.06);
           font-family: 'Space Grotesk','Inter',-apple-system,sans-serif;
         }
-        .logo { display: flex; align-items: center; text-decoration: none;
-                font-size: 1.4rem; font-weight: 700; letter-spacing: 0.01em; }
-        .logo .mani { color: var(--mani); }
-        .logo .gina { color: var(--lilac); }
-        .logo .m    { color: var(--coral); }
+        .logo { display: flex; align-items: center; text-decoration: none; }
+        .logo img { height: 30px; width: auto; display: block; }
         ul { display: flex; gap: 1.75rem; list-style: none; margin: 0; padding: 0; }
         a.link { color: rgba(255,255,255,0.72); text-decoration: none;
                  font-size: 0.9rem; font-weight: 500; font-family: 'Inter',-apple-system,sans-serif;
@@ -41,12 +38,12 @@ class SiteNav extends HTMLElement {
           nav { padding: 0 1rem; height: 60px; }
           ul { gap: 1rem; }
           a.link { font-size: 0.8rem; }
-          .logo { font-size: 1.2rem; }
+          .logo img { height: 26px; }
         }
         @media (max-width: 480px) { ul { gap: 0.7rem; } a.link { font-size: 0.72rem; } }
       </style>
       <nav>
-        <a class="logo" href="/" aria-label="ManiGinaM"><span class="mani">MANI</span><span class="gina">GINA</span><span class="m">M</span></a>
+        <a class="logo" href="/" aria-label="ManiGinaM"><img src="/img/wordmark-nav.svg" alt="ManiGinaM" width="588" height="130"></a>
         <ul>
           ${links.map(l => `<li><a class="link${l.key === active ? ' active' : ''}" href="${l.href}">${l.label}</a></li>`).join('')}
         </ul>
