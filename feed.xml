@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <title>Gina Martiny — maniginam.dev</title>
+    <link>https://maniginam.dev</link>
+    <description>Software craftsmanship, responsible AI, leadership lessons from chemical plants, and the messy reality of building things that work.</description>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 29 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://maniginam.dev/feed.xml" rel="self" type="application/rss+xml"/>
+
+    <!-- 5 draft posts hidden pending review -->
+
+    <item>
+      <title>The Gauge Said Everything Was Fine</title>
+      <link>https://maniginam.dev/blog/state-of-smb-ai-2026</link>
+      <guid>https://maniginam.dev/blog/state-of-smb-ai-2026</guid>
+      <pubDate>Mon, 29 Jun 2026 00:00:00 GMT</pubDate>
+      <description>Surveys say 76% of small businesses use AI. Production data says 17%. The gap between what the dial reads and what's actually moving through the pipe is the whole story of 2026.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Twenty Kills Per Second</title>
+      <link>https://maniginam.dev/blog/twenty-kills-per-second</link>
+      <guid>https://maniginam.dev/blog/twenty-kills-per-second</guid>
+      <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+      <description>My oldest came skidding around the corner in socks on hardwood — eyes wide, voice cracking with the particular urgency that only an eight-year-old whose Minecraft world is under siege can produce.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>The Board Doesn't Lie</title>
+      <link>https://maniginam.dev/blog/the-board-doesnt-lie</link>
+      <guid>https://maniginam.dev/blog/the-board-doesnt-lie</guid>
+      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
+      <description>Every morning at 6:15, before the coffee kicked in, we stood in front of the board. Five letters. Big. Color-coded. Red or green.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Build It Once</title>
+      <link>https://maniginam.dev/blog/build-it-once</link>
+      <guid>https://maniginam.dev/blog/build-it-once</guid>
+      <pubDate>Sun, 04 May 2026 00:00:00 GMT</pubDate>
+      <description>Your MVP has a procurement process to survive. A security review. A compliance checklist. A VP who put their name on the approval. It has to live in that world from day one.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Bland Confidence</title>
+      <link>https://maniginam.dev/blog/bland-confidence</link>
+      <guid>https://maniginam.dev/blog/bland-confidence</guid>
+      <pubDate>Thu, 17 Apr 2026 00:00:00 GMT</pubDate>
+      <description>One of our AI agents rewrote a function, ran the tests, watched them pass, and shipped it. Except the function was wrong.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>We Build Software with Responsible AI</title>
+      <link>https://maniginam.dev/blog/we-build-software-with-responsible-ai</link>
+      <guid>https://maniginam.dev/blog/we-build-software-with-responsible-ai</guid>
+      <pubDate>Wed, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Teams are building AI features with none of the discipline they'd apply to literally any other part of their system.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>The Hive is Open</title>
+      <link>https://maniginam.dev/blog/the-hive-is-open</link>
+      <guid>https://maniginam.dev/blog/the-hive-is-open</guid>
+      <pubDate>Tue, 15 Apr 2026 00:00:00 GMT</pubDate>
+      <description>I was sitting at my desk with six AI agents running in six terminal panes, and I couldn't tell what any of them were doing.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>I Made Some Mistakes. The Robot Made Them Faster.</title>
+      <link>https://maniginam.dev/blog/i-made-some-mistakes</link>
+      <guid>https://maniginam.dev/blog/i-made-some-mistakes</guid>
+      <pubDate>Tue, 08 Apr 2026 00:00:00 GMT</pubDate>
+      <description>Last week I committed a Secure cookie flag to production that only worked on localhost. The AI helped with all of it. Enthusiastically.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Heat Disappearing Ink is Dangerous...</title>
+      <link>https://maniginam.dev/blog/leadership-is-hard</link>
+      <guid>https://maniginam.dev/blog/leadership-is-hard</guid>
+      <pubDate>Wed, 21 May 2025 00:00:00 GMT</pubDate>
+      <description>I decided to save my original EPIC drawings by laminating them, only to remember I'd drawn them with a heat-sensitive erasable pen.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Navigating the Unknown and Avoiding the Money Pit</title>
+      <link>https://maniginam.dev/blog/navigating-the-unknown</link>
+      <guid>https://maniginam.dev/blog/navigating-the-unknown</guid>
+      <pubDate>Tue, 06 Feb 2024 00:00:00 GMT</pubDate>
+      <description>Spending ten years in chemical manufacturing is not the typical path to preparing for a career in software development. But that's what I did.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>EPIC Growth</title>
+      <link>https://maniginam.dev/blog/epic-growth</link>
+      <guid>https://maniginam.dev/blog/epic-growth</guid>
+      <pubDate>Thu, 07 Apr 2022 00:00:00 GMT</pubDate>
+      <description>From a toddler's one-word school report to building a full production platform — a reflection on growth, persistence, and the slow accumulation of craft.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Don't Get Stranded Testlessly</title>
+      <link>https://maniginam.dev/blog/dont-get-stranded-testlessly</link>
+      <guid>https://maniginam.dev/blog/dont-get-stranded-testlessly</guid>
+      <pubDate>Wed, 01 Sep 2021 00:00:00 GMT</pubDate>
+      <description>On the importance of testing and what happens when you skip it — told through the lens of learning TDD from scratch.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Car Soup is Too Hot</title>
+      <link>https://maniginam.dev/blog/car-soup-is-too-hot</link>
+      <guid>https://maniginam.dev/blog/car-soup-is-too-hot</guid>
+      <pubDate>Tue, 31 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Life lessons from toddlers, applied to software development. Sometimes the simplest observations cut the deepest.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Milk is in a Cup</title>
+      <link>https://maniginam.dev/blog/milk-is-in-a-cup</link>
+      <guid>https://maniginam.dev/blog/milk-is-in-a-cup</guid>
+      <pubDate>Wed, 25 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Observations from raising kids while learning to code — where the mundane becomes metaphor.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Pee-Yoop!</title>
+      <link>https://maniginam.dev/blog/pee-youp</link>
+      <guid>https://maniginam.dev/blog/pee-youp</guid>
+      <pubDate>Tue, 17 Aug 2021 00:00:00 GMT</pubDate>
+      <description>The apprenticeship continues. Learning, failing, growing — with colorful commentary from the peanut gallery at home.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Stuck and Growing Fast</title>
+      <link>https://maniginam.dev/blog/stuck-and-growing-fast</link>
+      <guid>https://maniginam.dev/blog/stuck-and-growing-fast</guid>
+      <pubDate>Mon, 16 Aug 2021 00:00:00 GMT</pubDate>
+      <description>That particular feeling when you're stuck on a problem and growing at the same time. The apprenticeship grind, unvarnished.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>The Start of Two Recurs</title>
+      <link>https://maniginam.dev/blog/the-start-of-two-recurs</link>
+      <guid>https://maniginam.dev/blog/the-start-of-two-recurs</guid>
+      <pubDate>Thu, 12 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Recursion, explained — twice. When code calls itself and toddlers repeat themselves, the parallels are uncanny.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Cheeky Butt</title>
+      <link>https://maniginam.dev/blog/cheeky-butt</link>
+      <guid>https://maniginam.dev/blog/cheeky-butt</guid>
+      <pubDate>Mon, 09 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Kids say the darndest things. So do error messages. Reflections from the intersection of parenting and programming.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Refactor, Refactor, Drop!</title>
+      <link>https://maniginam.dev/blog/refactor-refactor-drop</link>
+      <guid>https://maniginam.dev/blog/refactor-refactor-drop</guid>
+      <pubDate>Fri, 06 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Learning to refactor code while learning to let go. The apprenticeship diaries continue.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Cats VS HTTP</title>
+      <link>https://maniginam.dev/blog/cats-vs-http</link>
+      <guid>https://maniginam.dev/blog/cats-vs-http</guid>
+      <pubDate>Wed, 04 Aug 2021 00:00:00 GMT</pubDate>
+      <description>HTTP status codes explained through the universal language of cats. Because sometimes the best way to learn protocols is through memes.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Roadmaps</title>
+      <link>https://maniginam.dev/blog/roadmaps</link>
+      <guid>https://maniginam.dev/blog/roadmaps</guid>
+      <pubDate>Mon, 02 Aug 2021 00:00:00 GMT</pubDate>
+      <description>Planning the path forward — apprenticeship roadmaps, learning plans, and figuring out what to tackle next.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Choo Choo Peanut Poop</title>
+      <link>https://maniginam.dev/blog/choo-choo-peanut-poop</link>
+      <guid>https://maniginam.dev/blog/choo-choo-peanut-poop</guid>
+      <pubDate>Sat, 31 Jul 2021 00:00:00 GMT</pubDate>
+      <description>The title says it all. Parenthood meets apprenticeship in the most unglamorous way possible.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Dragon Drops</title>
+      <link>https://maniginam.dev/blog/dragon-drops</link>
+      <guid>https://maniginam.dev/blog/dragon-drops</guid>
+      <pubDate>Wed, 21 Jul 2021 00:00:00 GMT</pubDate>
+      <description>Drag and drop, explained. Also dragons. The early apprenticeship blog entries where code concepts meet creative storytelling.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>Eleventeen</title>
+      <link>https://maniginam.dev/blog/eleventeen</link>
+      <guid>https://maniginam.dev/blog/eleventeen</guid>
+      <pubDate>Tue, 20 Jul 2021 00:00:00 GMT</pubDate>
+      <description>The very beginning. Starting a software apprenticeship with two small kids, a chemical engineering background, and zero idea what I was getting into.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+    <item>
+      <title>A Beginner's Path</title>
+      <link>https://maniginam.dev/blog/a-path-for-beginners</link>
+      <guid>https://maniginam.dev/blog/a-path-for-beginners</guid>
+      <pubDate>Mon, 03 May 2021 00:00:00 GMT</pubDate>
+      <description>I wanted to learn how to code, but I neither knew where to start or what that path forward might look like. A decade of false starts before finding the right approach.</description>
+      <dc:creator>Gina Martiny</dc:creator>
+    </item>
+
+  </channel>
+</rss>
