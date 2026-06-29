@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Gauge Said Everything Was Fine — Gina Martiny</title>
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="The State of SMB AI in 2026: surveys say 76% of small businesses use AI, but production data says 17%. The gap between the dial and the pipe is the whole story.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Gauge Said Everything Was Fine">
+  <meta property="og:description" content="The State of SMB AI in 2026: surveys say 76% of small businesses use AI, but production data says 17%. The gap between the dial and the pipe is the whole story.">
+  <meta property="og:url" content="https://maniginam.dev/blog/state-of-smb-ai-2026">
+  <meta property="og:site_name" content="maniginam.dev">
+  <meta property="og:image" content="https://maniginam.dev/img/og/state-of-smb-ai-2026.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A pressure gauge with the needle pegged at 76 and the real reading at 17">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://maniginam.dev/img/og/state-of-smb-ai-2026.png">
+  <meta name="twitter:title" content="The Gauge Said Everything Was Fine">
+  <meta name="twitter:description" content="The State of SMB AI in 2026: surveys say 76% of small businesses use AI, but production data says 17%. The gap between the dial and the pipe is the whole story.">
+  <link rel="canonical" href="https://maniginam.dev/blog/state-of-smb-ai-2026">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --navy: #1e1e2e; --accent: #ff8a8a; --accent-light: #ffb3b3; --lilac: #c4a0ff; --lilac-light: #dbc4ff; --display: 'Space Grotesk','Inter',sans-serif;
+      --text: #e8e8f0; --text-light: #9999aa; --bg: #1e1e2e; --white: #ffffff; --border: #33334a;
+    }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; color: var(--text); background: var(--bg); line-height: 1.8; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    nav .logo { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; letter-spacing: 0.03em; }
+    nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s; }
+    nav ul li a:hover { color: var(--accent-light); }
+
+    /* Hero with full image — no cropping */
+    .post-hero { margin-top: 64px; background: var(--navy); text-align: center; }
+    .post-hero img { display: block; width: 100%; max-height: 500px; object-fit: contain; background: var(--navy); }
+    .post-hero .hero-text { padding: 1.5rem 2rem 2rem; }
+    .post-hero h1 { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-hero .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    /* Default header (no hero) */
+    .post-header { margin-top: 64px; background: var(--navy); padding: 4rem 2rem 3rem; text-align: center; }
+    .post-header h1 { font-family: var(--display); font-weight: 700; font-size: 2rem; color: var(--white); margin-bottom: 0.5rem; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .post-header .post-date { color: rgba(255,255,255,0.5); font-size: 0.85rem; }
+
+    .post-content { max-width: 700px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+    .post-content p { margin-bottom: 1.3rem; font-size: 1.13rem; }
+    .post-content h2 { font-family: var(--display); font-size: 1.4rem; color: var(--lilac); margin: 2rem 0 1rem; font-weight: 700; }
+    .post-content h3 { font-family: var(--display); font-size: 1.15rem; color: var(--lilac); margin: 1.75rem 0 0.75rem; font-weight: 600; }
+    .post-content h4 { font-family: var(--display); font-size: 1rem; color: var(--lilac-light); margin: 1.5rem 0 0.5rem; font-weight: 600; }
+    .post-content blockquote { border-left: 3px solid var(--accent); padding: 0.75rem 1.25rem; margin: 1.25rem 0; background: rgba(255,138,138,0.05); color: var(--text-light); font-style: italic; }
+    .post-content ul, .post-content ol { margin: 1rem 0 1.25rem 1.5rem; }
+    .post-content li { margin-bottom: 0.4rem; font-size: 1.08rem; }
+    .post-content code { background: #2a2a3e; color: var(--lilac-light); padding: 0.15em 0.4em; border-radius: 3px; font-size: 0.9em; }
+    .post-content pre { background: #1e293b; color: #e2e8f0; padding: 1.25rem; border-radius: 6px; overflow-x: auto; margin: 1.25rem 0; }
+    .post-content pre code { background: none; padding: 0; color: inherit; }
+    .post-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+    .post-content a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(255,138,138,0.3); }
+    .post-content a:hover { border-bottom-color: var(--accent); }
+    .post-content img { max-width: 100%; height: auto; border-radius: 4px; margin: 1rem 0; }
+    .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
+    .back-link:hover { text-decoration: underline; }
+    footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    @media (max-width: 768px) {
+      nav ul { gap: 1rem; }
+      nav ul li a { font-size: 0.8rem; }
+      .post-hero h1 { font-size: 1.5rem; }
+      .post-header { padding: 3rem 1.5rem 2rem; }
+      .post-header h1 { font-size: 1.5rem; }
+    }
+    .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
+    .related-posts h3 { font-family: var(--display); font-size: 1.1rem; color: var(--lilac); margin-bottom: 1rem; font-weight: 700; }
+    .related-posts ul { list-style: none; padding: 0; }
+    .related-posts li { margin-bottom: 0.75rem; }
+    .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(255,138,138,0.3); transition: border-color 0.2s; }
+    .related-posts a:hover { border-bottom-color: var(--accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "The Gauge Said Everything Was Fine",
+    "author": {
+      "@type": "Person",
+      "name": "Gina Martiny",
+      "url": "https://maniginam.dev"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Gina Martiny"
+    },
+    "datePublished": "2026-06-29",
+    "description": "The State of SMB AI in 2026: surveys say 76% of small businesses use AI, but production data says 17%. The gap between the dial and the pipe is the whole story.",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://maniginam.dev/blog/state-of-smb-ai-2026"
+    }
+  }
+  </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T361VBY3C1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-T361VBY3C1');
+</script>
+</head>
+<body>
+  <site-nav active="blog"></site-nav>
+  <div class="post-hero">
+    <img src="/blog/img/state-of-smb-ai-2026/hero.png" alt="A pressure gauge with the needle pegged at 76 and the real reading at 17">
+    <div class="hero-text">
+      <h1>The Gauge Said Everything Was Fine</h1>
+      <p class="post-date">June 29, 2026</p>
+    </div>
+  </div>
+  <div class="post-content">
+    <a href="/blog" class="back-link">&larr; Back to all posts</a>
+<p>There was a gauge on the wall in the control room at the plant that I never fully trusted. Pressure reading on a line three buildings away. The needle would sit there, calm, parked at a nice number, while you stood in front of it sipping bad coffee at 3 a.m. feeling great about your shift.</p>
+<p>The old operators &mdash; the ones who&rsquo;d been there long enough to have opinions about everything &mdash; didn&rsquo;t look at the gauge. Not really. They&rsquo;d glance at it, grunt, and then go <em>walk the line</em>. Put a hand near the pipe. Listen. Because a gauge tells you what a sensor measured at one point under one set of assumptions, and a pipe tells you what&rsquo;s actually moving through it. Those are not always the same story. Sometimes they&rsquo;re not even the same building.</p>
+<p>I think about that gauge a lot lately, because right now everybody is staring at a gauge that says small businesses have gone all-in on AI, and almost nobody is walking the line.</p>
+<h2>What the Needle Says</h2>
+<p>Read the headlines and you&rsquo;d think the whole thing is settled. Surveys put small-business AI adoption at 55%, 58%, sometimes 76%. The needle is <em>pegged</em>. Everybody&rsquo;s doing it. If you run a shop and you&rsquo;re not, you&rsquo;re the last holdout, you&rsquo;re already behind, better hurry.</p>
+<p>Except those are vendor surveys. Somebody emailed a few hundred owners and asked &ldquo;do you use AI?&rdquo; and an owner who once asked a chatbot to write a birthday Instagram caption clicks yes. That&rsquo;s a real click. It is not a real pipe.</p>
+<p>Walk the line and the number changes. The US Census actually tracks production use &mdash; AI doing real work in a real function of the business &mdash; and that number is sitting around 17 to 20%. JP Morgan looked at who&rsquo;s literally <em>paying</em> for an AI tool out of their business account: 17.7%. Goldman&rsquo;s survey is the one that gives away the whole game. Seventy-six percent say they &ldquo;use AI.&rdquo; Fourteen percent have it actually <em>embedded</em> in how the business runs.</p>
+<p>Seventy-six on the gauge. Fourteen in the pipe.</p>
+<p>That gap isn&rsquo;t a rounding error or a pessimist&rsquo;s footnote. That gap is the entire story of 2026.</p>
+<h2>The Part Where the Line Bursts</h2>
+<p>Here&rsquo;s the thing about trusting the needle instead of the pipe: eventually the pipe tells you the truth whether you wanted to hear it or not.</p>
+<p>In 2025, the share of companies that abandoned most of their AI projects jumped from 17% to 42%. More than doubled. A lot of people lit money on fire chasing a glowing dashboard, couldn&rsquo;t tell you what it actually did for them, and quietly killed it. Only about half of organizations can even confidently measure whether their AI spend paid off. The other half are standing in front of the gauge at 3 a.m., needle parked at a nice number, telling themselves the shift is going great.</p>
+<p>And the cruelest detail &mdash; the one that made me sit up when I read it &mdash; is <em>where</em> the real returns are hiding. Everybody points the new tool at marketing. Write me captions, write me blog posts, make me a logo. That&rsquo;s the fun stuff, the visible stuff, the stuff that demos well. But MIT&rsquo;s data says the durable ROI is in the boring back office. Cutting what you were paying an agency. Trimming the contractor invoice. The work nobody wants to film. The marketing toys get the attention; the back-office plumbing gets the payback.</p>
+<p>The operators chasing the shiny gauge readings are the ones who abandoned their projects. The ones who walked the line and fixed an actual leak are the ones still running.</p>
+<h2>The Reversal Nobody Expected</h2>
+<p>Now here&rsquo;s where it gets genuinely interesting, and where I&rsquo;d tell any small-shop owner to lean in.</p>
+<p>Conventional wisdom says big companies get the new technology first and the little guys catch up years later, sweating. Early 2024, that held &mdash; big firms used AI at almost twice the small-firm rate. By late 2025 the small firms had nearly closed the gap, and the big firms had actually <em>slipped back</em>. The little guys are catching up to the giants on a brand-new technology. That basically never happens.</p>
+<p>Why? Because the entry cost fell through the floor. The tool that cost fifty bucks a month in 2019 costs twenty now, sometimes eight. The barrier stopped being <em>price</em>. Which means the barrier is now the thing it was always quietly going to be: knowing what you&rsquo;re doing.</p>
+<p>Half of small-business owners say the number one thing stopping them isn&rsquo;t cost &mdash; it&rsquo;s that they don&rsquo;t have anyone who knows how to do this well. Forty-seven percent say they can&rsquo;t even figure out <em>which tool to pick</em>. That&rsquo;s not a money problem. That&rsquo;s a craft problem. That&rsquo;s somebody standing in front of forty gauges with no idea which three matter and which thirty-seven are decoration.</p>
+<p>And craft problems have a very specific shape of answer. You don&rsquo;t fix them by buying a bigger gauge.</p>
+<h2>Walking the Line</h2>
+<p>The owners who are going to win the next two years aren&rsquo;t the ones with the most subscriptions. They&rsquo;re the ones who treat this like the old operators treated that pressure reading. Pick one real measurement &mdash; hours saved, dollars saved, a number you&rsquo;d actually defend. Point one tool at one boring, expensive, repetitive piece of the business. Give it ninety days. If you can&rsquo;t show the number moved by day ninety, kill it without sentiment. That&rsquo;s it. That&rsquo;s the whole discipline. It&rsquo;s not glamorous and it doesn&rsquo;t demo well, and it is the only thing that separates the 14% who embedded it from the 42% who abandoned it.</p>
+<p>That&rsquo;s also, not coincidentally, how I&rsquo;ve always wanted software built. You don&rsquo;t ship the thing because the dashboard is green. You walk the line. You measure what&rsquo;s actually flowing through the pipe, you test it before you trust it, and you have the spine to rip out what isn&rsquo;t earning its keep &mdash; even when the gauge on the wall is parked at a number that lets you sleep.</p>
+<p>The needle is a story somebody told you about the line. The line is the line.</p>
+<p>Go walk it.</p>
+  </div>
+  <div class="related-posts">
+    <h3>Related Posts</h3>
+    <ul>
+      <li><a href="/blog/we-build-software-with-responsible-ai">We Build Software with Responsible AI</a></li>
+      <li><a href="/blog/bland-confidence">Bland Confidence</a></li>
+      <li><a href="/blog/build-it-once">Build It Once</a></li>
+    </ul>
+  </div>
+  <footer>
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+      <a href="https://wbr.maniginam.dev" style="color:#c4a0ff;">WBR Local</a> ·
+      <a href="https://legacyleaps.com" style="color:#c4a0ff;">LegacyLeaps</a> ·
+      <a href="https://aileapers.com" style="color:#c4a0ff;">AI Leapers</a> ·
+      <a href="https://sideline.maniginam.dev" style="color:#c4a0ff;">Sideline</a> ·
+      <a href="https://tradeup.maniginam.dev" style="color:#c4a0ff;">TradeUp</a>
+    </p>
+    <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
+  </footer>
+  <script src="/js/site-nav.js" defer></script>
+</html>
