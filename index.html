@@ -308,7 +308,7 @@
     }
     .hero-weather-badge .weather-icon { font-size: 0.75rem; }
     .hero-weather-badge .weather-temp { font-size: 0.7rem; font-weight: 600; color: #e0e0e0; }
-    .hero-weather-badge .weather-details { font-size: 0.45rem; color: #9e9e9e; line-height: 1.2; }
+    .hero-weather-badge .weather-details { font-size: 0.62rem; color: #b8b8c8; line-height: 1.25; }
 
     /* Scroll indicator */
     .scroll-hint {
@@ -539,6 +539,18 @@
       font-size: 0.95rem; color: rgba(255,255,255,0.8); line-height: 1.7; margin: 0;
     }
 
+    /* ===== FAQ ===== */
+    .faq-list { max-width: 760px; margin: 0 auto; display: grid; gap: 1rem; }
+    .faq-item {
+      background: var(--navy-mid); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.5rem 1.75rem;
+    }
+    .faq-item h3 {
+      font-family: var(--font-display); font-size: 1.05rem;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .faq-item p { color: var(--text-mid); font-size: 0.98rem; margin: 0; }
+
     /* ===== CONTACT ===== */
     .contact-box {
       background: linear-gradient(160deg, var(--navy), var(--navy-mid), var(--navy-light));
@@ -615,6 +627,16 @@
       .svc-card { padding: 1.5rem; }
       .contact-box { padding: 2rem 1.5rem; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
   </style>
 </head>
 <body>
@@ -631,8 +653,8 @@
     <div class="hero-gradient-out"></div>
     <div class="hero-gradient-in"></div>
     <div class="hero-weather-tint"></div>
-    <canvas class="hero-traffic-canvas" role="img" aria-label="Animated traffic flow on Baton Rouge road network"></canvas>
-    <canvas class="hero-weather-canvas" role="img" aria-label="Live weather particle effects"></canvas>
+    <canvas class="hero-traffic-canvas" aria-hidden="true"></canvas>
+    <canvas class="hero-weather-canvas" aria-hidden="true"></canvas>
     <div class="hero-road-layer"></div>
 
     <div class="hero-content">
@@ -651,7 +673,7 @@
     <div class="hero-daylight-meter"></div>
     <div class="hero-weather-badge"></div>
 
-    <div class="scroll-hint">
+    <div class="scroll-hint" aria-hidden="true">
       <div class="scroll-dot"></div>
       scroll
     </div>
@@ -796,6 +818,27 @@
           <p>Those ten years in manufacturing weren't just technical &mdash; they were leadership. Managing teams, running operations, navigating safety-critical systems, and making decisions under real constraints. That experience shapes everything I build today: practical, reliable, built for people who don't have time for things that break.</p>
           <p>On the software side, I practice clean code, SOLID principles, and test-driven development &mdash; the kind of engineering discipline that delivers systems which hold up under real conditions, not just demos.</p>
           <p>Today, I build AI-integrated software systems for businesses across the greater Baton Rouge metro area and beyond. From autonomous agents that handle repetitive work to construction ERP integrations that connect the field to the back office, every engagement is grounded in the same principle: <strong>build it right, build it to last.</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="faq">
+    <div class="container">
+      <p class="section-label reveal">Common Questions</p>
+      <h2 class="section-title reveal">FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item reveal reveal-delay-1">
+          <h3>What services does ManiGinaM offer?</h3>
+          <p>Custom software development, AI integration, industrial automation, web applications, and community technology projects in the greater Baton Rouge area.</p>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <h3>Does ManiGinaM work with industrial companies?</h3>
+          <p>Yes. Gina Martiny has extensive experience bridging chemical manufacturing and software engineering, modernizing legacy industrial systems.</p>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <h3>Where is ManiGinaM located?</h3>
+          <p>Port Allen, Louisiana &mdash; serving West Baton Rouge Parish, Baton Rouge, and all of Louisiana.</p>
         </div>
       </div>
     </div>

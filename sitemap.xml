@@ -7,150 +7,140 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/resume.html</loc>
+    <loc>https://maniginam.dev/resume</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/index.html</loc>
+    <loc>https://maniginam.dev/blog</loc>
     <lastmod>2026-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/state-of-smb-ai-2026.html</loc>
+    <loc>https://maniginam.dev/blog/state-of-smb-ai-2026</loc>
     <lastmod>2026-06-29</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/twenty-kills-per-second.html</loc>
+    <loc>https://maniginam.dev/blog/twenty-kills-per-second</loc>
     <lastmod>2026-01-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/the-board-doesnt-lie.html</loc>
+    <loc>https://maniginam.dev/blog/the-board-doesnt-lie</loc>
     <lastmod>2026-01-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/build-it-once.html</loc>
+    <loc>https://maniginam.dev/blog/build-it-once</loc>
     <lastmod>2026-02-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/bland-confidence.html</loc>
+    <loc>https://maniginam.dev/blog/bland-confidence</loc>
     <lastmod>2026-02-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/we-build-software-with-responsible-ai.html</loc>
+    <loc>https://maniginam.dev/blog/we-build-software-with-responsible-ai</loc>
     <lastmod>2026-03-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/the-hive-is-open.html</loc>
+    <loc>https://maniginam.dev/blog/the-hive-is-open</loc>
     <lastmod>2026-03-18</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/i-made-some-mistakes.html</loc>
+    <loc>https://maniginam.dev/blog/i-made-some-mistakes</loc>
     <lastmod>2026-03-30</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/leadership-is-hard.html</loc>
+    <loc>https://maniginam.dev/blog/leadership-is-hard</loc>
     <lastmod>2026-04-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/navigating-the-unknown.html</loc>
+    <loc>https://maniginam.dev/blog/navigating-the-unknown</loc>
     <lastmod>2026-04-20</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/epic-growth.html</loc>
+    <loc>https://maniginam.dev/blog/epic-growth</loc>
     <lastmod>2026-04-29</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/dont-get-stranded-testlessly.html</loc>
+    <loc>https://maniginam.dev/blog/dont-get-stranded-testlessly</loc>
     <lastmod>2026-05-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/car-soup-is-too-hot.html</loc>
+    <loc>https://maniginam.dev/blog/car-soup-is-too-hot</loc>
     <lastmod>2026-05-15</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/milk-is-in-a-cup.html</loc>
+    <loc>https://maniginam.dev/blog/milk-is-in-a-cup</loc>
     <lastmod>2026-05-22</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/pee-youp.html</loc>
+    <loc>https://maniginam.dev/blog/pee-youp</loc>
     <lastmod>2026-05-28</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/stuck-and-growing-fast.html</loc>
+    <loc>https://maniginam.dev/blog/stuck-and-growing-fast</loc>
     <lastmod>2026-06-02</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/cheeky-butt.html</loc>
+    <loc>https://maniginam.dev/blog/cheeky-butt</loc>
     <lastmod>2026-06-05</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/refactor-refactor-drop.html</loc>
+    <loc>https://maniginam.dev/blog/refactor-refactor-drop</loc>
     <lastmod>2026-06-07</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/the-start-of-two-recurs.html</loc>
+    <loc>https://maniginam.dev/blog/the-start-of-two-recurs</loc>
     <lastmod>2026-06-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/cats-vs-http.html</loc>
+    <loc>https://maniginam.dev/blog/cats-vs-http</loc>
     <lastmod>2026-06-09</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/roadmaps.html</loc>
+    <loc>https://maniginam.dev/blog/roadmaps</loc>
     <lastmod>2026-06-10</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/choo-choo-peanut-poop.html</loc>
+    <loc>https://maniginam.dev/blog/choo-choo-peanut-poop</loc>
     <lastmod>2026-06-11</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/dragon-drops.html</loc>
+    <loc>https://maniginam.dev/blog/dragon-drops</loc>
     <lastmod>2026-06-12</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/eleventeen.html</loc>
+    <loc>https://maniginam.dev/blog/eleventeen</loc>
     <lastmod>2026-06-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://maniginam.dev/blog/a-path-for-beginners.html</loc>
+    <loc>https://maniginam.dev/blog/a-path-for-beginners</loc>
     <lastmod>2026-06-14</lastmod>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://maniginam.dev/blog/ai-tools-for-baton-rouge-small-business.html</loc>
-    <lastmod>2026-06-15</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://maniginam.dev/blog/counselai-legal-document-analysis.html</loc>
-    <lastmod>2026-06-15</lastmod>
-    <priority>0.8</priority>
   </url>
 </urlset>
