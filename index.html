@@ -230,6 +230,14 @@
     .hero-content {
       position: relative; z-index: 5; max-width: 720px; text-align: center;
     }
+    /* Dark scrim guarantees text contrast over the animated day/night canvas */
+    .hero-content::before {
+      content: ''; position: absolute; z-index: -1;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 130%; height: 135%;
+      background: radial-gradient(ellipse at center, rgba(15,15,25,0.72) 0%, rgba(15,15,25,0.5) 55%, transparent 80%);
+      pointer-events: none;
+    }
     .hero-intro {
       display: flex; flex-direction: column; align-items: center; gap: 1rem;
       margin-bottom: 0.5rem;
@@ -561,15 +569,15 @@
       transition: color 0.2s, transform 0.2s;
     }
     .contact-info a:hover { color: #fff; transform: translateX(-3px); }
-    .contact-loc { color: rgba(255,255,255,0.4); font-size: 0.85rem; font-weight: 500; }
+    .contact-loc { color: rgba(255,255,255,0.7); font-size: 0.85rem; font-weight: 500; }
 
     /* ===== FOOTER ===== */
     .footer {
       background: var(--navy); padding: 2rem;
       text-align: center; border-top: 1px solid rgba(255,255,255,0.04);
     }
-    .footer p { color: rgba(255,255,255,0.3); font-size: 0.8rem; }
-    .footer a { color: rgba(255,255,255,0.4); }
+    .footer p { color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+    .footer a { color: rgba(255,255,255,0.75); }
     .footer a:hover { color: var(--gold-light); }
 
     /* ===== CURSOR GLOW ===== */
