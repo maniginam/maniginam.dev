@@ -152,6 +152,15 @@
     a { color: var(--lilac); text-decoration: none; transition: color 0.2s; }
     a:hover { color: var(--gold); }
 
+    .skip-link {
+      position: absolute; left: -999px; top: 0; z-index: 2000;
+      background: var(--coral); color: var(--bg); padding: 0.6rem 1rem;
+      border-radius: 0 0 8px 0; font-weight: 700; font-size: 0.9rem;
+    }
+    .skip-link:focus { left: 0; }
+
+    section[id] { scroll-margin-top: 80px; }
+
     /* ===== NAV ===== */
     .nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -602,9 +611,13 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <div class="cursor-glow" id="cursorGlow"></div>
 
   <site-nav></site-nav>
+
+  <main id="main">
 
   <section class="hero" id="hero">
     <div class="hero-gradient-out"></div>
@@ -794,6 +807,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer class="footer">
     <p style="margin-bottom:0.5rem;">

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Page Not Found — maniginam.dev</title>
+  <meta name="robots" content="noindex, follow">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -14,6 +15,8 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     :root { --navy: #1e1e2e; --accent: #ff8a8a; --accent-light: #ffb3b3; --lilac: #c4a0ff; --text: #e8e8f0; --text-light: #9999aa; --bg: #1e1e2e; --white: #ffffff; --display: 'Space Grotesk','Inter',sans-serif; }
     body { font-family: 'Inter', -apple-system, sans-serif; color: var(--text); background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; }
+    .skip-link { position: absolute; left: -999px; top: 0; z-index: 2000; background: var(--accent); color: var(--navy); padding: 0.6rem 1rem; border-radius: 0 0 8px 0; font-weight: 700; font-size: 0.9rem; }
+    .skip-link:focus { left: 0; }
     nav { background: var(--navy); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
     nav .logo { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--white); text-decoration: none; }
     nav .logo { display: flex; align-items: center; } nav .logo .lg-mani { color: #8a8b98; } nav .logo .lg-gina { color: var(--lilac); } nav .logo .lg-m { color: var(--accent); }
@@ -39,13 +42,14 @@
 </script>
 </head>
 <body><a href="https://maniginam.dev/cdn-cgi/content?id=uWj3VYfweSUaFf8xAfUwf4iTHlNkmgB4evHWNLh.IM8-1780794479.8499367-1.2.1.1-2QJoBKT5Vk2pPojcA7ZUWcbjhQumgVZwMS4Ob2Kc0GI" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+  <a class="skip-link" href="#main">Skip to content</a>
   <site-nav active=""></site-nav>
-  <div class="content">
+  <main id="main" class="content">
     <h1>404</h1>
     <h2>Page not found</h2>
     <p>The page you're looking for doesn't exist or has been moved.</p>
     <a href="/">Back to Home</a>
-  </div>
+  </main>
   <footer>
     <p style="margin-bottom:0.5rem;">
       <a href="https://wbr.maniginam.dev" style="color:rgba(255,255,255,0.5);font-size:0.8rem;margin:0 0.3rem;">WBR Local</a> &middot;

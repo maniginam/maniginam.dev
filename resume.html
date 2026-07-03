@@ -61,6 +61,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    .skip-link {
+      position: absolute; left: -999px; top: 0; z-index: 2000;
+      background: var(--accent); color: var(--navy); padding: 0.6rem 1rem;
+      border-radius: 0 0 8px 0; font-weight: 700; font-size: 0.9rem;
+    }
+    .skip-link:focus { left: 0; }
+
     /* Nav */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
@@ -175,7 +182,11 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <site-nav active="resume"></site-nav>
+
+  <main id="main">
 
   <div class="page-header">
     <h1>Gina Martiny</h1>
@@ -374,6 +385,8 @@
     </div>
 
   </div>
+
+  </main>
 
   <footer>
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
