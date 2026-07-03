@@ -1,0 +1,27 @@
+# Cloudflare Pages: files here are NEVER uploaded to the live site.
+# wrangler pages deploy ignores .gitignore, so secrets must be listed here too.
+
+# Secrets / credentials — never deploy
+wbr-drafts/
+*.csv
+.env
+.security-session-start-sha
+
+# Local tooling, not for production
+tools/
+
+# Dev mockups / scratch pages
+*-mockup.html
+logo-concepts.html
+logo-concepts-v2.html
+logo-preview.html
+font-preview.html
+refined-bridge-logo.html
+
+# VCS / editor / OS junk
+.git/
+.gitignore
+.DS_Store
+*.swp
+*.swo
+node_modules/
