@@ -71,7 +71,7 @@
     .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
     .back-link:hover { text-decoration: underline; }
     footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
-    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
     @media (max-width: 768px) {
       nav ul { gap: 1rem; }
       nav ul li a { font-size: 0.8rem; }
@@ -85,7 +85,9 @@
     .related-posts li { margin-bottom: 0.75rem; }
     .related-posts a { color: var(--accent); text-decoration: none; font-size: 0.95rem; border-bottom: 1px solid rgba(255,138,138,0.3); transition: border-color 0.2s; }
     .related-posts a:hover { border-bottom-color: var(--accent); }
-  </style>
+      .skip-link { position: absolute; left: -999px; top: 0; z-index: 2000; background: var(--accent); color: var(--navy); padding: 0.6rem 1rem; border-radius: 0 0 8px 0; font-weight: 700; font-size: 0.9rem; }
+    .skip-link:focus { left: 0; }
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -118,7 +120,10 @@
 </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <site-nav active="blog"></site-nav>
+
+  <main id="main">
   <div class="post-header">
     <h1>Milk is in a Cup</h1>
     <p class="post-date">August 25, 2021</p>
@@ -150,8 +155,11 @@ Leo loves to take anything big and long (especially spaceships) and go “Tree! 
 
     </ul>
   </div>
+
+  </main>
+
   <footer>
-    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#a8a8b8;">
       <a href="https://wbr.maniginam.dev" style="color:#c4a0ff;">WBR Local</a> · 
       <a href="https://legacyleaps.com" style="color:#c4a0ff;">LegacyLeaps</a> · 
       <a href="https://aileapers.com" style="color:#c4a0ff;">AI Leapers</a> · 
@@ -161,4 +169,5 @@ Leo loves to take anything big and long (especially spaceships) and go “Tree! 
     <p>Gina Martiny &mdash; Port Allen, Louisiana</p>
   </footer>
   <script src="/js/site-nav.js" defer></script>
+</body>
 </html>

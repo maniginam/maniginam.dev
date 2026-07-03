@@ -55,7 +55,7 @@
     .back-link { display: inline-block; margin-bottom: 2rem; font-size: 0.85rem; color: var(--accent); text-decoration: none; }
     .back-link:hover { text-decoration: underline; }
     footer { background: var(--navy); padding: 1.5rem 2rem; text-align: center; }
-    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.35); }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
     .related-posts { max-width: 700px; margin: 0 auto; padding: 0 2rem 3rem; }
     .related-posts h3 { font-family: var(--display); font-size: 1.1rem; color: var(--lilac); margin-bottom: 1rem; font-weight: 700; }
     .related-posts ul { list-style: none; padding: 0; }
@@ -69,7 +69,9 @@
       .post-header { padding: 3rem 1.5rem 2rem; }
       .post-header h1 { font-size: 1.5rem; }
     }
-  </style>
+      .skip-link { position: absolute; left: -999px; top: 0; z-index: 2000; background: var(--accent); color: var(--navy); padding: 0.6rem 1rem; border-radius: 0 0 8px 0; font-weight: 700; font-size: 0.9rem; }
+    .skip-link:focus { left: 0; }
+</style>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -91,7 +93,10 @@
 </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <site-nav active="blog"></site-nav>
+
+  <main id="main">
   <div class="post-header">
     <h1>AI Tools I'm Building for Baton Rouge Small Businesses</h1>
     <p class="post-date">June 6, 2026</p>
@@ -170,8 +175,12 @@
     </ul>
   </div>
 
+
+  </main>
+
+
   <footer>
-    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#888;">
+    <p style="margin-bottom:0.5rem;font-size:0.85rem;color:#a8a8b8;">
       <a href="https://wbr.maniginam.dev" style="color:#c4a0ff;">WBR Local</a> · 
       <a href="https://legacyleaps.com" style="color:#c4a0ff;">LegacyLeaps</a> · 
       <a href="https://aileapers.com" style="color:#c4a0ff;">AI Leapers</a> · 
