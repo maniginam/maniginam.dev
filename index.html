@@ -248,9 +248,9 @@
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
     }
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--gold-light), var(--gold));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
+      /* Solid gold — gradient background-clip:text drops earlier line fragments
+         on wrapped inline spans in mobile WebKit/Blink, blacking out "work as". */
+      color: var(--gold-light);
     }
     .hero-sub {
       font-size: clamp(1rem, 2.2vw, 1.15rem); color: rgba(255,255,255,0.7);
