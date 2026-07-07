@@ -8,6 +8,24 @@ const LINK_HEADER = [
   '</.well-known/mcp/server-card.json>; rel="service-desc"',
 ].join(', ');
 
+async function countView(context, url) {
+  const { request, env } = context;
+  if (!env.STATS) return;
+  if (request.method !== 'GET') return;
+  if (url.pathname.startsWith('/admin')) return;
+  const day = new Date().toISOString().slice(0, 10);
+  const path = url.pathname;
+  const bump = async (key) => {
+    const n = Number(await env.STATS.get(key)) || 0;
+    await env.STATS.put(key, String(n + 1));
+  };
+  await bump(`views:${day}:${path}`);
+  const ref = request.headers.get('Referer');
+  if (ref) {
+    try { await bump(`ref:${day}:${new URL(ref).host}`); } catch {}
+  }
+}
+
 function htmlToMarkdown(html) {
   // Lightweight HTML-to-markdown conversion for static pages
   return html
@@ -67,6 +85,10 @@ export async function onRequest(context) {
   const response = await context.next();
   const url = new URL(context.request.url);
   const isHTML = (response.headers.get('content-type') || '').includes('text/html');
+
+  if (isHTML) {
+    context.waitUntil(countView(context, url));
+  }
 
   // Add Link headers to all HTML responses
   const newResponse = new Response(response.body, response);
