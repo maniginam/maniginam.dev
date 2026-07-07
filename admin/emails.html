@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin · Emails</title>
+  <link rel="stylesheet" href="/admin/assets/admin.css">
+</head>
+<body>
+  <div id="bar"></div>
+  <div class="wrap">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="count">Signups</h3>
+        <button id="csv">Export CSV</button>
+      </div>
+      <table id="tbl"><thead><tr><th>Email</th><th>Name</th><th>Source</th><th>When</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+  <script type="module">
+    import { topbar, getJSON, logout } from '/admin/assets/admin.js';
+    document.getElementById('bar').innerHTML = topbar('emails');
+    document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
+    const data = await getJSON('/admin/api/emails');
+    if (data) {
+      document.getElementById('count').textContent = `Signups (${data.count})`;
+      document.querySelector('#tbl tbody').innerHTML =
+        data.signups.map(s => `<tr><td>${s.email}</td><td>${s.name||''}</td><td>${s.source||''}</td><td>${s.ts}</td></tr>`).join('')
+        || '<tr><td colspan="4" style="color:var(--muted)">No signups yet</td></tr>';
+      document.getElementById('csv').addEventListener('click', () => {
+        const rows = [['email','name','source','ts'], ...data.signups.map(s => [s.email,s.name||'',s.source||'',s.ts])];
+        const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+        a.download = 'signups.csv'; a.click();
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,1 +1,30 @@
-<!doctype html><title>Login</title><h1>Login</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin Login</title>
+  <link rel="stylesheet" href="/admin/assets/admin.css">
+</head>
+<body>
+  <form class="login-box" id="login">
+    <h2>Admin Access</h2>
+    <p style="color:var(--muted)">Enter your access token.</p>
+    <input type="password" id="token" placeholder="Access token" autocomplete="off" autofocus>
+    <div class="err" id="err"></div>
+    <button type="submit">Enter</button>
+  </form>
+  <script type="module">
+    document.getElementById('login').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const token = document.getElementById('token').value;
+      const r = await fetch('/admin/api/login', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token }),
+      });
+      if (r.status === 204) { location.href = '/admin/index.html'; }
+      else { document.getElementById('err').textContent = 'Invalid token'; }
+    });
+  </script>
+</body>
+</html>

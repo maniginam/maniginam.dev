@@ -1,1 +1,40 @@
-<!doctype html><title>Dash</title><h1>Secret Dashboard</h1>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin · Dashboard</title>
+  <link rel="stylesheet" href="/admin/assets/admin.css">
+</head>
+<body>
+  <div id="bar"></div>
+  <div class="wrap">
+    <div class="stat-grid" id="stats"></div>
+    <div class="card"><h3>Top Pages (last 30d)</h3><table id="pages"><tbody></tbody></table></div>
+    <div class="card"><h3>Top Referrers</h3><table id="refs"><tbody></tbody></table></div>
+  </div>
+  <script type="module">
+    import { topbar, getJSON, logout } from '/admin/assets/admin.js';
+    document.getElementById('bar').innerHTML = topbar('index');
+    document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
+    const data = await getJSON('/admin/api/stats');
+    if (data) {
+      const totalViews = data.views.reduce((s,v)=>s+v.count,0);
+      const emails = await getJSON('/admin/api/emails');
+      document.getElementById('stats').innerHTML =
+        `<div class="stat"><b>${totalViews}</b>Pageviews</div>
+         <div class="stat"><b>${data.views.length}</b>Tracked paths</div>
+         <div class="stat"><b>${emails?emails.count:0}</b>Signups</div>`;
+      const max = Math.max(1, ...data.views.map(v=>v.count));
+      document.getElementById('pages').querySelector('tbody').innerHTML =
+        data.views.slice(0,15).map(v =>
+          `<tr><td>${v.path}</td><td>${v.count}</td>
+           <td style="width:40%"><div class="bar" style="width:${Math.round(v.count/max*100)}%"></div></td></tr>`).join('')
+        || '<tr><td colspan="3" style="color:var(--muted)">No data yet</td></tr>';
+      document.getElementById('refs').querySelector('tbody').innerHTML =
+        data.refs.slice(0,15).map(r => `<tr><td>${r.host}</td><td>${r.count}</td></tr>`).join('')
+        || '<tr><td colspan="2" style="color:var(--muted)">No referrers yet</td></tr>';
+    }
+  </script>
+</body>
+</html>
