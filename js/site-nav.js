@@ -16,7 +16,7 @@ class SiteNav extends HTMLElement {
     const root = this.attachShadow({ mode: 'open' });
     root.innerHTML = `
       <style>
-        :host { --charcoal: #1e1e2e; --lilac: #c4a0ff; --coral: #ff8a8a;
+        :host { --charcoal: #1e1e2e; --lilac: #b026ff; --coral: #ff4030;
                 display: block; }
         nav {
           position: fixed; top: 0; left: 0; right: 0; z-index: 1000;

@@ -115,7 +115,8 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="/vendor/aos.css" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -123,11 +124,11 @@
       --navy: #1e1e2e;
       --navy-mid: #2a2a3e;
       --navy-light: #33334a;
-      --gold: #ff8a8a;
-      --gold-light: #c4a0ff;
-      --gold-dim: rgba(255,138,138,0.15);
-      --lilac: #c4a0ff;
-      --coral: #ff8a8a;
+      --gold: #ff4030;
+      --gold-light: #b026ff;
+      --gold-dim: rgba(255,64,48,0.20);
+      --lilac: #b026ff;
+      --coral: #ff4030;
       --text: #e8e8f0;
       --text-mid: #b8b8c8;
       --text-muted: #9999aa;
@@ -135,7 +136,7 @@
       --bg-alt: #26262f;
       --border: #33334a;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-display: 'Space Grotesk', 'Inter', sans-serif;
+      --font-display: 'Sora', 'Inter', sans-serif;
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -251,15 +252,16 @@
     }
     .hero-badge {
       display: inline-block;
-      background: rgba(255,138,138,0.15); border: 1px solid rgba(255,138,138,0.3);
+      background: rgba(255,64,48,0.15); border: 1px solid rgba(255,64,48,0.3);
       padding: 0.4rem 1.2rem; border-radius: 100px;
       font-size: 0.82rem; font-weight: 600; color: var(--gold-light);
       letter-spacing: 0.04em; margin-bottom: 1.5rem;
       animation: fadeUp 0.8s ease-out both;
     }
     .hero h1 {
-      font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 900;
-      color: #fff; line-height: 1.2; letter-spacing: -0.03em;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 4.2vw, 3rem); font-weight: 700;
+      color: #fff; line-height: 1.08; letter-spacing: -0.045em;
       margin-bottom: 1.25rem;
       animation: fadeUp 0.8s 0.15s ease-out both;
       text-shadow: 0 2px 20px rgba(0,0,0,0.3);
@@ -356,15 +358,8 @@
       line-height: 1.7; margin-bottom: 3rem;
     }
 
-    /* Scroll reveal */
-    .reveal {
-      opacity: 0; transform: translateY(30px);
-      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
+    /* Scroll reveal now handled by AOS (see data-aos wiring in footer script) */
+    .reveal { }
 
     /* ===== SERVICES ===== */
     .services { background: var(--bg-alt); }
@@ -465,10 +460,14 @@
       margin-bottom: 1rem;
       padding: 0.75rem 1rem;
       background: var(--gold-dim);
-      border: 1px solid rgba(255,138,138,0.2);
+      border: 1px solid rgba(255,64,48,0.2);
       border-radius: 8px;
       text-align: center;
     }
+    /* Logo-matched color grouping: mani=charcoal, gina=violet, m=coral */
+    .bp-mani { color: #8a8b98; }
+    .bp-gina { color: var(--lilac); }
+    .bp-m { color: var(--coral); }
     .bp-visual {
       display: flex;
       flex-direction: column;
@@ -784,9 +783,9 @@
           <h2 class="about-name">Gina Martiny</h2>
           <div class="brand-palindrome">
             <div class="bp-visual">
-              <span class="bp-forward"><span class="bp-hi">M</span>artiny, <span class="bp-hi">G</span>ina <span class="bp-hi">M</span>artiny</span>
+              <span class="bp-forward"><span class="bp-mani">Martiny</span>, <span class="bp-gina">Gina</span> <span class="bp-m">Martiny</span></span>
               <span class="bp-arrow">&darr;</span>
-              <span class="bp-result"><span class="bp-hi">m</span>a<span class="bp-hi">n</span>i<span class="bp-hi">g</span>i<span class="bp-hi">n</span>a<span class="bp-hi">m</span></span>
+              <span class="bp-result"><span class="bp-mani">mani</span><span class="bp-gina">gina</span><span class="bp-m">m</span></span>
             </div>
             <p class="bp-note">My last name, first name, last name &mdash; reads the same forwards and backwards.</p>
           </div>
@@ -861,7 +860,7 @@
         <div style="display:flex;gap:.5rem;margin-top:.35rem">
           <input id="sub-email" type="email" placeholder="you@email.com" required
                  style="flex:1;padding:.55rem;border:1px solid #ccc;border-radius:6px">
-          <button type="submit" style="background:#8b1a1a;color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-weight:700;cursor:pointer">Subscribe</button>
+          <button type="submit" style="background:var(--lilac);color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-weight:700;cursor:pointer">Subscribe</button>
         </div>
         <div id="sub-msg" style="min-height:1.2em;font-size:.9rem;margin-top:.35rem"></div>
       </form>
@@ -892,7 +891,15 @@
       <a href="https://tradeup.maniginam.dev">TradeUp</a>
     </p>
     <p>ManiGinaM, LLC &mdash; West Baton Rouge Parish's Software Engineer &middot; Port Allen, LA</p>
+    <p style="margin-top:1.25rem;margin-bottom:0.5rem;font-size:0.8rem;color:rgba(255,255,255,0.6);">Proud member of the West Baton Rouge Chamber of Commerce</p>
+    <div id="mni-membership-639190373175585863" style="margin:0 auto;max-width:220px;"></div>
   </footer>
+
+  <!-- West Baton Rouge Chamber of Commerce membership badge -->
+  <script src="https://westbatonrougechamber.chambermaster.com/Content/Script/Member.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    new MNI.Widgets.Member("mni-membership-639190373175585863",{member:7831,styleTemplate:"#@id{text-align:center;position:relative}#@id .mn-widget-member-name{font-weight:700}#@id .mn-widget-member-logo{max-width:100%}"}).create();
+  </script>
 
   <!-- Shared navigation component -->
   <script src="/js/site-nav.js" defer></script>
@@ -906,19 +913,21 @@
   <script src="js/hero/daylight-meter.js"></script>
   <script src="js/hero/hero.js"></script>
 
+  <script src="/vendor/aos.js"></script>
   <script>
-    // Scroll reveal
-    var revealObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          revealObserver.unobserve(e.target);
-        }
+    // Scroll reveal via AOS. Map legacy .reveal elements to varied AOS animations.
+    // Guard: if aos.js failed to load, skip wiring entirely so aos.css never hides
+    // the content at opacity:0 — elements stay visible rather than vanishing.
+    (function () {
+      if (!window.AOS) return;
+      var anims = ['fade-up', 'fade-up', 'zoom-in', 'fade-right', 'fade-left', 'flip-up'];
+      document.querySelectorAll('.reveal').forEach(function (el, i) {
+        el.setAttribute('data-aos', anims[i % anims.length]);
+        var d = /reveal-delay-(\d)/.exec(el.className);
+        if (d) el.setAttribute('data-aos-delay', String(+d[1] * 120));
       });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(function (el) {
-      revealObserver.observe(el);
-    });
+      AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 80 });
+    })();
 
     // Cursor glow (desktop only)
     var glow = document.getElementById('cursorGlow');
