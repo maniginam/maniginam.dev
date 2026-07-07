@@ -4,8 +4,8 @@ compatibility_date = "2024-09-23"
 
 [[kv_namespaces]]
 binding = "STATS"
-id = "PLACEHOLDER_SET_IN_DASHBOARD"
+id = "6d40211202ae456ca65dd64731a53bde"
 
 [[kv_namespaces]]
 binding = "SIGNUPS"
-id = "PLACEHOLDER_SET_IN_DASHBOARD"
+id = "0a959ca839e54859ab6b465199cf8544"

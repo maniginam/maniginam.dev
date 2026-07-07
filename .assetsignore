@@ -25,3 +25,14 @@ refined-bridge-logo.html
 *.swp
 *.swo
 node_modules/
+
+# Admin build: never deploy secrets, tooling, or local state
+.dev.vars
+.wrangler/
+docs/
+tests/
+node_modules/
+package.json
+package-lock.json
+vitest.config.js
+wrangler.toml
