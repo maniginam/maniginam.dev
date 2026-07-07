@@ -856,6 +856,28 @@
           <span class="contact-loc">Port Allen, Louisiana &mdash; Greater Baton Rouge</span>
         </div>
       </div>
+      <form id="subscribe" style="margin-top:1rem;max-width:420px">
+        <label for="sub-email" style="font-weight:600">Get updates</label>
+        <div style="display:flex;gap:.5rem;margin-top:.35rem">
+          <input id="sub-email" type="email" placeholder="you@email.com" required
+                 style="flex:1;padding:.55rem;border:1px solid #ccc;border-radius:6px">
+          <button type="submit" style="background:#8b1a1a;color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-weight:700;cursor:pointer">Subscribe</button>
+        </div>
+        <div id="sub-msg" style="min-height:1.2em;font-size:.9rem;margin-top:.35rem"></div>
+      </form>
+      <script>
+        document.getElementById('subscribe').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const email = document.getElementById('sub-email').value;
+          const msg = document.getElementById('sub-msg');
+          const r = await fetch('/api/subscribe', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, source: 'home-footer' }),
+          });
+          if (r.ok) { msg.style.color = 'green'; msg.textContent = 'Thanks — you are subscribed.'; e.target.reset(); }
+          else { msg.style.color = '#b00'; msg.textContent = 'Please enter a valid email.'; }
+        });
+      </script>
     </div>
   </section>
 
