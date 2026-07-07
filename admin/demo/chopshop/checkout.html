@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout — The Chop Shop</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="favicon.svg">
+</head>
+<body>
+  <nav id="site-nav"></nav>
+  <main class="section"><div class="container">
+    <h2>Checkout</h2>
+    <div class="checkout-wrap">
+      <form id="checkout-form" novalidate>
+        <label for="f-name">Name</label>
+        <input id="f-name" name="name" autocomplete="name">
+        <div class="field-error" data-for="name"></div>
+
+        <div class="grid2">
+          <div>
+            <label for="f-phone">Phone</label>
+            <input id="f-phone" name="phone" inputmode="tel" autocomplete="tel">
+            <div class="field-error" data-for="phone"></div>
+          </div>
+          <div>
+            <label for="f-email">Email</label>
+            <input id="f-email" name="email" inputmode="email" autocomplete="email">
+            <div class="field-error" data-for="email"></div>
+          </div>
+        </div>
+
+        <label>Fulfillment</label>
+        <label style="font-weight:400"><input type="radio" name="fulfillment" value="pickup" checked> Pickup</label>
+        <label style="font-weight:400"><input type="radio" name="fulfillment" value="delivery"> Delivery</label>
+
+        <div id="address-field">
+          <label for="f-address">Delivery address</label>
+          <input id="f-address" name="address" autocomplete="street-address">
+          <div class="field-error" data-for="address"></div>
+        </div>
+
+        <label for="f-time">Requested time</label>
+        <input id="f-time" name="time" type="datetime-local">
+
+        <label for="f-notes">Order notes</label>
+        <textarea id="f-notes" name="notes" rows="3"></textarea>
+
+        <div class="note">Payment is not collected in this demo. Stripe Checkout will be wired here.</div>
+        <button class="btn btn--gold" type="submit" style="margin-top:1rem">Place Order</button>
+      </form>
+
+      <aside>
+        <h3>Order Summary</h3>
+        <div class="summary" id="order-summary"></div>
+      </aside>
+    </div>
+  </div></main>
+  <footer id="site-footer"></footer>
+  <script type="module" src="js/checkout.js"></script>
+</body>
+</html>
