@@ -18,14 +18,14 @@
     </div>
   </div>
   <script type="module">
-    import { topbar, getJSON, logout } from '/admin/assets/admin.js';
+    import { topbar, getJSON, logout, esc } from '/admin/assets/admin.js';
     document.getElementById('bar').innerHTML = topbar('emails');
     document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
     const data = await getJSON('/admin/api/emails');
     if (data) {
       document.getElementById('count').textContent = `Signups (${data.count})`;
       document.querySelector('#tbl tbody').innerHTML =
-        data.signups.map(s => `<tr><td>${s.email}</td><td>${s.name||''}</td><td>${s.source||''}</td><td>${s.ts}</td></tr>`).join('')
+        data.signups.map(s => `<tr><td>${esc(s.email)}</td><td>${esc(s.name)}</td><td>${esc(s.source)}</td><td>${esc(s.ts)}</td></tr>`).join('')
         || '<tr><td colspan="4" style="color:var(--muted)">No signups yet</td></tr>';
       document.getElementById('csv').addEventListener('click', () => {
         const rows = [['email','name','source','ts'], ...data.signups.map(s => [s.email,s.name||'',s.source||'',s.ts])];

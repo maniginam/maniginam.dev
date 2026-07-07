@@ -14,7 +14,7 @@
     <div class="card"><h3>Top Referrers</h3><table id="refs"><tbody></tbody></table></div>
   </div>
   <script type="module">
-    import { topbar, getJSON, logout } from '/admin/assets/admin.js';
+    import { topbar, getJSON, logout, esc } from '/admin/assets/admin.js';
     document.getElementById('bar').innerHTML = topbar('index');
     document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
     const data = await getJSON('/admin/api/stats');
@@ -28,11 +28,11 @@
       const max = Math.max(1, ...data.views.map(v=>v.count));
       document.getElementById('pages').querySelector('tbody').innerHTML =
         data.views.slice(0,15).map(v =>
-          `<tr><td>${v.path}</td><td>${v.count}</td>
+          `<tr><td>${esc(v.path)}</td><td>${v.count}</td>
            <td style="width:40%"><div class="bar" style="width:${Math.round(v.count/max*100)}%"></div></td></tr>`).join('')
         || '<tr><td colspan="3" style="color:var(--muted)">No data yet</td></tr>';
       document.getElementById('refs').querySelector('tbody').innerHTML =
-        data.refs.slice(0,15).map(r => `<tr><td>${r.host}</td><td>${r.count}</td></tr>`).join('')
+        data.refs.slice(0,15).map(r => `<tr><td>${esc(r.host)}</td><td>${r.count}</td></tr>`).join('')
         || '<tr><td colspan="2" style="color:var(--muted)">No referrers yet</td></tr>';
     }
   </script>

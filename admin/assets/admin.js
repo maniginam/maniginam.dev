@@ -1,3 +1,7 @@
+const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+export function esc(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ESC[c]);
+}
 export async function logout() {
   await fetch('/admin/api/logout', { method: 'POST' });
   location.href = '/admin/login.html';
