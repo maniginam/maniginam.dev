@@ -1,7 +1,14 @@
 import { validateSignup } from './_validate.js';
 
+function ipKey(ip) {
+  // CF-Connecting-IP is edge-set in production, but sanitize defensively so a
+  // spoofed header at origin can't craft or collide KV keys. Keep only valid
+  // IPv4/IPv6 chars and cap length.
+  return (ip || 'unknown').replace(/[^0-9a-fA-F:.]/g, '').slice(0, 45) || 'unknown';
+}
+
 async function rateLimited(env, ip) {
-  const key = `rl:${ip}`;
+  const key = `rl:${ipKey(ip)}`;
   const cur = Number(await env.SIGNUPS.get(key)) || 0;
   if (cur >= 5) return true;
   await env.SIGNUPS.put(key, String(cur + 1), { expirationTtl: 600 });
