@@ -10,3 +10,5 @@ wbr-drafts/oauth.txt
 
 # Local tooling, not deployed
 tools/
+
+.dev.vars

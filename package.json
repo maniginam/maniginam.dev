@@ -1,0 +1,14 @@
+{
+  "name": "maniginam-dev",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "dev": "wrangler pages dev . --kv STATS --kv SIGNUPS"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0",
+    "wrangler": "^3.80.0"
+  }
+}
