@@ -2,6 +2,7 @@ import { parseCookies, verifySession } from './_auth.js';
 
 const PUBLIC_PATHS = new Set([
   '/admin/login.html',
+  '/admin/login', // Cloudflare Pages serves login.html at this extensionless pretty URL
   '/admin/api/login',
   '/admin/assets/admin.css',
 ]);
