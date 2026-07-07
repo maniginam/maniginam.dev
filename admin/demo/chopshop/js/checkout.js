@@ -22,6 +22,10 @@ function toggleAddress(){
   document.getElementById('address-field').style.display = mode === 'delivery' ? 'block' : 'none';
 }
 
+function esc(s){
+  return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 function showError(name, msg){
   const el = document.querySelector(`.field-error[data-for="${name}"]`);
   if(el) el.textContent = msg || '';
@@ -35,7 +39,7 @@ function validate(form){
   const mode = form.fulfillment.value;
   showError('name', ''); showError('phone', ''); showError('email', ''); showError('address', '');
   if(!name){ showError('name', 'Name required'); ok = false; }
-  if(!/^[0-9()+\-.\s]{7,}$/.test(phone)){ showError('phone', 'Valid phone required'); ok = false; }
+  if(!/^[0-9()+\-.\s]{7,}$/.test(phone) || (phone.match(/\d/g)||[]).length < 7){ showError('phone', 'Valid phone required'); ok = false; }
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ showError('email', 'Valid email required'); ok = false; }
   if(mode === 'delivery' && !form.address.value.trim()){ showError('address', 'Delivery address required'); ok = false; }
   return ok;
@@ -54,8 +58,8 @@ form.addEventListener('submit', e => {
   // then redirect to Stripe. Payment fields intentionally omitted for now.
   clearCart();
   document.querySelector('.container').innerHTML =
-    `<h2>Thanks, ${form.name.value.trim()}!</h2>
+    `<h2>Thanks, ${esc(form.name.value.trim())}!</h2>
      <p class="note">Your order request was received (demo — no payment taken yet).
-     We'll call ${form.phone.value.trim()} to confirm. Stripe checkout coming soon.</p>
+     We'll call ${esc(form.phone.value.trim())} to confirm. Stripe checkout coming soon.</p>
      <a class="btn" href="menu.html">Back to menu</a>`;
 });
