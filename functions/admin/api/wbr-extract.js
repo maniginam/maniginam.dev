@@ -1,21 +1,19 @@
-// WBR Budget Autofill — AI extraction endpoint.
+// WBR Financials Autofill — AI extraction endpoint.
 // Protected by functions/admin/_middleware.js (admin session required).
-// Reads uploaded parish financial PDFs with Claude and returns structured
-// budget line items, each figure carrying both a normalized value and the
-// value as printed in the source report (for the comparator).
+// Reads any West Baton Rouge financial statement (budget, balance sheet,
+// income statement, statement of revenues & expenditures, …) and returns it as
+// a structure-preserving matrix: the document's own columns (funds/periods) and
+// section-grouped rows, each cell carrying both a value and its printed form.
 
 const MODEL = 'claude-haiku-4-5';
 const ANTHROPIC_VERSION = '2023-06-01';
 const MAX_FILES = 8;
-const MAX_TOTAL_BYTES = 25 * 1024 * 1024; // 25 MB across all uploads
+const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
 
-const FIGURE = {
+const CELL = {
   type: 'object',
   additionalProperties: false,
-  properties: {
-    value: { type: ['number', 'null'] },
-    printed: { type: 'string' },
-  },
+  properties: { value: { type: ['number', 'null'] }, printed: { type: 'string' } },
   required: ['value', 'printed'],
 };
 
@@ -23,66 +21,61 @@ const SCHEMA = {
   type: 'object',
   additionalProperties: false,
   properties: {
-    lineItems: {
+    title: { type: 'string' },
+    statementType: { type: 'string' },
+    columns: { type: 'array', items: { type: 'string' } },
+    sections: {
       type: 'array',
       items: {
         type: 'object',
         additionalProperties: false,
         properties: {
-          fund: { type: 'string' },
-          department: { type: 'string' },
-          account: { type: 'string' },
-          description: { type: 'string' },
-          source: {
-            type: 'object',
-            additionalProperties: false,
-            properties: {
-              doc: { type: 'string' },
-              page: { type: ['integer', 'null'] },
-              label: { type: 'string' },
+          name: { type: 'string' },
+          rows: {
+            type: 'array',
+            items: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                label: { type: 'string' },
+                account: { type: 'string' },
+                isTotal: { type: 'boolean' },
+                cells: { type: 'array', items: CELL },
+              },
+              required: ['label', 'account', 'isTotal', 'cells'],
             },
-            required: ['doc', 'page', 'label'],
           },
-          priorYearActual: FIGURE,
-          currentBudget: FIGURE,
-          ytdActual: FIGURE,
-          nextYearRequest: FIGURE,
         },
-        required: [
-          'fund', 'department', 'account', 'description', 'source',
-          'priorYearActual', 'currentBudget', 'ytdActual', 'nextYearRequest',
-        ],
+        required: ['name', 'rows'],
       },
     },
-    sourceDocs: { type: 'array', items: { type: 'string' } },
     warnings: { type: 'array', items: { type: 'string' } },
   },
-  required: ['lineItems', 'sourceDocs', 'warnings'],
+  required: ['title', 'statementType', 'columns', 'sections', 'warnings'],
 };
 
-const INSTRUCTIONS = `You are a municipal finance data-entry assistant for West Baton Rouge Parish.
-The attached PDFs are parish fund-accounting reports (revenue & expenditure, fund balance, payroll, etc.).
+const INSTRUCTIONS = `You extract financial data for West Baton Rouge Parish. The attached PDF is a West Baton Rouge financial document — a budget, budget recap, balance sheet, statement of net position, statement of revenues & expenditures, income statement, or similar.
 
-Extract every budget line item across all documents into the structured schema. For each line item:
-- fund: the fund name (e.g. "General Fund", "Road & Bridge Fund").
-- department: the department or cost center.
-- account: the GL account code as printed (e.g. "001-500-6100"), or "" if none.
-- description: the line description (e.g. "Salaries & Wages").
-- source: { doc: the report title the row came from, page: page number if determinable else null, label: the row label exactly as printed }.
-- For each figure (priorYearActual, currentBudget, ytdActual, nextYearRequest):
-    - value: the number with no commas/currency symbols (e.g. 412000), or null if not present in the reports.
-    - printed: the figure exactly as printed including commas and any parentheses for negatives (e.g. "412,000" or "(3,500)"), or "" if not present.
+PRESERVE THE DOCUMENT'S OWN STRUCTURE. Do not force it into a fixed shape.
+- title: the statement title exactly as printed.
+- statementType: a short label (e.g. "Budget Recap", "Balance Sheet", "Statement of Revenues & Expenditures", "Income Statement").
+- columns: the value-column headers, left to right, exactly as printed (e.g. fund names like "General Fund", "Roads", "Drainage"; OR periods like "Original Budget", "Final Budget", "Actual", "Variance"; OR "Total"). Include a "Total" column if the report has one.
+- sections: the report's natural groupings, in order (e.g. "Revenue Sources", "Expenditures"; OR "Assets", "Liabilities", "Deferred Inflows", "Fund Balances"). Each section has rows.
+- Each row:
+    - label: the row label exactly as printed (e.g. "Ad Valorem Tax", "Cash and cash equivalents").
+    - account: the fund number or GL/account code if the row shows one, else "".
+    - isTotal: true for subtotal / total lines (e.g. "Total assets", "TOTAL REVENUE").
+    - cells: one entry per column in "columns", in the same left-to-right order. For each cell:
+        - value: the number with no commas, no $, no parentheses; represent negatives / (parentheses) as a negative number.
+        - printed: the cell exactly as printed, including commas, $, and parentheses.
+        - For a blank cell use value null and printed "".
 
-Only report figures actually present in the documents — never invent numbers. If a figure is absent for a line, use value null and printed "".
-List each distinct source document title in sourceDocs. Put any extraction concerns (unreadable sections, ambiguous totals) in warnings.`;
+Never invent numbers — only report what is on the page. Put anything ambiguous or unreadable in warnings.`;
 
 function jsonResponse(obj, status = 200) {
   return new Response(JSON.stringify(obj), {
     status,
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Robots-Tag': 'noindex, nofollow',
-    },
+    headers: { 'Content-Type': 'application/json', 'X-Robots-Tag': 'noindex, nofollow' },
   });
 }
 
@@ -110,57 +103,44 @@ export async function onRequestPost(context) {
   }
 
   const files = form.getAll('files').filter((f) => typeof f === 'object' && f.arrayBuffer);
-  if (files.length === 0) {
-    return jsonResponse({ error: 'No files uploaded.' }, 400);
-  }
-  if (files.length > MAX_FILES) {
-    return jsonResponse({ error: `Too many files (max ${MAX_FILES}).` }, 400);
-  }
+  if (files.length === 0) return jsonResponse({ error: 'No files uploaded.' }, 400);
+  if (files.length > MAX_FILES) return jsonResponse({ error: `Too many files (max ${MAX_FILES}).` }, 400);
 
   const docs = [];
   let totalBytes = 0;
   for (const file of files) {
     const name = file.name || 'document.pdf';
     const isPdf = (file.type === 'application/pdf') || name.toLowerCase().endsWith('.pdf');
-    if (!isPdf) {
-      return jsonResponse({ error: `"${name}" is not a PDF. Only PDF reports are supported.` }, 400);
-    }
+    if (!isPdf) return jsonResponse({ error: `"${name}" is not a PDF.` }, 400);
     const buf = new Uint8Array(await file.arrayBuffer());
     totalBytes += buf.length;
-    if (totalBytes > MAX_TOTAL_BYTES) {
-      return jsonResponse({ error: 'Uploads exceed the 25 MB limit.' }, 400);
-    }
+    if (totalBytes > MAX_TOTAL_BYTES) return jsonResponse({ error: 'Uploads exceed the 25 MB limit.' }, 400);
     docs.push({ name, data: bytesToBase64(buf) });
   }
 
-  // One request per document, in parallel — wall time is the slowest single
-  // document, not the sum. Keeps a live demo snappy even with several reports.
+  // One request per document, in parallel — each statement keeps its own shape.
   const results = await Promise.all(docs.map((d) => extractDocument(d, env)));
 
-  const merged = { lineItems: [], sourceDocs: [], warnings: [] };
-  let anyOk = false;
+  const documents = [];
+  const warnings = [];
   results.forEach((r, i) => {
     if (r.ok) {
-      anyOk = true;
-      merged.lineItems.push(...(r.data.lineItems || []));
-      (r.data.sourceDocs || []).forEach((s) => { if (!merged.sourceDocs.includes(s)) merged.sourceDocs.push(s); });
-      merged.warnings.push(...(r.data.warnings || []));
+      documents.push({ name: docs[i].name, ...r.data });
     } else {
-      merged.warnings.push(`${docs[i].name}: ${r.error}`);
+      warnings.push(`${docs[i].name}: ${r.error}`);
     }
   });
 
-  if (!anyOk) {
-    return jsonResponse({ error: 'Extraction failed — try again.', detail: merged.warnings.join(' | ').slice(0, 500) }, 502);
+  if (documents.length === 0) {
+    return jsonResponse({ error: 'Extraction failed — try again.', detail: warnings.join(' | ').slice(0, 500) }, 502);
   }
-  return jsonResponse(merged, 200);
+  return jsonResponse({ documents, warnings }, 200);
 }
 
 async function extractDocument(doc, env) {
   const body = {
     model: MODEL,
-    max_tokens: 8000,
-    // Extraction is transcription, not deep reasoning — skip thinking, low effort.
+    max_tokens: 16000,
     thinking: { type: 'disabled' },
     output_config: { format: { type: 'json_schema', schema: SCHEMA } },
     messages: [{
@@ -195,8 +175,13 @@ async function extractDocument(doc, env) {
   const textBlock = (data.content || []).find((b) => b.type === 'text');
   if (!textBlock) return { ok: false, error: 'no data returned' };
   try {
-    return { ok: true, data: JSON.parse(textBlock.text) };
+    const parsed = JSON.parse(textBlock.text);
+    if (data.stop_reason === 'max_tokens') {
+      parsed.warnings = parsed.warnings || [];
+      parsed.warnings.push('Document is large; extraction may be truncated. Try a single statement per file.');
+    }
+    return { ok: true, data: parsed };
   } catch {
-    return { ok: false, error: 'could not parse extracted data' };
+    return { ok: false, error: 'could not parse extracted data (document may be too large)' };
   }
 }
