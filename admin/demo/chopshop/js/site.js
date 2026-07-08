@@ -21,7 +21,10 @@ export function renderChrome(active){
     nav.className = 'nav';
     nav.innerHTML = `
       <div class="nav__inner">
-        <a class="nav__brand" href="index.html">The <b>Chop</b> Shop</a>
+        <a class="nav__brand" href="index.html">
+          <img src="img/real/logo2.png" alt="The Chop Shop logo">
+          <span>The <b>Chop</b> Shop</span>
+        </a>
         <div class="nav__links">
           <a href="menu.html">Menu</a>
           <a href="specials.html">Specials</a>
@@ -37,9 +40,10 @@ export function renderChrome(active){
     footer.className = 'footer';
     footer.innerHTML = `
       <div class="footer__inner">
-        <div>
+        <div class="footer__brand">
+          <img src="img/real/logo2.png" alt="The Chop Shop logo">
           <h4>The Chop Shop</h4>
-          <p>Defining delicious. Meat market, catering & deer processing.</p>
+          <p>Defining delicious. Specialty meats, catering, deer processing &amp; party trays.</p>
         </div>
         <div>
           <h4>Visit</h4>
