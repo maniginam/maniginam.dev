@@ -7,6 +7,7 @@
 // No admin session required. Nothing here is linked publicly and robots.txt
 // disallows /demo/, so the only way in is a valid ticket link.
 import { verifyShareTicket } from './_share.js';
+import { handleExtract } from '../admin/api/wbr-extract.js';
 
 function forbidden(msg) {
   return new Response(
@@ -62,6 +63,13 @@ export async function onRequest(context) {
   const access = await verifyShareTicket(cookies[`demo_${slug}`], slug, secret);
   if (!access.ok) {
     return forbidden('This link requires a valid, unexpired share ticket.');
+  }
+
+  // Ticket-gated API: the WBR demo needs server extraction, which normally
+  // lives behind admin auth. Expose it here only for a valid ticket-holder.
+  if (slug === 'wbr-fintech' && segs[1] === 'api' && segs[2] === 'extract') {
+    if (request.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
+    return handleExtract(request, env);
   }
 
   // Proxy the requested asset from the gated /admin/demo/<slug>/ static files.

@@ -67,7 +67,10 @@ async function runExtraction() {
   const form = new FormData();
   state.files.forEach((f) => form.append('files', f.file, f.name));
   try {
-    const resp = await fetch('/admin/api/wbr-extract', { method: 'POST', body: form });
+    // Admin preview hits the gated endpoint; a hosted share link (/demo/…) uses
+    // the ticket-gated one relative to its own path.
+    const endpoint = location.pathname.startsWith('/demo/') ? './api/extract' : '/admin/api/wbr-extract';
+    const resp = await fetch(endpoint, { method: 'POST', body: form });
     const payload = await resp.json().catch(() => ({}));
     if (!resp.ok) throw new Error(payload.error || 'Extraction failed.');
     if (!payload.documents || payload.documents.length === 0) {

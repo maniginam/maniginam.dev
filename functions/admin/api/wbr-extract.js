@@ -89,8 +89,12 @@ function bytesToBase64(bytes) {
 }
 
 export async function onRequestPost(context) {
-  const { request, env } = context;
+  return handleExtract(context.request, context.env);
+}
 
+// Shared core, called by the admin route (above) and the ticket-gated demo
+// route (functions/demo/[[path]].js) so hosted share links can extract too.
+export async function handleExtract(request, env) {
   if (!env.MANIGINAM_ANTHROPIC_API_KEY) {
     return jsonResponse({ error: 'Extraction is not configured on this server.' }, 500);
   }
