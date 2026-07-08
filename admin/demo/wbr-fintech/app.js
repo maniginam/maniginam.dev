@@ -89,7 +89,8 @@ async function loadSamples() {
 // ---- extraction -----------------------------------------------------------
 
 async function runExtraction() {
-  showOverlay('Reading documents with AI…');
+  const n = state.files.length;
+  showOverlay(`Reading ${n} document${n === 1 ? '' : 's'} with AI…`);
   setMsg('#intake-msg', '', '');
   const form = new FormData();
   state.files.forEach((f) => form.append('files', f.file, f.name));
@@ -468,8 +469,18 @@ function setMsg(sel, text, cls) {
   n.textContent = text;
   n.className = 'msg' + (cls ? ' ' + cls : '');
 }
-function showOverlay(text) { $('#overlay-text').textContent = text; $('#overlay').removeAttribute('hidden'); }
-function hideOverlay() { $('#overlay').setAttribute('hidden', ''); }
+let overlayTimer = null;
+function showOverlay(text) {
+  const node = $('#overlay-text');
+  const start = Date.now();
+  node.textContent = text;
+  clearInterval(overlayTimer);
+  overlayTimer = setInterval(() => {
+    node.textContent = `${text} (${Math.floor((Date.now() - start) / 1000)}s)`;
+  }, 500);
+  $('#overlay').removeAttribute('hidden');
+}
+function hideOverlay() { clearInterval(overlayTimer); $('#overlay').setAttribute('hidden', ''); }
 function shortName(name) { return name.replace(/^\d+-/, '').replace(/\.pdf$/i, '').replace(/-/g, ' '); }
 function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, (c) =>

@@ -183,7 +183,8 @@ table.grid tr.grand td { background: #f0ece1; font-weight: 700; border-top: 2px 
   position: fixed; inset: 0; background: rgba(14,32,51,.72);
   display: grid; place-items: center; align-content: center; gap: 1rem; z-index: 50; color: #fff;
 }
-.overlay p { font-size: 1.05rem; }
+.overlay p { font-size: 1.05rem; margin: 0; }
+.overlay-hint { font-size: .85rem !important; color: #a9b7c4; }
 .spinner {
   width: 46px; height: 46px; border: 4px solid rgba(255,255,255,.25);
   border-top-color: var(--brass-lite); border-radius: 50%; animation: spin .9s linear infinite;
