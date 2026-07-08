@@ -1,0 +1,11 @@
+{
+  "agents": [
+    {
+      "name": "ManiGinaM Site Agent",
+      "description": "Read site content and subscribe to the newsletter for maniginam.dev.",
+      "url": "https://maniginam.dev/.well-known/agent.json",
+      "protocol": "a2a",
+      "capabilities": ["text", "json"]
+    }
+  ]
+}

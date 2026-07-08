@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "maniginam": {
+      "name": "maniginam.dev",
+      "description": "Content resources (homepage, blog, resume, services) for Gina Martiny / ManiGinaM, LLC.",
+      "url": "https://maniginam.dev/.well-known/mcp/server-card.json",
+      "capabilities": {"resources": true, "tools": false, "prompts": false}
+    }
+  }
+}

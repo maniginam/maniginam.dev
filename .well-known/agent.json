@@ -1,0 +1,28 @@
+{
+  "name": "ManiGinaM Site Agent",
+  "description": "Agent interface for maniginam.dev — Gina Martiny, software engineer in Port Allen, LA. Exposes site content (portfolio, blog, resume, services) as readable resources and a newsletter-subscribe action.",
+  "url": "https://maniginam.dev",
+  "provider": {"organization": "ManiGinaM, LLC", "url": "https://maniginam.dev"},
+  "version": "1.0.0",
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "stateTransitionHistory": false
+  },
+  "defaultInputModes": ["application/json", "text/plain"],
+  "defaultOutputModes": ["application/json", "text/plain", "text/markdown"],
+  "skills": [
+    {
+      "id": "subscribe",
+      "name": "Newsletter Subscribe",
+      "description": "Subscribe an email address to Gina Martiny's newsletter/updates.",
+      "tags": ["contact", "newsletter"]
+    },
+    {
+      "id": "read-content",
+      "name": "Read Site Content",
+      "description": "Fetch portfolio, blog posts, resume, and services as HTML or markdown (send Accept: text/markdown).",
+      "tags": ["content", "portfolio", "blog"]
+    }
+  ]
+}

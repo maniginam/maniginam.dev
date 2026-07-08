@@ -1,0 +1,16 @@
+{
+  "spec": "webmcp/0.1",
+  "tools": [
+    {
+      "name": "subscribe",
+      "description": "Subscribe an email address to Gina Martiny's newsletter.",
+      "url": "/api/subscribe",
+      "method": "POST",
+      "parameters": [
+        {"name": "email", "type": "string", "description": "Subscriber email address", "required": true},
+        {"name": "name", "type": "string", "description": "Optional name", "required": false},
+        {"name": "source", "type": "string", "description": "Optional signup source tag", "required": false}
+      ]
+    }
+  ]
+}

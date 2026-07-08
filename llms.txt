@@ -1,0 +1,32 @@
+# ManiGinaM, LLC — Gina Martiny
+
+> Software engineer in Port Allen, Louisiana (West Baton Rouge Parish). Custom software development, AI integration, industrial automation, and web development for the greater Baton Rouge area.
+
+## Pages
+- [Home](https://maniginam.dev/): Portfolio, services, and overview for ManiGinaM, LLC
+- [Blog](https://maniginam.dev/blog/): Posts on software craftsmanship, AI, TDD, and building in Louisiana
+- [Resume](https://maniginam.dev/resume.html): Professional experience — software engineering, AI, industrial automation
+
+## Services
+- Custom software development
+- AI integration and consulting
+- Industrial automation / legacy system modernization
+- Web application development
+
+## Related projects
+- [AI Leapers](https://aileapers.com): AI tools and buyer's-guide reviews
+- [LegacyLeaps](https://legacyleaps.com)
+- [WBR Local](https://wbr.maniginam.dev): West Baton Rouge community
+- [Sideline Sports](https://sideline.maniginam.dev)
+- [TradeUp](https://tradeup.maniginam.dev)
+
+## Machine interfaces
+- Agent card (A2A): https://maniginam.dev/.well-known/agent.json
+- MCP discovery: https://maniginam.dev/.well-known/mcp.json
+- OpenAPI: https://maniginam.dev/openapi.json
+- Newsletter subscribe: POST https://maniginam.dev/api/subscribe {"email": "..."}
+- Markdown of any page: send header `Accept: text/markdown`
+
+## Contact
+- Location: Port Allen, LA 70767 — serving West Baton Rouge Parish, Baton Rouge, and Louisiana
+- Chamber: member, West Baton Rouge Chamber of Commerce

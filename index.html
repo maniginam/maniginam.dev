@@ -39,8 +39,10 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
+    "@id": "https://maniginam.dev/#person",
     "name": "Gina Martiny",
     "url": "https://maniginam.dev",
+    "worksFor": {"@id": "https://maniginam.dev/#business"},
     "jobTitle": "Software Engineer",
     "address": {
       "@type": "PostalAddress",
@@ -62,10 +64,12 @@
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
+    "@id": "https://maniginam.dev/#business",
     "name": "ManiGinaM, LLC",
     "url": "https://maniginam.dev",
     "description": "Software engineering and AI consulting in West Baton Rouge Parish. Custom software, AI integration, industrial automation.",
-    "founder": {"@type": "Person", "name": "Gina Martiny"},
+    "founder": {"@type": "Person", "@id": "https://maniginam.dev/#person", "name": "Gina Martiny"},
+    "memberOf": {"@type": "Organization", "name": "West Baton Rouge Chamber of Commerce", "url": "https://www.westbatonrougechamber.org"},
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Port Allen",
@@ -112,6 +116,31 @@
   }
   </script>
 
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://maniginam.dev/#website",
+    "name": "Gina Martiny — ManiGinaM, LLC",
+    "url": "https://maniginam.dev",
+    "publisher": {"@id": "https://maniginam.dev/#business"},
+    "inLanguage": "en-US"
+  }
+  </script>
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://maniginam.dev/"}
+    ]
+  }
+  </script>
+
+  <meta name="author" content="Gina Martiny">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -855,10 +884,15 @@
           <span class="contact-loc">Port Allen, Louisiana &mdash; Greater Baton Rouge</span>
         </div>
       </div>
-      <form id="subscribe" style="margin-top:1rem;max-width:420px">
+      <form id="subscribe" style="margin-top:1rem;max-width:420px"
+            action="/api/subscribe" method="POST"
+            tool-name="subscribe"
+            tool-description="Subscribe an email address to Gina Martiny's newsletter/updates">
         <label for="sub-email" style="font-weight:600">Get updates</label>
         <div style="display:flex;gap:.5rem;margin-top:.35rem">
-          <input id="sub-email" type="email" placeholder="you@email.com" required
+          <input id="sub-email" name="email" type="email" placeholder="you@email.com" required
+                 autocomplete="email"
+                 tool-param-description="Subscriber email address"
                  style="flex:1;padding:.55rem;border:1px solid #ccc;border-radius:6px">
           <button type="submit" style="background:var(--lilac);color:#fff;border:none;border-radius:6px;padding:.55rem 1rem;font-weight:700;cursor:pointer">Subscribe</button>
         </div>

@@ -1,0 +1,26 @@
+# ManiGinaM, LLC — Gina Martiny (full)
+
+> Gina Martiny is a software engineer based in Port Allen, Louisiana (West Baton Rouge Parish), operating as ManiGinaM, LLC. She builds custom software, integrates AI into real workflows, modernizes legacy industrial systems, and develops web applications for businesses in the greater Baton Rouge area.
+
+## About
+ManiGinaM, LLC bridges chemical/industrial manufacturing and modern software craftsmanship. Gina serves West Baton Rouge Parish and greater Baton Rouge, going business-to-business locally. Work spans AI integration, custom development, industrial automation, and community technology projects.
+
+## Services (detail)
+- Custom software development — bespoke applications and tooling.
+- AI integration & consulting — practical AI in existing workflows, not hype.
+- Industrial automation — modernizing legacy plant/manufacturing systems.
+- Web development — fast, accessible, agent-ready sites and web apps.
+
+## FAQ
+- What services does ManiGinaM offer? Custom software development, AI integration, industrial automation, web applications, and community technology projects in the greater Baton Rouge area.
+- Does ManiGinaM work with industrial companies? Yes — extensive experience bridging chemical manufacturing and software engineering, modernizing legacy industrial systems.
+- Where is ManiGinaM located? Port Allen, Louisiana — serving West Baton Rouge Parish, Baton Rouge, and all of Louisiana.
+
+## Machine interfaces
+- A2A agent card: https://maniginam.dev/.well-known/agent.json
+- MCP discovery: https://maniginam.dev/.well-known/mcp.json ; server card: https://maniginam.dev/.well-known/mcp/server-card.json
+- WebMCP manifest: https://maniginam.dev/.well-known/webmcp.json
+- agents.json: https://maniginam.dev/.well-known/agents.json
+- OpenAPI 3.1: https://maniginam.dev/openapi.json
+- Newsletter subscribe: POST https://maniginam.dev/api/subscribe with JSON {"email": "you@example.com"}
+- Any page as markdown: request with header `Accept: text/markdown`

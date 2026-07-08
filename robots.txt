@@ -9,3 +9,7 @@ Sitemap: https://maniginam.dev/sitemap.xml
 # API Catalog (RFC 9727): https://maniginam.dev/.well-known/api-catalog
 # Agent Skills: https://maniginam.dev/.well-known/agent-skills/index.json
 # MCP Server Card: https://maniginam.dev/.well-known/mcp/server-card.json
+# A2A Agent Card: https://maniginam.dev/.well-known/agent.json
+# MCP Discovery: https://maniginam.dev/.well-known/mcp.json
+# OpenAPI: https://maniginam.dev/openapi.json
+# LLM guide: https://maniginam.dev/llms.txt
