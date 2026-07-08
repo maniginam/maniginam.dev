@@ -4,7 +4,7 @@
 // budget line items, each figure carrying both a normalized value and the
 // value as printed in the source report (for the comparator).
 
-const MODEL = 'claude-sonnet-4-6';
+const MODEL = 'claude-haiku-4-5';
 const ANTHROPIC_VERSION = '2023-06-01';
 const MAX_FILES = 8;
 const MAX_TOTAL_BYTES = 25 * 1024 * 1024; // 25 MB across all uploads
@@ -117,7 +117,7 @@ export async function onRequestPost(context) {
     return jsonResponse({ error: `Too many files (max ${MAX_FILES}).` }, 400);
   }
 
-  const documentBlocks = [];
+  const docs = [];
   let totalBytes = 0;
   for (const file of files) {
     const name = file.name || 'document.pdf';
@@ -130,28 +130,51 @@ export async function onRequestPost(context) {
     if (totalBytes > MAX_TOTAL_BYTES) {
       return jsonResponse({ error: 'Uploads exceed the 25 MB limit.' }, 400);
     }
-    documentBlocks.push({
-      type: 'document',
-      title: name,
-      source: { type: 'base64', media_type: 'application/pdf', data: bytesToBase64(buf) },
-    });
+    docs.push({ name, data: bytesToBase64(buf) });
   }
 
+  // One request per document, in parallel — wall time is the slowest single
+  // document, not the sum. Keeps a live demo snappy even with several reports.
+  const results = await Promise.all(docs.map((d) => extractDocument(d, env)));
+
+  const merged = { lineItems: [], sourceDocs: [], warnings: [] };
+  let anyOk = false;
+  results.forEach((r, i) => {
+    if (r.ok) {
+      anyOk = true;
+      merged.lineItems.push(...(r.data.lineItems || []));
+      (r.data.sourceDocs || []).forEach((s) => { if (!merged.sourceDocs.includes(s)) merged.sourceDocs.push(s); });
+      merged.warnings.push(...(r.data.warnings || []));
+    } else {
+      merged.warnings.push(`${docs[i].name}: ${r.error}`);
+    }
+  });
+
+  if (!anyOk) {
+    return jsonResponse({ error: 'Extraction failed — try again.', detail: merged.warnings.join(' | ').slice(0, 500) }, 502);
+  }
+  return jsonResponse(merged, 200);
+}
+
+async function extractDocument(doc, env) {
   const body = {
     model: MODEL,
-    max_tokens: 16000,
+    max_tokens: 8000,
+    // Extraction is transcription, not deep reasoning — skip thinking, low effort.
+    thinking: { type: 'disabled' },
     output_config: { format: { type: 'json_schema', schema: SCHEMA } },
-    messages: [
-      {
-        role: 'user',
-        content: [...documentBlocks, { type: 'text', text: INSTRUCTIONS }],
-      },
-    ],
+    messages: [{
+      role: 'user',
+      content: [
+        { type: 'document', title: doc.name, source: { type: 'base64', media_type: 'application/pdf', data: doc.data } },
+        { type: 'text', text: INSTRUCTIONS },
+      ],
+    }],
   };
 
-  let apiResp;
+  let resp;
   try {
-    apiResp = await fetch('https://api.anthropic.com/v1/messages', {
+    resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -161,30 +184,19 @@ export async function onRequestPost(context) {
       body: JSON.stringify(body),
     });
   } catch {
-    return jsonResponse({ error: 'Could not reach the extraction service. Try again.' }, 502);
+    return { ok: false, error: 'could not reach the extraction service' };
   }
-
-  if (!apiResp.ok) {
-    const detail = await apiResp.text().catch(() => '');
-    return jsonResponse({ error: 'Extraction failed — try again.', status: apiResp.status, detail: detail.slice(0, 500) }, 502);
+  if (!resp.ok) {
+    const detail = await resp.text().catch(() => '');
+    return { ok: false, error: `API ${resp.status} ${detail.slice(0, 200)}` };
   }
-
-  const data = await apiResp.json();
-  if (data.stop_reason === 'refusal') {
-    return jsonResponse({ error: 'The reader declined to process these documents.' }, 502);
-  }
-
+  const data = await resp.json();
+  if (data.stop_reason === 'refusal') return { ok: false, error: 'reader declined this document' };
   const textBlock = (data.content || []).find((b) => b.type === 'text');
-  if (!textBlock) {
-    return jsonResponse({ error: 'No structured data returned. Try again.' }, 502);
-  }
-
-  let parsed;
+  if (!textBlock) return { ok: false, error: 'no data returned' };
   try {
-    parsed = JSON.parse(textBlock.text);
+    return { ok: true, data: JSON.parse(textBlock.text) };
   } catch {
-    return jsonResponse({ error: 'Could not parse the extracted data. Try again.' }, 502);
+    return { ok: false, error: 'could not parse extracted data' };
   }
-
-  return jsonResponse(parsed, 200);
 }
