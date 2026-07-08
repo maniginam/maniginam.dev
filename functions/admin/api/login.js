@@ -21,8 +21,9 @@ export async function onRequestPost(context) {
     });
   }
   const session = await makeSession(env.SESSION_SECRET);
+  const secure = new URL(request.url).protocol === 'https:';
   return new Response(null, {
     status: 204,
-    headers: { 'Set-Cookie': sessionCookieHeader(session), 'X-Robots-Tag': 'noindex, nofollow' },
+    headers: { 'Set-Cookie': sessionCookieHeader(session, { secure }), 'X-Robots-Tag': 'noindex, nofollow' },
   });
 }

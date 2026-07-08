@@ -62,6 +62,11 @@ export function parseCookies(header) {
   return out;
 }
 
-export function sessionCookieHeader(value) {
-  return `admin_session=${value}; HttpOnly; Secure; SameSite=Strict; Path=/admin; Max-Age=604800`;
+export function sessionCookieHeader(value, { secure = true } = {}) {
+  // `Secure` is required over https (production) but blocks the cookie from
+  // being stored over http://localhost in some browsers — omit it on http.
+  const parts = [`admin_session=${value}`, 'HttpOnly'];
+  if (secure) parts.push('Secure');
+  parts.push('SameSite=Strict', 'Path=/admin', 'Max-Age=604800');
+  return parts.join('; ');
 }
