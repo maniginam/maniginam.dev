@@ -8,6 +8,7 @@
     "dev": "wrangler pages dev . --kv STATS --kv SIGNUPS"
   },
   "devDependencies": {
+    "pdfkit": "^0.19.1",
     "vitest": "^2.1.0",
     "wrangler": "^3.80.0"
   }

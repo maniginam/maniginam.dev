@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>WBR Budget Autofill</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./vendor/exceljs.min.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="crest">WBR</div>
+    <div class="masthead-text">
+      <h1>Budget Autofill</h1>
+      <p>West Baton Rouge Parish Council &middot; Finance</p>
+    </div>
+    <a class="back" href="/admin/demos.html">&larr; Demos</a>
+  </header>
+
+  <main>
+    <!-- Step 1: intake -->
+    <section id="intake" class="panel">
+      <div class="panel-head">
+        <span class="step">1</span>
+        <h2>Drop in your reports</h2>
+      </div>
+      <p class="lede">Pull the same reports you export from CivicPlus &mdash; revenue &amp; expenditure,
+        fund balance, payroll. Drag them in and the assistant reads every line for you.</p>
+
+      <div id="dropzone" class="dropzone">
+        <svg viewBox="0 0 24 24" width="40" height="40" aria-hidden="true"><path fill="currentColor" d="M19 13v6H5v-6H3v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6zM11 4v9.17l-2.59-2.58L7 12l5 5 5-5-1.41-1.41L13 13.17V4z"/></svg>
+        <p><strong>Drag &amp; drop PDFs here</strong> or <label class="link" for="file-input">browse</label></p>
+        <input id="file-input" type="file" accept="application/pdf" multiple hidden>
+        <button id="sample-btn" class="ghost" type="button">Use sample parish reports</button>
+      </div>
+
+      <ul id="filelist" class="filelist"></ul>
+      <div class="actions">
+        <button id="extract-btn" type="button" disabled>Read documents with AI</button>
+      </div>
+      <div id="intake-msg" class="msg"></div>
+    </section>
+
+    <!-- Step 2: verify + edit -->
+    <section id="workspace" class="panel" hidden>
+      <div class="panel-head">
+        <span class="step">2</span>
+        <h2>Verify &amp; adjust</h2>
+      </div>
+      <p class="lede">Every figure the assistant read sits beside the value as printed in the report.
+        Correct anything before you submit &mdash; nothing is pushed until you say so.</p>
+
+      <div id="verify-banner" class="banner"></div>
+
+      <div class="split">
+        <div class="source-pane">
+          <div class="pane-head">
+            <h3>Source reports</h3>
+            <div id="doc-tabs" class="doc-tabs"></div>
+          </div>
+          <div id="doc-viewer" class="doc-viewer"></div>
+        </div>
+        <div class="grid-pane">
+          <div class="pane-head"><h3>Budget worksheet</h3></div>
+          <div id="grid-scroll" class="grid-scroll"></div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button id="submit-btn" type="button">Submit worksheet</button>
+        <button id="csv-btn" class="ghost" type="button">Export CSV</button>
+        <button id="xlsx-btn" class="ghost" type="button">Generate Excel workbook</button>
+        <button id="reset-btn" class="link-btn" type="button">Start over</button>
+      </div>
+      <div id="workspace-msg" class="msg"></div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay" hidden>
+    <div class="spinner"></div>
+    <p id="overlay-text">Reading documents&hellip;</p>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
