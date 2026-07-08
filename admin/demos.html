@@ -24,6 +24,36 @@
     import { topbar, logout } from '/admin/assets/admin.js';
     document.getElementById('bar').innerHTML = topbar('demos');
     document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
+
+    // Enhance each demo card with a "Copy 7-day share link" button.
+    // The link lets the owner open the demo with no admin password; it expires in 7 days.
+    for (const card of document.querySelectorAll('.demo-card')) {
+      const open = card.querySelector('a[href^="/admin/demo/"]');
+      const m = open && open.getAttribute('href').match(/\/admin\/demo\/([^/]+)\//);
+      if (!m) continue;
+      const slug = m[1];
+      const btn = document.createElement('button');
+      btn.textContent = 'Copy 7-day link';
+      btn.style.marginLeft = '.5rem';
+      btn.style.background = 'transparent';
+      btn.style.border = '1px solid var(--accent)';
+      btn.style.color = 'var(--accent)';
+      btn.addEventListener('click', async () => {
+        btn.textContent = '…';
+        try {
+          const r = await fetch(`/admin/api/share?demo=${encodeURIComponent(slug)}&days=7`);
+          const data = await r.json();
+          if (!r.ok) throw new Error(data.error || 'failed');
+          await navigator.clipboard.writeText(data.url);
+          const exp = new Date(data.expires).toLocaleDateString();
+          btn.textContent = `Copied! (expires ${exp})`;
+        } catch (e) {
+          btn.textContent = 'Error — try again';
+        }
+        setTimeout(() => { btn.textContent = 'Copy 7-day link'; }, 4000);
+      });
+      open.parentElement.appendChild(btn);
+    }
   </script>
 </body>
 </html>

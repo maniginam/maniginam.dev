@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /demo/
 
 Sitemap: https://maniginam.dev/sitemap.xml
 
