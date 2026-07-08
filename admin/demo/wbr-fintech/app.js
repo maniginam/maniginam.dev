@@ -169,26 +169,30 @@ function rowTr(si, ri, row, ncols) {
 
 function cellTd(si, ri, ci, cell) {
   const td = el('td', 'num');
-  if (!cell) { td.appendChild(el('div', 'cell-money')); return td; }
   const wrap = el('div', 'cell-money');
+  if (!cell) { td.appendChild(wrap); return td; }
   const input = el('input');
   input.type = 'text';
   input.inputMode = 'numeric';
-  input.value = cell.cur == null ? '' : String(cell.cur);
-  const src = el('div', 'src', cell.printed ? cell.printed : '·');
-  wrap.appendChild(input);
-  wrap.appendChild(src);
+  input.value = fmtCell(cell.cur);           // formatted with commas for reading
   applyFlag(wrap, cell);
+  input.addEventListener('focus', () => {
+    input.value = cell.cur == null ? '' : String(cell.cur); // raw for editing
+    focusHighlight(si, ri, ci);
+  });
   input.addEventListener('input', () => {
     cell.cur = parseNum(input.value);
     applyFlag(wrap, cell);
     refreshBanner();
   });
-  input.addEventListener('focus', () => focusHighlight(si, ri, ci));
+  input.addEventListener('blur', () => { input.value = fmtCell(cell.cur); });
   if (state.submitted) input.disabled = true;
+  wrap.appendChild(input);
   td.appendChild(wrap);
   return td;
 }
+
+function fmtCell(v) { return v == null ? '' : Number(v).toLocaleString('en-US'); }
 
 function applyFlag(wrap, cell) {
   wrap.classList.remove('missing', 'flagged');
