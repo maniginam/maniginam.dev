@@ -93,6 +93,20 @@ img{max-width:100%;display:block}
 .card .btn{align-self:flex-start;margin-top:.4rem}
 .unit{font-size:.75rem;color:var(--muted);font-family:'Special Elite',monospace}
 
+/* Gallery */
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem}
+.gallery img{width:100%;height:190px;object-fit:cover;border-radius:12px;box-shadow:var(--shadow)}
+
+/* Catering */
+.catering-intro{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;margin-bottom:2.5rem}
+.catering-intro img{border-radius:16px;box-shadow:var(--shadow);width:100%;height:100%;object-fit:cover;max-height:360px}
+.offer-list{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;margin:1rem 0}
+.offer-list li{position:relative;padding-left:1.4rem;color:#333}
+.offer-list li::before{content:"◆";color:var(--magenta);position:absolute;left:0}
+.inquire-card{background:#fff;border-radius:16px;box-shadow:var(--shadow);padding:2rem;max-width:720px;margin:0 auto;border-top:6px solid var(--pink)}
+.inquire-ok{text-align:center;padding:2rem 1rem}
+.inquire-ok h3{font-size:1.8rem;margin-bottom:.5rem}
+
 /* Reviews */
 .reviews{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem}
 .review{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:1.5rem;border-top:5px solid var(--pink)}

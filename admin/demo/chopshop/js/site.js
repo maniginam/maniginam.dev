@@ -28,6 +28,7 @@ export function renderChrome(active){
         <div class="nav__links">
           <a href="menu.html">Menu</a>
           <a href="specials.html">Specials</a>
+          <a href="catering.html">Catering</a>
           <a href="index.html#contact">Contact</a>
           <a class="cart-link" href="cart.html">Cart
             <span class="cart-badge" hidden>0</span>

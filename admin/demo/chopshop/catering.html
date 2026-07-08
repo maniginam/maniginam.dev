@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catering &amp; Party Trays — The Chop Shop</title>
+  <meta name="description" content="The Chop Shop catering: charcuterie, boudin ball trays, kebabs, gumbo pots, and party trays for weddings, parties, and office events in Port Allen.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="img/real/logo2.png">
+</head>
+<body>
+  <nav id="site-nav"></nav>
+
+  <header class="page-head">
+    <div class="container">
+      <h2>Catering &amp; Party Trays</h2>
+      <p>Whatever your occasion — however big or small — we've got the perfect spread</p>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="catering-intro">
+        <div>
+          <h2 style="margin-bottom:.6rem">Let us cater your next event</h2>
+          <p>Weddings, birthdays, office functions, tailgates, and holidays — we bring the flavor. Everything is made fresh in-house from our specialty meats.</p>
+          <ul class="offer-list">
+            <li>Charcuterie &amp; cheese boards</li>
+            <li>Boudin ball &amp; sausage trays</li>
+            <li>Marinated kebab platters</li>
+            <li>Gumbo &amp; jambalaya pots</li>
+            <li>Shrimp &amp; grits</li>
+            <li>Pork roulade</li>
+            <li>Fresh fruit &amp; veggie trays</li>
+            <li>Party trays, any size</li>
+          </ul>
+          <a class="btn btn--gold" href="#inquire">Inquire Now</a>
+        </div>
+        <img src="img/real/photo-3.jpg" alt="Charcuterie board with cured meats, cheeses, and fruit">
+      </div>
+
+      <div class="section__head"><h2>From our catering table</h2></div>
+      <div class="gallery">
+        <img src="img/real/photo-1.jpg" alt="Boudin balls and sausage party tray">
+        <img src="img/real/photo-9.jpg" alt="Marinated beef and vegetable kebabs">
+        <img src="img/real/photo-11.jpg" alt="Seafood gumbo over rice">
+        <img src="img/real/photo-7.jpg" alt="Fresh fruit tray with dip">
+        <img src="img/real/photo-2.jpg" alt="Catering spread">
+        <img src="img/real/photo-5.jpg" alt="Catering platter">
+      </div>
+    </div>
+  </main>
+
+  <section class="section section--smoke" id="inquire">
+    <div class="container">
+      <div class="section__head">
+        <h2>Catering Inquiry</h2>
+        <p>Tell us about your event — we'll get right back to you</p>
+      </div>
+      <div class="inquire-card" id="inquire-card">
+        <form id="inquire-form" novalidate>
+          <div class="grid2">
+            <div>
+              <label for="c-name">Name</label>
+              <input id="c-name" name="name" autocomplete="name">
+              <div class="field-error" data-for="name"></div>
+            </div>
+            <div>
+              <label for="c-email">Email</label>
+              <input id="c-email" name="email" inputmode="email" autocomplete="email">
+              <div class="field-error" data-for="email"></div>
+            </div>
+          </div>
+          <div class="grid2">
+            <div>
+              <label for="c-phone">Phone</label>
+              <input id="c-phone" name="phone" inputmode="tel" autocomplete="tel">
+              <div class="field-error" data-for="phone"></div>
+            </div>
+            <div>
+              <label for="c-date">Event date</label>
+              <input id="c-date" name="eventDate" type="date">
+              <div class="field-error" data-for="eventDate"></div>
+            </div>
+          </div>
+          <div class="grid2">
+            <div>
+              <label for="c-guests">Guests</label>
+              <input id="c-guests" name="guests" type="number" min="1" inputmode="numeric">
+              <div class="field-error" data-for="guests"></div>
+            </div>
+            <div>
+              <label for="c-type">Event type</label>
+              <select id="c-type" name="eventType">
+                <option>Wedding</option>
+                <option>Birthday / party</option>
+                <option>Office / corporate</option>
+                <option>Holiday</option>
+                <option>Tailgate</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <label for="c-details">Details</label>
+          <textarea id="c-details" name="details" rows="4" placeholder="Menu ideas, dietary needs, budget, pickup or delivery…"></textarea>
+          <div class="note">This is a demo — no message is sent yet. Wiring to email/backend is a one-step add.</div>
+          <button class="btn btn--gold" type="submit" style="margin-top:1rem">Send Inquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+  <script type="module" src="js/catering.js"></script>
+</body>
+</html>
