@@ -167,6 +167,9 @@ button.link-btn:hover { color: var(--warn); background: none; }
 .hl { position: absolute; border-radius: 3px; }
 .hl-row { background: rgba(185,135,59,.10); outline: 1px dashed rgba(185,135,59,.55); }
 .hl-value { background: rgba(217,178,120,.55); outline: 2px solid var(--brass); box-shadow: 0 0 0 3px rgba(185,135,59,.30); }
+/* Clickable number in the PDF -> jumps to the matching worksheet input */
+.pdf-hotspot { position: absolute; border-radius: 3px; pointer-events: auto; cursor: pointer; }
+.pdf-hotspot:hover { background: rgba(70,29,124,.18); outline: 1px solid rgba(70,29,124,.5); }
 
 /* Grid */
 .grid-scroll { overflow: auto; max-height: 80vh; border: 1px solid var(--line); border-radius: 8px; }

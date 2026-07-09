@@ -245,6 +245,7 @@ function cellTd(si, ri, ci, cell) {
   const input = el('input');
   input.type = 'text';
   input.inputMode = 'numeric';
+  input.dataset.si = si; input.dataset.ri = ri; input.dataset.ci = ci; // for PDF→grid clicks
   input.value = fmtCell(cell.cur);           // formatted with commas for reading
   const badge = el('span', 'cell-badge');    // hover-hint marker for concerns
   wrap.appendChild(input);
@@ -374,14 +375,69 @@ async function renderPdf(doc) {
     pageDiv.appendChild(hl);
     node.appendChild(pageDiv);
     const tc = await page.getTextContent();
+    const pageItems = [];
     for (const it of tc.items) {
       if (!it.str.trim()) continue;
       const tx = pdfjs.Util.transform(viewport.transform, it.transform);
       const h = Math.hypot(tx[2], tx[3]) || 10;
-      index.push({ page: p, pageDiv, hl, str: it.str, x: tx[4], top: tx[5] - h, w: it.width * scale, h });
+      const item = { page: p, pageDiv, hl, str: it.str, x: tx[4], top: tx[5] - h, w: it.width * scale, h };
+      index.push(item);
+      pageItems.push(item);
     }
+    addClickHotspots(pageItems, hl);
   }
   return { node, index };
+}
+
+const looksNumeric = (s) => /\d/.test(s);
+
+// Make each number in the PDF clickable: clicking it focuses the matching grid
+// input (which in turn highlights it). Reconstructs each row's label from the
+// text left of its first number, so the click knows which row it belongs to.
+function addClickHotspots(items, hl) {
+  const lines = [];
+  items.slice().sort((a, b) => a.top - b.top || a.x - b.x).forEach((it) => {
+    let line = lines.find((l) => Math.abs(l.top - it.top) < it.h * 0.6);
+    if (!line) { line = { top: it.top, items: [] }; lines.push(line); }
+    line.items.push(it);
+  });
+  for (const line of lines) {
+    const sorted = line.items.slice().sort((a, b) => a.x - b.x);
+    const firstNum = sorted.find((i) => looksNumeric(i.str));
+    if (!firstNum) continue;
+    const label = sorted.filter((i) => i.x < firstNum.x - 1 && !looksNumeric(i.str))
+      .map((i) => i.str).join(' ').trim();
+    if (!label) continue;
+    sorted.filter((i) => looksNumeric(i.str)).forEach((num) => {
+      const spot = el('div', 'pdf-hotspot');
+      spot.style.left = (num.x - 3) + 'px';
+      spot.style.top = (num.top - 2) + 'px';
+      spot.style.width = (num.w + 6) + 'px';
+      spot.style.height = (num.h + 4) + 'px';
+      spot.title = 'Click to jump to this figure in the worksheet';
+      spot.addEventListener('click', (e) => { e.stopPropagation(); focusInputFromPdf(label, num.str); });
+      hl.appendChild(spot);
+    });
+  }
+}
+
+function focusInputFromPdf(rowLabel, printed) {
+  const ext = activeDoc().ext;
+  const key = norm(rowLabel);
+  let target = null;
+  (ext.sections || []).forEach((sec, si) => (sec.rows || []).forEach((row, ri) => {
+    if (target) return;
+    const rk = norm(row.label);
+    if (!(rk === key || (rk && key.startsWith(rk)) || (rk && rk.startsWith(key)))) return;
+    (row.cells || []).forEach((c, ci) => {
+      if (target || !c) return;
+      if (norm(c.printed) === norm(printed)) target = { si, ri, ci };
+    });
+  }));
+  if (!target) return;
+  const inp = document.querySelector(
+    `#grid-scroll input[data-si="${target.si}"][data-ri="${target.ri}"][data-ci="${target.ci}"]`);
+  if (inp) { inp.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' }); inp.focus(); }
 }
 
 const norm = (s) => String(s == null ? '' : s).replace(/[\s,$()]/g, '').toLowerCase();
