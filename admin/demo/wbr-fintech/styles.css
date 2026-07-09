@@ -50,6 +50,8 @@ body {
 .masthead .back:hover { color: #fff; }
 
 main { max-width: 1440px; margin: 1.5rem auto; padding: 0 1.25rem; }
+/* The verify workspace uses the full page width — two documents side by side. */
+#workspace { max-width: none; margin-left: 1rem; margin-right: 1rem; }
 
 .panel {
   background: var(--white);
@@ -125,14 +127,25 @@ button.link-btn:hover { color: var(--warn); background: none; }
 .banner .tally b { color: var(--navy); }
 .banner .chip { padding: .15rem .6rem; border-radius: 20px; font-size: .82rem; font-weight: 600; }
 .chip.clean { background: #dff0e6; color: var(--ok); }
+.chip.attn { background: #fdf4d0; color: #8a6d1a; }
 .chip.flag { background: var(--flag-bg); color: var(--warn); }
 .chip.miss { background: var(--miss-bg); color: var(--miss-line); }
 
-/* Split layout */
-.split { display: grid; grid-template-columns: minmax(500px, 1.15fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
+/* Split layout — even halves using the full page width */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; align-items: start; }
 @media (max-width: 1000px) { .split { grid-template-columns: 1fr; } }
 .source-pane { position: sticky; top: 1rem; min-width: 0; }
-.grid-pane { min-width: 0; } /* allow the grid to shrink + scroll instead of bleeding over */
+.grid-pane { min-width: 0; position: relative; } /* allow the grid to shrink + scroll instead of bleeding over */
+/* "more columns →" affordance when the matrix scrolls horizontally */
+.grid-pane.scroll-right::after {
+  content: "more funds →"; position: absolute; top: 50%; right: 6px; transform: translateY(-50%);
+  background: rgba(19,41,61,.9); color: #fff; font-size: .72rem; font-weight: 600;
+  padding: .25rem .5rem; border-radius: 20px; pointer-events: none; z-index: 5; white-space: nowrap;
+}
+.grid-pane.scroll-right .grid-scroll {
+  -webkit-mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 90%, transparent 100%);
+}
 .pane-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: .6rem; }
 .pane-head h3 { margin: 0; font-size: 1.05rem; color: var(--navy); }
 
@@ -179,15 +192,25 @@ table.grid .row-label .acct {
   font-size: .72rem; color: var(--muted); background: #f2efe7; padding: 0 .3rem; border-radius: 3px;
 }
 
-.cell-money { min-width: 118px; }
+.cell-money { position: relative; min-width: 118px; }
 .cell-money input {
   width: 120px; text-align: right; font-family: "SF Mono", ui-monospace, Menlo, monospace;
   font-size: .88rem; padding: .32rem .45rem; border: 1px solid var(--line); border-radius: 4px;
   background: #fff; color: var(--ink);
 }
 .cell-money input:focus { outline: 2px solid var(--brass-lite); border-color: var(--brass); }
-.cell-money.flagged input { border-color: var(--warn); background: var(--flag-bg); }
+/* attention (yellow): dash-zero or a review note. missing (red): nothing found. */
+.cell-money.attention input { border-color: #d6a72a; background: #fdf4d0; }
 .cell-money.missing input { border-color: var(--miss-line); background: var(--miss-bg); }
+.cell-money.flagged input { border-color: var(--warn); background: var(--flag-bg); }
+/* concern marker with a hover hint (title) — only shown when there's a note */
+.cell-badge { display: none; }
+.cell-money.has-note .cell-badge {
+  display: block; position: absolute; top: -5px; right: -3px; width: 13px; height: 13px;
+  background: #d6a72a; color: #fff; border-radius: 50%; font-size: 10px; line-height: 13px;
+  text-align: center; cursor: help;
+}
+.cell-money.has-note .cell-badge::before { content: "!"; font-weight: 700; }
 
 /* Overlay */
 .overlay {

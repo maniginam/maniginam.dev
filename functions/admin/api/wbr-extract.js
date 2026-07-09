@@ -13,8 +13,12 @@ const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
 const CELL = {
   type: 'object',
   additionalProperties: false,
-  properties: { value: { type: ['number', 'null'] }, printed: { type: 'string' } },
-  required: ['value', 'printed'],
+  properties: {
+    value: { type: ['number', 'null'] },
+    printed: { type: 'string' },
+    note: { type: 'string' }, // "" unless the figure is uncertain/anomalous
+  },
+  required: ['value', 'printed', 'note'],
 };
 
 const SCHEMA = {
@@ -67,10 +71,12 @@ PRESERVE THE DOCUMENT'S OWN STRUCTURE. Do not force it into a fixed shape.
     - isTotal: true for subtotal / total lines (e.g. "Total assets", "TOTAL REVENUE").
     - cells: one entry per column in "columns", in the same left-to-right order. For each cell:
         - value: the number with no commas, no $, no parentheses; represent negatives / (parentheses) as a negative number.
-        - printed: the cell exactly as printed, including commas, $, and parentheses.
-        - For a blank cell use value null and printed "".
+        - printed: the cell exactly as printed, including commas, $, parentheses, or a dash.
+        - note: "" normally. Put a SHORT concern here ONLY if this specific figure is uncertain or anomalous — e.g. digits are blurry/ambiguous, the number looks like an OCR misread, or it is inconsistent with its row/column total. Otherwise "".
+        - A DASH ("-", "–", or "—") in accounting means zero / none, NOT missing: set value 0 and printed to the dash character.
+        - A cell that is genuinely BLANK / absent (no figure and no dash): value null, printed "".
 
-Never invent numbers — only report what is on the page. Put anything ambiguous or unreadable in warnings.`;
+Never invent numbers — only report what is on the page. Put document-wide concerns in warnings; put per-figure concerns in that cell's note.`;
 
 function jsonResponse(obj, status = 200) {
   return new Response(JSON.stringify(obj), {

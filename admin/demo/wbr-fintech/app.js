@@ -92,10 +92,66 @@ async function runExtraction() {
 }
 
 // Give each cell a current (editable) value alongside the AI value + printed.
+// Normalize dash cells (accounting "none/zero") to 0 and mark them. Then run a
+// client-side anomaly pass so the grid can flag suspect figures in yellow.
 function seedValues(ext) {
   (ext.sections || []).forEach((sec) =>
     (sec.rows || []).forEach((row) =>
-      (row.cells || []).forEach((c) => { c.cur = c.value; })));
+      (row.cells || []).forEach((c) => {
+        if (!c) return;
+        if (c.value == null && isDash(c.printed)) c.value = 0; // dash means zero
+        c.isDash = isDash(c.printed) || (c.value === 0 && !c.printed);
+        c.cur = c.value;
+        c.note = c.note || '';
+      })));
+  detectAnomalies(ext);
+}
+
+function isDash(s) { return /^\s*[-–—]\s*$/.test(String(s || '')); }
+
+// Flag figures that don't reconcile. Cheap, high-signal: for each column that
+// has a "Total"-type total row in a section, check the section's non-total rows
+// sum to the total; and if there's a Total column, check each row's fund cells
+// sum to its Total cell. Mismatches get a yellow note.
+function detectAnomalies(ext) {
+  const cols = ext.columns || [];
+  const totalCol = cols.findIndex((c) => /^total$/i.test(c.trim()));
+  (ext.sections || []).forEach((sec) => {
+    const rows = sec.rows || [];
+    // Row-wise: fund columns should sum to the Total column.
+    if (totalCol >= 0) {
+      rows.forEach((row) => {
+        const t = row.cells[totalCol];
+        if (!t || t.value == null) return;
+        let sum = 0, any = false;
+        cols.forEach((_, ci) => {
+          if (ci === totalCol) return;
+          const v = row.cells[ci] && row.cells[ci].value;
+          if (typeof v === 'number') { sum += v; any = true; }
+        });
+        if (any && Math.abs(sum - t.value) > 1 && !t.note) {
+          t.note = `Row funds sum to ${sum.toLocaleString('en-US')}, but Total reads ${t.value.toLocaleString('en-US')}.`;
+        }
+      });
+    }
+    // Column-wise: non-total rows should sum to the total row, per column.
+    const totalRow = rows.find((r) => r.isTotal);
+    if (totalRow) {
+      cols.forEach((_, ci) => {
+        const t = totalRow.cells[ci];
+        if (!t || t.value == null) return;
+        let sum = 0, any = false;
+        rows.forEach((r) => {
+          if (r === totalRow || r.isTotal) return;
+          const v = r.cells[ci] && r.cells[ci].value;
+          if (typeof v === 'number') { sum += v; any = true; }
+        });
+        if (any && Math.abs(sum - t.value) > 1 && !t.note) {
+          t.note = `Column sums to ${sum.toLocaleString('en-US')}, but this total reads ${t.value.toLocaleString('en-US')}.`;
+        }
+      });
+    }
+  });
 }
 
 // ---- workspace ------------------------------------------------------------
@@ -159,7 +215,19 @@ function renderGrid() {
   const scroll = $('#grid-scroll');
   scroll.innerHTML = '';
   scroll.appendChild(table);
+  updateScrollHint();
+  scroll.onscroll = updateScrollHint;
 }
+
+// Show a "more funds →" affordance while the matrix can scroll further right.
+function updateScrollHint() {
+  const scroll = $('#grid-scroll');
+  const pane = document.querySelector('.grid-pane');
+  if (!scroll || !pane) return;
+  const more = scroll.scrollWidth - scroll.clientWidth - scroll.scrollLeft > 8;
+  pane.classList.toggle('scroll-right', more);
+}
+window.addEventListener('resize', updateScrollHint);
 
 function rowTr(si, ri, row, ncols) {
   const tr = el('tr', row.isTotal ? 'total' : null);
@@ -178,6 +246,9 @@ function cellTd(si, ri, ci, cell) {
   input.type = 'text';
   input.inputMode = 'numeric';
   input.value = fmtCell(cell.cur);           // formatted with commas for reading
+  const badge = el('span', 'cell-badge');    // hover-hint marker for concerns
+  wrap.appendChild(input);
+  wrap.appendChild(badge);
   applyFlag(wrap, cell);
   input.addEventListener('focus', () => {
     input.value = cell.cur == null ? '' : String(cell.cur); // raw for editing
@@ -185,32 +256,52 @@ function cellTd(si, ri, ci, cell) {
   });
   input.addEventListener('input', () => {
     cell.cur = parseNum(input.value);
+    cell.note = ''; // user touched it — clear the AI/anomaly concern
     applyFlag(wrap, cell);
     refreshBanner();
   });
   input.addEventListener('blur', () => { input.value = fmtCell(cell.cur); });
   if (state.submitted) input.disabled = true;
-  wrap.appendChild(input);
   td.appendChild(wrap);
   return td;
 }
 
 function fmtCell(v) { return v == null ? '' : Number(v).toLocaleString('en-US'); }
 
+// missing (red): AI found nothing. attention (yellow): dash-zero, a concern
+// note, or an edit. Hover hint carries the reason.
 function applyFlag(wrap, cell) {
-  wrap.classList.remove('missing', 'flagged');
-  if (cell.value == null) wrap.classList.add('missing');
-  else if (cell.cur !== cell.value) wrap.classList.add('flagged');
+  wrap.classList.remove('missing', 'attention', 'flagged', 'has-note');
+  const input = wrap.querySelector('input');
+  const badge = wrap.querySelector('.cell-badge');
+  let hint = '';
+  if (cell.cur == null && !cell.isDash) {
+    wrap.classList.add('missing');
+    hint = 'No figure found in the report — enter it manually.';
+  } else if (cell.note) {
+    wrap.classList.add('attention', 'has-note');
+    hint = cell.note;
+  } else if (cell.isDash) {
+    wrap.classList.add('attention');
+    hint = 'Reported as “—” (none / zero).';
+  } else if (cell.cur !== cell.value) {
+    wrap.classList.add('flagged');
+    hint = `Edited — assistant read ${cell.value == null ? 'nothing' : Number(cell.value).toLocaleString('en-US')}.`;
+  }
+  if (input) input.title = hint;
+  if (badge) badge.title = hint;
 }
 
 function refreshBanner() {
   const ext = activeDoc().ext;
-  let rows = 0, missing = 0, edited = 0;
+  let rows = 0, missing = 0, edited = 0, review = 0, dash = 0;
   (ext.sections || []).forEach((sec) => (sec.rows || []).forEach((row) => {
     rows++;
     (row.cells || []).forEach((c) => {
       if (!c) return;
-      if (c.value == null) missing++;
+      if (c.cur == null && !c.isDash) missing++;
+      else if (c.note) review++;
+      else if (c.isDash) dash++;
       else if (c.cur !== c.value) edited++;
     });
   }));
@@ -218,10 +309,13 @@ function refreshBanner() {
   banner.innerHTML = '';
   banner.appendChild(el('span', 'tally',
     `<b>${escapeHtml(ext.title || ext.statementType || 'Statement')}</b> &middot; ${rows} rows &times; ${(ext.columns || []).length} columns`));
-  if (edited === 0 && missing === 0) banner.appendChild(el('span', 'chip clean', 'All figures match source'));
-  else {
-    if (edited) banner.appendChild(el('span', 'chip flag', `${edited} edited`));
+  if (edited === 0 && missing === 0 && review === 0 && dash === 0) {
+    banner.appendChild(el('span', 'chip clean', 'All figures match source'));
+  } else {
+    if (review) banner.appendChild(el('span', 'chip attn', `${review} to review`));
     if (missing) banner.appendChild(el('span', 'chip miss', `${missing} blank`));
+    if (dash) banner.appendChild(el('span', 'chip attn', `${dash} reported “—” (zero)`));
+    if (edited) banner.appendChild(el('span', 'chip flag', `${edited} edited`));
   }
   (ext.warnings || []).concat(state.globalWarnings || []).forEach((w) =>
     banner.appendChild(el('span', 'chip flag', escapeHtml(w))));
