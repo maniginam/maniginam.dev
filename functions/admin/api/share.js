@@ -16,7 +16,7 @@ export async function onRequestGet(context) {
     return json({ error: 'Unknown demo' }, 400);
   }
   const ttl = days * DAY;
-  const ticket = await makeShareTicket(slug, env.SESSION_SECRET, ttl);
+  const ticket = await makeShareTicket(slug, env.SHARE_SECRET, ttl);
   const link = `${url.origin}/demo/${slug}/t/${ticket}`;
   const expires = new Date(Date.now() + ttl).toISOString();
   return json({ url: link, slug, days, expires }, 200);

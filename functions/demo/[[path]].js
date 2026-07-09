@@ -36,7 +36,9 @@ function parseCookies(header) {
 
 export async function onRequest(context) {
   const { request, env, params } = context;
-  const secret = env.SESSION_SECRET;
+  // Share tickets have their OWN secret, separate from admin login (SESSION_SECRET),
+  // so rotating the admin session secret does not invalidate outstanding demo links.
+  const secret = env.SHARE_SECRET;
   const segs = (params.path || []).filter(Boolean); // e.g. ['chopshop','t','<ticket>'] or ['chopshop','css','styles.css']
   const slug = segs[0];
 
