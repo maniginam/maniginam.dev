@@ -439,11 +439,27 @@ $('#submit-btn').addEventListener('click', () => {
   $('#grid-scroll').querySelectorAll('input').forEach((i) => (i.disabled = true));
   const stamp = el('span', 'done-stamp', 'SUBMITTED');
   $('#verify-banner').prepend(stamp);
-  setMsg('#workspace-msg', 'Worksheet submitted. Export to CSV or generate the Excel workbook below.', 'ok');
+  setMsg('#workspace-msg', IS_SHARED
+    ? 'Worksheet verified. CSV / Excel export is available in the full version.'
+    : 'Worksheet submitted. Export to CSV or generate the Excel workbook below.', 'ok');
 });
 
-$('#csv-btn').addEventListener('click', exportCsv);
-$('#xlsx-btn').addEventListener('click', exportXlsx);
+// On the emailed share link (/demo/…), exports are the paid deliverable — show
+// the demo can read & verify, but don't hand over clean data files. Admin
+// preview keeps exports fully working.
+const IS_SHARED = location.pathname.startsWith('/demo/');
+if (IS_SHARED) {
+  ['#csv-btn', '#xlsx-btn'].forEach((sel) => {
+    const b = $(sel);
+    b.disabled = true;
+    b.classList.add('locked');
+    b.title = 'Export is available in the full version.';
+    b.textContent = b.textContent + ' 🔒';
+  });
+} else {
+  $('#csv-btn').addEventListener('click', exportCsv);
+  $('#xlsx-btn').addEventListener('click', exportXlsx);
+}
 
 // Flatten one document's matrix into export rows.
 function matrixRows(ext) {
