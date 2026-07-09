@@ -424,19 +424,28 @@ function addClickHotspots(items, hl) {
 function focusInputFromPdf(rowLabel, printed) {
   const ext = activeDoc().ext;
   const key = norm(rowLabel);
-  let target = null;
+  const pv = norm(printed);
+  if (!pv) return;
+  const valueMatches = []; // cells whose printed value equals the clicked number
+  const labelMatches = []; // ...and whose row label also matches (best)
   (ext.sections || []).forEach((sec, si) => (sec.rows || []).forEach((row, ri) => {
-    if (target) return;
     const rk = norm(row.label);
-    if (!(rk === key || (rk && key.startsWith(rk)) || (rk && rk.startsWith(key)))) return;
+    const lblOk = rk && key && (rk === key || rk.startsWith(key) || key.startsWith(rk) ||
+      rk.includes(key) || key.includes(rk));
     (row.cells || []).forEach((c, ci) => {
-      if (target || !c) return;
-      if (norm(c.printed) === norm(printed)) target = { si, ri, ci };
+      if (!c || norm(c.printed) !== pv) return;
+      valueMatches.push({ si, ri, ci, isTotal: row.isTotal });
+      if (lblOk) labelMatches.push({ si, ri, ci });
     });
   }));
-  if (!target) return;
+  // Prefer a label+value match; else a unique value; else a total row; else first.
+  const t = labelMatches[0]
+    || (valueMatches.length === 1 ? valueMatches[0] : null)
+    || valueMatches.find((m) => m.isTotal)
+    || valueMatches[0];
+  if (!t) return;
   const inp = document.querySelector(
-    `#grid-scroll input[data-si="${target.si}"][data-ri="${target.ri}"][data-ci="${target.ci}"]`);
+    `#grid-scroll input[data-si="${t.si}"][data-ri="${t.ri}"][data-ci="${t.ci}"]`);
   if (inp) { inp.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' }); inp.focus(); }
 }
 

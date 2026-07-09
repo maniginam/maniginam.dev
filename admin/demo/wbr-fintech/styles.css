@@ -178,8 +178,9 @@ table.grid th, table.grid td { padding: .45rem .6rem; border-bottom: 1px solid #
 table.grid thead th {
   position: sticky; top: 0; z-index: 3; background: var(--navy); color: #eef2f6;
   font-family: Georgia, serif; font-weight: 600; font-size: .82rem; text-align: right;
+  white-space: normal; max-width: 140px; vertical-align: bottom; line-height: 1.2;
 }
-table.grid thead th.sticky-col { text-align: left; }
+table.grid thead th.sticky-col { text-align: left; max-width: 320px; }
 /* Line-item column frozen on the left so labels stay visible when scrolling funds */
 table.grid .sticky-col { position: sticky; left: 0; z-index: 2; background: #fff; min-width: 240px; max-width: 320px; }
 table.grid thead th.sticky-col { z-index: 4; background: var(--navy); }
