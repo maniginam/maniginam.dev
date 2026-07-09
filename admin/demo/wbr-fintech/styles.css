@@ -128,6 +128,7 @@ button.link-btn:hover { color: var(--warn); background: none; }
 .banner .chip { padding: .15rem .6rem; border-radius: 20px; font-size: .82rem; font-weight: 600; }
 .chip.clean { background: #dff0e6; color: var(--ok); }
 .chip.attn { background: #fdf4d0; color: #8a6d1a; }
+.chip.anom { background: rgba(70, 29, 124, 0.14); color: #461D7C; }
 .chip.flag { background: var(--flag-bg); color: var(--warn); }
 .chip.miss { background: var(--miss-bg); color: var(--miss-line); }
 
@@ -199,15 +200,17 @@ table.grid .row-label .acct {
   background: #fff; color: var(--ink);
 }
 .cell-money input:focus { outline: 2px solid var(--brass-lite); border-color: var(--brass); }
-/* attention (yellow): dash-zero or a review note. missing (red): nothing found. */
+/* attention (yellow): dash-zero. anomaly (LSU purple, translucent): a review
+   note. missing (red): nothing found. flagged (orange): edited. */
 .cell-money.attention input { border-color: #d6a72a; background: #fdf4d0; }
+.cell-money.anomaly input { border-color: #461D7C; background: rgba(70, 29, 124, 0.14); }
 .cell-money.missing input { border-color: var(--miss-line); background: var(--miss-bg); }
 .cell-money.flagged input { border-color: var(--warn); background: var(--flag-bg); }
 /* concern marker with a hover hint (title) — only shown when there's a note */
 .cell-badge { display: none; }
 .cell-money.has-note .cell-badge {
   display: block; position: absolute; top: -5px; right: -3px; width: 13px; height: 13px;
-  background: #d6a72a; color: #fff; border-radius: 50%; font-size: 10px; line-height: 13px;
+  background: #461D7C; color: #fff; border-radius: 50%; font-size: 10px; line-height: 13px;
   text-align: center; cursor: help;
 }
 .cell-money.has-note .cell-badge::before { content: "!"; font-weight: 700; }

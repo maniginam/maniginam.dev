@@ -268,10 +268,10 @@ function cellTd(si, ri, ci, cell) {
 
 function fmtCell(v) { return v == null ? '' : Number(v).toLocaleString('en-US'); }
 
-// missing (red): AI found nothing. attention (yellow): dash-zero, a concern
-// note, or an edit. Hover hint carries the reason.
+// red (missing): AI found nothing. purple (anomaly): a concern note. yellow
+// (attention): dash-zero. orange (flagged): edited. Hover hint carries the why.
 function applyFlag(wrap, cell) {
-  wrap.classList.remove('missing', 'attention', 'flagged', 'has-note');
+  wrap.classList.remove('missing', 'anomaly', 'attention', 'flagged', 'has-note');
   const input = wrap.querySelector('input');
   const badge = wrap.querySelector('.cell-badge');
   let hint = '';
@@ -279,7 +279,7 @@ function applyFlag(wrap, cell) {
     wrap.classList.add('missing');
     hint = 'No figure found in the report — enter it manually.';
   } else if (cell.note) {
-    wrap.classList.add('attention', 'has-note');
+    wrap.classList.add('anomaly', 'has-note');
     hint = cell.note;
   } else if (cell.isDash) {
     wrap.classList.add('attention');
@@ -312,7 +312,7 @@ function refreshBanner() {
   if (edited === 0 && missing === 0 && review === 0 && dash === 0) {
     banner.appendChild(el('span', 'chip clean', 'All figures match source'));
   } else {
-    if (review) banner.appendChild(el('span', 'chip attn', `${review} to review`));
+    if (review) banner.appendChild(el('span', 'chip anom', `${review} to review`));
     if (missing) banner.appendChild(el('span', 'chip miss', `${missing} blank`));
     if (dash) banner.appendChild(el('span', 'chip attn', `${dash} reported “—” (zero)`));
     if (edited) banner.appendChild(el('span', 'chip flag', `${edited} edited`));
