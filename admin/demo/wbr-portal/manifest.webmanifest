@@ -1,0 +1,13 @@
+{
+  "name": "West Baton Rouge Parish — Digital Services",
+  "short_name": "WBR Parish",
+  "description": "Report issues, pay bills, watch meetings, and connect with West Baton Rouge Parish.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f4ec",
+  "theme_color": "#0b3d5c",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

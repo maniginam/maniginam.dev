@@ -9,3 +9,13 @@ id = "6d40211202ae456ca65dd64731a53bde"
 [[kv_namespaces]]
 binding = "SIGNUPS"
 id = "0a959ca839e54859ab6b465199cf8544"
+
+# West Baton Rouge Parish portal database.
+# Create once:  npx wrangler d1 create wbr-portal   (paste the returned id below)
+# Migrate:      npx wrangler d1 migrations apply wbr-portal        (remote/prod)
+#               npx wrangler d1 migrations apply wbr-portal --local (local dev)
+[[d1_databases]]
+binding = "WBR_DB"
+database_name = "wbr-portal"
+database_id = "4fd38ee4-1dcc-4aef-a10e-b0d9fa95b8a2"
+migrations_dir = "migrations"

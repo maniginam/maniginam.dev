@@ -8,6 +8,7 @@
 // disallows /demo/, so the only way in is a valid ticket link.
 import { verifyShareTicket } from './_share.js';
 import { handleExtract } from '../admin/api/wbr-extract.js';
+import { handleApi as handleWbrPortalApi } from './wbr-portal/_api.js';
 
 function forbidden(msg) {
   return new Response(
@@ -72,6 +73,11 @@ export async function onRequest(context) {
   if (slug === 'wbr-fintech' && segs[1] === 'api' && segs[2] === 'extract') {
     if (request.method !== 'POST') return new Response('Method Not Allowed', { status: 405 });
     return handleExtract(request, env);
+  }
+
+  // Ticket-gated API for the WBR Parish portal (D1-backed 311, staff auth, alerts).
+  if (slug === 'wbr-portal' && segs[1] === 'api') {
+    return handleWbrPortalApi(request, env, segs.slice(2));
   }
 
   // Proxy the requested asset from the gated /admin/demo/<slug>/ static files.

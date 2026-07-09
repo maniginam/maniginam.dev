@@ -10,6 +10,9 @@ wbr-drafts/
 # Local tooling, not for production
 tools/
 
+# DB migrations — SQL/seed (incl. password hashes) must not be served publicly
+migrations/
+
 # Dev mockups / scratch pages
 *-mockup.html
 logo-concepts.html
