@@ -131,6 +131,9 @@ form label{display:block;font-family:'Anton',sans-serif;text-transform:uppercase
 form input,form select,form textarea{width:100%;padding:.65rem;border:2px solid #ddd;border-radius:8px;font-size:1rem;font-family:inherit}
 form input:focus,form textarea:focus,form select:focus{outline:none;border-color:var(--navy)}
 .field-error{color:var(--magenta);font-size:.85rem;margin-top:.25rem;min-height:1em;font-family:'Special Elite',monospace}
+.radio-row{display:flex;gap:1.5rem;margin:.4rem 0}
+.radio-opt{display:inline-flex;align-items:center;gap:.45rem;font-family:system-ui;text-transform:none;letter-spacing:normal;font-size:1rem;color:var(--ink);margin:0;cursor:pointer}
+.radio-opt input{width:auto}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .checkout-wrap{display:grid;grid-template-columns:1.3fr .7fr;gap:2rem;align-items:start}
 .note{background:#fff0fd;border:2px solid var(--pink);border-radius:10px;padding:.85rem 1.1rem;font-size:.92rem;margin-top:1rem}
