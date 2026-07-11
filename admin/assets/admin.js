@@ -12,7 +12,7 @@ export async function getJSON(url) {
   return r.json();
 }
 export function topbar(active) {
-  const tabs = [['index.html','Dashboard'],['emails.html','Emails'],['demos.html','Demos']];
+  const tabs = [['index.html','Dashboard'],['emails.html','Emails'],['catering.html','Catering'],['demos.html','Demos']];
   return `<div class="topbar"><strong>maniginam.dev · admin</strong><nav>${
     tabs.map(([h,l]) => `<a href="${h}"${h.includes(active)?' style="color:var(--ink)"':''}>${l}</a>`).join('')
   }<a href="#" id="logout">Log out</a></nav></div>`;

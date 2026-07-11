@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Admin · Catering</title>
+  <link rel="stylesheet" href="/admin/assets/admin.css">
+</head>
+<body>
+  <div id="bar"></div>
+  <div class="wrap">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 id="count">Catering Inquiries</h3>
+        <button id="csv">Export CSV</button>
+      </div>
+      <table id="tbl">
+        <thead><tr><th>When</th><th>Name</th><th>Contact</th><th>Event</th><th>Guests</th><th>Details</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <script type="module">
+    import { topbar, getJSON, logout, esc } from '/admin/assets/admin.js';
+    document.getElementById('bar').innerHTML = topbar('catering');
+    document.getElementById('logout').addEventListener('click', e => { e.preventDefault(); logout(); });
+    const data = await getJSON('/admin/api/catering');
+    if (data) {
+      document.getElementById('count').textContent = `Catering Inquiries (${data.count})`;
+      document.querySelector('#tbl tbody').innerHTML =
+        data.inquiries.map(i => `<tr>
+          <td>${esc((i.ts||'').slice(0,10))}</td>
+          <td>${esc(i.name)}</td>
+          <td>${esc(i.email)}<br><span style="color:var(--muted)">${esc(i.phone)}</span></td>
+          <td>${esc(i.eventType)}<br><span style="color:var(--muted)">${esc(i.eventDate)}</span></td>
+          <td>${esc(i.guests)}</td>
+          <td>${esc(i.details)}</td>
+        </tr>`).join('')
+        || '<tr><td colspan="6" style="color:var(--muted)">No catering inquiries yet</td></tr>';
+      document.getElementById('csv').addEventListener('click', () => {
+        const rows = [['ts','name','email','phone','eventType','eventDate','guests','details'],
+          ...data.inquiries.map(i => [i.ts,i.name,i.email,i.phone,i.eventType,i.eventDate,i.guests,i.details])];
+        const csv = rows.map(r => r.map(c => `"${String(c ?? '').replace(/"/g,'""')}"`).join(',')).join('\n');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
+        a.download = 'catering-inquiries.csv'; a.click();
+      });
+    }
+  </script>
+</body>
+</html>
