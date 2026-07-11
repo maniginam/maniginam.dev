@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Header + Font Mockups — maniginam.dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  /* ===== REAL BRAND PALETTE (from WBR pages) ===== */
+  :root {
+    --charcoal: #1e1e2e;
+    --charcoal-light: #2a2a3e;
+    --charcoal-mid: #33334a;
+    --lilac: #c4a0ff;
+    --lilac-light: #dbc4ff;
+    --lilac-dim: #9a7acc;
+    --coral: #ff8a8a;
+    --coral-light: #ffb3b3;
+    --ink: #2a2b34;
+    --ink-dim: #6b6c7a;
+    --paper: #faf9fc;
+    --line: #e8e4f0;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #ececf2; font-family: 'Inter', sans-serif; padding: 2rem 1rem 5rem; -webkit-font-smoothing: antialiased; }
+  .intro { max-width: 1000px; margin: 0 auto 2rem; text-align: center; }
+  .intro h1 { font-size: 1.5rem; color: var(--charcoal); margin-bottom: 0.3rem; }
+  .intro p { color: var(--ink-dim); font-size: 0.92rem; }
+  .swatches { display: flex; gap: 0.5rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+  .sw { font-family: 'Space Mono', monospace; font-size: 0.65rem; padding: 0.35rem 0.6rem; border-radius: 5px; color: #fff; }
+
+  .mock { max-width: 1000px; margin: 0 auto 2.5rem; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 30px rgba(30,30,46,0.15); }
+  .mock-tag { background: var(--charcoal); color: var(--lilac-light); font-family: 'Space Mono', monospace; font-size: 0.78rem; padding: 0.6rem 1.5rem; }
+  .mock-tag b { color: var(--coral); }
+
+  /* shared nav + hero scaffolding */
+  .nav { height: 60px; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; }
+  .nav .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; }
+  .nav .links { display: flex; gap: 1.5rem; list-style: none; }
+  .nav .links a { font-size: 0.85rem; font-weight: 500; text-decoration: none; }
+  .hero { padding: 3.5rem 2rem 3rem; }
+  .hero .badge { display: inline-block; font-size: 0.72rem; font-weight: 600; padding: 0.35rem 1rem; border-radius: 100px; letter-spacing: 0.04em; margin-bottom: 1.1rem; }
+  .hero h2 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 0.9rem; }
+  .hero p { font-size: 1rem; max-width: 520px; line-height: 1.65; }
+  .hero .cta { display: inline-block; margin-top: 1.5rem; padding: 0.75rem 1.6rem; border-radius: 8px; font-weight: 700; font-size: 0.9rem; text-decoration: none; }
+  .blogbar { padding: 2rem; border-top: 1px dashed rgba(255,255,255,0.12); }
+  .blogbar .bl-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin-bottom: 0.4rem; }
+  .blogbar h3 { font-size: 1.6rem; letter-spacing: -0.01em; }
+
+  /* ============ A: DARK charcoal · Oswald ============ */
+  .A .nav { background: var(--charcoal); }
+  .A .logo { font-family: 'Oswald', sans-serif; color: #fff; text-transform: uppercase; }
+  .A .logo .dot { color: var(--coral); }
+  .A .links a { color: rgba(255,255,255,0.7); }
+  .A .hero { background: radial-gradient(circle at 80% 10%, rgba(196,160,255,0.18), transparent 50%), radial-gradient(circle at 10% 90%, rgba(255,138,138,0.14), transparent 50%), var(--charcoal); }
+  .A .badge { background: rgba(196,160,255,0.15); border: 1px solid rgba(196,160,255,0.3); color: var(--lilac-light); }
+  .A .hero h2 { font-family: 'Oswald', sans-serif; font-weight: 600; color: #fff; }
+  .A .hero h2 .hl { color: var(--lilac); }
+  .A .hero p { color: rgba(255,255,255,0.65); }
+  .A .cta { background: var(--coral); color: var(--charcoal); }
+  .A .blogbar { background: var(--charcoal-light); }
+  .A .blogbar .bl-label { color: var(--coral); }
+  .A .blogbar h3 { font-family: 'Oswald', sans-serif; font-weight: 600; color: var(--lilac); }
+
+  /* ============ B: DARK charcoal · Space Grotesk ============ */
+  .B .nav { background: var(--charcoal); }
+  .B .logo { font-family: 'Space Grotesk', sans-serif; color: #fff; }
+  .B .logo .dot { color: var(--lilac); }
+  .B .links a { color: rgba(255,255,255,0.7); }
+  .B .hero { background: var(--charcoal); }
+  .B .hero::after { content: ''; }
+  .B .badge { background: rgba(255,138,138,0.15); border: 1px solid rgba(255,138,138,0.3); color: var(--coral-light); }
+  .B .hero h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: #fff; }
+  .B .hero h2 .hl { background: linear-gradient(100deg, var(--lilac), var(--coral)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .B .hero p { color: rgba(255,255,255,0.65); }
+  .B .cta { background: linear-gradient(100deg, var(--lilac), var(--coral)); color: var(--charcoal); }
+  .B .blogbar { background: var(--charcoal-light); }
+  .B .blogbar .bl-label { color: var(--lilac); }
+  .B .blogbar h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: #fff; }
+
+  /* ============ C: LIGHT page · charcoal nav band · Bricolage ============ */
+  .C .nav { background: var(--charcoal); }
+  .C .logo { font-family: 'Bricolage Grotesque', sans-serif; color: #fff; }
+  .C .logo .dot { color: var(--coral); }
+  .C .links a { color: rgba(255,255,255,0.75); }
+  .C .hero { background: var(--paper); }
+  .C .badge { background: rgba(154,122,204,0.12); border: 1px solid rgba(154,122,204,0.3); color: var(--lilac-dim); }
+  .C .hero h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: var(--charcoal); }
+  .C .hero h2 .hl { background: linear-gradient(100deg, var(--lilac-dim), var(--coral)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .C .hero p { color: var(--ink-dim); }
+  .C .cta { background: var(--coral); color: #fff; }
+  .C .blogbar { background: var(--paper); border-top: 1px dashed var(--line); }
+  .C .blogbar .bl-label { color: var(--coral); }
+  .C .blogbar h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; color: var(--charcoal); }
+
+  /* ============ D: LIGHT page · gradient header strip · Space Grotesk ============ */
+  .D .nav { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .D .logo { font-family: 'Space Grotesk', sans-serif; color: var(--charcoal); }
+  .D .logo .dot { color: var(--coral); }
+  .D .links a { color: var(--ink-dim); }
+  .D .hero { background: var(--paper); position: relative; }
+  .D .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--lilac), var(--coral)); }
+  .D .badge { background: rgba(196,160,255,0.14); border: 1px solid rgba(196,160,255,0.35); color: var(--lilac-dim); }
+  .D .hero h2 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--charcoal); }
+  .D .hero h2 .hl { color: var(--coral); }
+  .D .hero p { color: var(--ink-dim); }
+  .D .cta { background: var(--charcoal); color: #fff; }
+  .D .blogbar { background: #fff; border-top: 1px solid var(--line); position: relative; }
+  .D .blogbar::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--coral), var(--lilac)); }
+  .D .blogbar .bl-label { color: var(--lilac-dim); }
+  .D .blogbar h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--charcoal); }
+</style>
+  <script defer src="https://mgstat.maniginam.workers.dev/b.js"></script>
+</head>
+<body>
+  <div class="intro">
+    <h1>Header + Font directions — real brand palette</h1>
+    <p>Charcoal · neon pastel lilac · neon pastel coral. Each shows nav + homepage hero + a blog header.</p>
+    <div class="swatches">
+      <span class="sw" style="background:#1e1e2e">charcoal #1e1e2e</span>
+      <span class="sw" style="background:#c4a0ff;color:#1e1e2e">lilac #c4a0ff</span>
+      <span class="sw" style="background:#ff8a8a;color:#1e1e2e">coral #ff8a8a</span>
+    </div>
+  </div>
+
+  <!-- A -->
+  <div class="mock A">
+    <div class="mock-tag"><b>A</b> · Dark charcoal · Oswald headers · coral CTA</div>
+    <nav class="nav"><span class="logo">ManiGinaM<span class="dot">.dev</span></span><ul class="links"><li><a>Services</a></li><li><a>Blog</a></li><li><a>Contact</a></li></ul></nav>
+    <div class="hero">
+      <span class="badge">West Baton Rouge Parish's Software Engineer</span>
+      <h2>I build systems that <span class="hl">work as hard</span> as you do.</h2>
+      <p>Custom software, autonomous AI agents, and industrial-grade integrations for Louisiana businesses.</p>
+      <a class="cta">Start a Conversation →</a>
+    </div>
+    <div class="blogbar"><div class="bl-label">Writing</div><h3>The Board Doesn't Lie</h3></div>
+  </div>
+
+  <!-- B -->
+  <div class="mock B">
+    <div class="mock-tag"><b>B</b> · Dark charcoal · Space Grotesk · lilac→coral gradient</div>
+    <nav class="nav"><span class="logo">ManiGinaM<span class="dot">.dev</span></span><ul class="links"><li><a>Services</a></li><li><a>Blog</a></li><li><a>Contact</a></li></ul></nav>
+    <div class="hero">
+      <span class="badge">West Baton Rouge Parish's Software Engineer</span>
+      <h2>I build systems that <span class="hl">work as hard</span> as you do.</h2>
+      <p>Custom software, autonomous AI agents, and industrial-grade integrations for Louisiana businesses.</p>
+      <a class="cta">Start a Conversation →</a>
+    </div>
+    <div class="blogbar"><div class="bl-label">Writing</div><h3>The Board Doesn't Lie</h3></div>
+  </div>
+
+  <!-- C -->
+  <div class="mock C">
+    <div class="mock-tag"><b>C</b> · Light page · charcoal nav · Bricolage · coral CTA</div>
+    <nav class="nav"><span class="logo">ManiGinaM<span class="dot">.dev</span></span><ul class="links"><li><a>Services</a></li><li><a>Blog</a></li><li><a>Contact</a></li></ul></nav>
+    <div class="hero">
+      <span class="badge">West Baton Rouge Parish's Software Engineer</span>
+      <h2>I build systems that <span class="hl">work as hard</span> as you do.</h2>
+      <p>Custom software, autonomous AI agents, and industrial-grade integrations for Louisiana businesses.</p>
+      <a class="cta">Start a Conversation →</a>
+    </div>
+    <div class="blogbar"><div class="bl-label">Writing</div><h3>The Board Doesn't Lie</h3></div>
+  </div>
+
+  <!-- D -->
+  <div class="mock D">
+    <div class="mock-tag"><b>D</b> · Light page · gradient header strip · Space Grotesk · charcoal CTA</div>
+    <nav class="nav"><span class="logo">ManiGinaM<span class="dot">.dev</span></span><ul class="links"><li><a>Services</a></li><li><a>Blog</a></li><li><a>Contact</a></li></ul></nav>
+    <div class="hero">
+      <span class="badge">West Baton Rouge Parish's Software Engineer</span>
+      <h2>I build systems that <span class="hl">work as hard</span> as you do.</h2>
+      <p>Custom software, autonomous AI agents, and industrial-grade integrations for Louisiana businesses.</p>
+      <a class="cta">Start a Conversation →</a>
+    </div>
+    <div class="blogbar"><div class="bl-label">Writing</div><h3>The Board Doesn't Lie</h3></div>
+  </div>
+
+</body>
+</html>

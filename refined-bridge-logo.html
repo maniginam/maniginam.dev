@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManiGinaM — Refined Bridge Logo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;900&family=Inter:wght@400;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --lilac: #c4a0ff;
+            --coral: #ff8a8a;
+            --white: #e8e8f0;
+            --bg: #1e1e2e;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+        }
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+        .logo-box {
+            background: #2a2a3e;
+            padding: 60px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            border-left: 5px solid var(--lilac);
+        }
+        h1 { font-family: 'Outfit', sans-serif; font-weight: 200; letter-spacing: 0.1em; margin-bottom: 10px; }
+        h1 span { color: var(--lilac); font-weight: 900; }
+        p { color: #9999aa; font-size: 0.95rem; line-height: 1.6; max-width: 500px; margin: 0 auto 40px; }
+        
+        /* SVG Styling */
+        .bridge-svg { width: 100%; height: auto; max-width: 500px; }
+        .tower-l { stroke: var(--lilac); stroke-width: 8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .tower-r { stroke: var(--coral); stroke-width: 8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .span-main { stroke: var(--white); stroke-width: 4; fill: none; stroke-linecap: round; opacity: 0.8; }
+        .suspension-l { stroke: var(--lilac); stroke-width: 2; opacity: 0.7; fill: none; stroke-linecap: round; }
+        .suspension-r { stroke: var(--coral); stroke-width: 2; opacity: 0.7; fill: none; stroke-linecap: round; }
+        .node-l { fill: var(--lilac); }
+        .node-r { fill: var(--coral); }
+        .g-apex { font-family: 'Outfit', sans-serif; font-weight: 900; fill: var(--white); }
+        .apex-ring { fill: #2a2a3e; stroke: var(--white); stroke-width: 2; }
+    </style>
+  <script defer src="https://mgstat.maniginam.workers.dev/b.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Bubbly <span>Bridge</span> Logo</h1>
+        <p>Reverted to lilac & coral. Removed tower internal lines for a "bubblier" feel. Perfectly aligned the span to the M-towers.</p>
+
+        <div class="logo-box">
+            <svg viewBox="0 0 500 220" class="bridge-svg" xmlns="http://www.w3.org/2000/svg">
+                <!-- LEFT TOWER (The "M") - Bubblier with thick round strokes -->
+                <path class="tower-l" d="M60,160 L60,40 L90,80 L120,40 L120,160" />
+
+                <!-- RIGHT TOWER (The "M") - Bubblier with thick round strokes -->
+                <path class="tower-r" d="M380,160 L380,40 L410,80 L440,40 L440,160" />
+
+                <!-- THE BRIDGE SPAN - Aligned to the inner edges of the M's -->
+                <path class="span-main" d="M120,60 Q250,20 380,60" />
+                <line class="span-main" x1="120" y1="135" x2="380" y2="135" stroke-width="3" opacity="0.4" />
+
+                <!-- SUSPENSIONS SPELLING "ani" (Left) - Moved outward -->
+                <g transform="translate(130, 0)">
+                    <!-- "a" at x=142 (approx y_top=54) -->
+                    <path class="suspension-l" d="M0,135 L12,54 L24,135" />
+                    <line class="suspension-l" x1="6" y1="110" x2="18" y2="110" />
+                    <!-- "n" at x=180 (approx y_top=46) -->
+                    <path class="suspension-l" d="M40,135 L40,46 Q52,36 64,46 L64,135" />
+                    <!-- "i" at x=215 (approx y_top=42) -->
+                    <line class="suspension-l" x1="85" y1="52" x2="85" y2="135" />
+                    <circle class="node-l" cx="85" cy="42" r="3.5" />
+                </g>
+
+                <!-- SUSPENSIONS SPELLING "ina" (Right) - Perfectly mirrored outward -->
+                <g transform="translate(285, 0)">
+                    <!-- "i" at x=285 (approx y_top=42) -->
+                    <line class="suspension-r" x1="0" y1="52" x2="0" y2="135" />
+                    <circle class="node-r" cx="0" cy="42" r="3.5" />
+                    <!-- "n" at x=320 (approx y_top=46) -->
+                    <path class="suspension-r" d="M21,135 L21,46 Q33,36 45,46 L45,135" />
+                    <!-- "a" at x=358 (approx y_top=54) -->
+                    <path class="suspension-r" d="M61,135 L73,54 L85,135" />
+                    <line class="suspension-r" x1="67" y1="110" x2="79" y2="110" />
+                </g>
+
+                <!-- APEX "G" -->
+                <g transform="translate(250, 35)">
+                    <circle r="22" class="apex-ring" />
+                    <text y="8" text-anchor="middle" font-size="24" class="g-apex">G</text>
+                </g>
+
+                <!-- TEXT BELOW -->
+                <text x="250" y="195" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="28" fill="var(--white)" letter-spacing="0.2em">MANIGINAM</text>
+                <text x="250" y="215" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="var(--lilac)" letter-spacing="0.3em" opacity="0.8">BRIDGING TECHNOLOGY + COMMUNITY</text>
+            </svg>
+        </div>
+    </div>
+
+        <div style="display:flex; gap:20px; justify-content:center;">
+             <div style="background:white; padding:10px; border-radius:8px;">
+                 <img src="favicon.svg" width="32" height="32" style="display:block; margin: 0 auto 5px;">
+                 <span style="color:#666; font-size:10px;">Current Favicon</span>
+             </div>
+             <div style="background:white; padding:10px; border-radius:8px;">
+                 <svg viewBox="0 0 100 100" width="32" height="32">
+                    <circle cx="50" cy="50" r="45" fill="var(--navy)" />
+                    <text x="50" y="65" text-anchor="middle" font-family="'Outfit', sans-serif" font-weight="900" font-size="45" fill="var(--gold)">G</text>
+                 </svg>
+                 <span style="color:#666; font-size:10px;">New Apex Style</span>
+             </div>
+        </div>
+    </div>
+
+</body>
+</html>

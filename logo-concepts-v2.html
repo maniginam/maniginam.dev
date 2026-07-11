@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManiGinaM Logo Concepts - Take 2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&family=Outfit:wght@200;900&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0c2340;
+            --gold: #d4a843;
+            --gold-bright: #ffcc02;
+            --bg: #050b14;
+            --white: #ffffff;
+            --gray: #1e293b;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg);
+            color: var(--white);
+            margin: 0;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        header h1 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, var(--white), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: #94a3b8;
+            max-width: 500px;
+            font-weight: 300;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .logo-card {
+            background: var(--gray);
+            border-radius: 2px; /* Brutalist/Sharp */
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-card:hover {
+            border-left: 4px solid var(--gold);
+            background: #162030;
+        }
+
+        .logo-preview {
+            height: 180px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-info { width: 100%; }
+        .logo-info h3 {
+            margin: 0 0 12px 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--gold);
+        }
+
+        .logo-info p {
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin: 0;
+            font-weight: 300;
+        }
+
+        /* --- LOGO 1: THE RECURSIVE LOOP --- */
+        .c1-svg { overflow: visible; }
+        .c1-path {
+            fill: none;
+            stroke: var(--gold);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        /* --- LOGO 2: THE PROMPT --- */
+        .c2-terminal {
+            font-family: 'Fira Code', monospace;
+            font-size: 2.5rem;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .c2-cursor {
+            width: 20px;
+            height: 40px;
+            background: var(--gold);
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* --- LOGO 3: THE NEXUS --- */
+        .c3-nexus circle { fill: var(--gold); }
+        .c3-line { stroke: var(--gold); stroke-width: 1; opacity: 0.3; }
+
+        /* --- LOGO 4: THE MONolith --- */
+        .c4-monolith {
+            width: 60px;
+            height: 100px;
+            border: 2px solid var(--gold);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .c4-monolith::after {
+            content: 'G';
+            font-family: 'Outfit', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            color: var(--white);
+        }
+        .c4-data-lines {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; justify-content: space-around;
+            padding: 10px 0; box-sizing: border-box;
+            opacity: 0.2;
+        }
+        .c4-line { height: 1px; background: var(--gold); width: 100%; }
+
+        /* --- LOGO 5: THE SYMMETRY MARK --- */
+        .c5-mark {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 200;
+            font-size: 4rem;
+            letter-spacing: -0.1em;
+            position: relative;
+        }
+        .c5-mark span {
+            color: var(--gold);
+            font-weight: 900;
+            margin: 0 -10px;
+        }
+    </style>
+  <script defer src="https://mgstat.maniginam.workers.dev/b.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1>Logo Direction 2.0</h1>
+        <p>Moving away from literal icons toward abstract engineering symbols and "Hacker/Architect" aesthetics.</p>
+    </header>
+
+    <div class="logo-grid">
+        
+        <!-- Direction 1: The Recursive Loop -->
+        <div class="logo-card">
+            <div class="logo-preview">
+                <svg width="120" height="80" viewBox="0 0 120 80" class="c1-svg">
+                    <!-- A stylized, infinite 'M' that loops back into a 'G' -->
+                    <path class="c1-path" d="M20,60 L20,20 L60,50 L100,20 L100,60 C100,75 80,75 80,60 L80,50 L110,50" />
+                    <circle cx="20" cy="60" r="4" fill="var(--gold)" />
+                    <circle cx="110" cy="50" r="4" fill="var(--white)" />
+                </svg>
+            </div>
+            <div class="logo-info">
+                <h3>1. The Recursive Loop</h3>
+                <p>A single, continuous line forming a recursive path. It represents the "Build, Test, Refactor" cycle and the palindrome nature of your name.</p>
+            </div>
+        </div>
+
+        <!-- Direction 2: The Terminal Prompt -->
+        <div class="logo-card">
+            <div class="logo-preview">
+                <div class="c2-terminal">
+                    <span style="color:var(--gold)">></span>_g<span class="c2-cursor"></span>
+                </div>
+            </div>
+            <div class="logo-info">
+                <h3>2. The "Main" Prompt</h3>
+                <p>Ultra-minimalist. It's the moment of creation—a terminal prompt where AI agents and code begin. Strips away the "consultant" look for a "builder" look.</p>
+            </div>
+        </div>
+
+        <!-- Direction 3: The Nexus Point -->
+        <div class="logo-card">
+            <div class="logo-preview">
+                <svg width="120" height="120" viewBox="0 0 100 100" class="c3-nexus">
+                    <line x1="10" y1="10" x2="50" y2="50" class="c3-line" />
+                    <line x1="90" y1="10" x2="50" y2="50" class="c3-line" />
+                    <line x1="50" y1="90" x2="50" y2="50" class="c3-line" />
+                    <circle cx="50" cy="50" r="8" />
+                    <circle cx="10" cy="10" r="3" fill="var(--white)" />
+                    <circle cx="90" cy="10" r="3" fill="var(--white)" />
+                    <circle cx="50" cy="90" r="3" fill="var(--white)" />
+                    <!-- Subtle 'M' formation -->
+                    <path d="M30,70 L50,50 L70,70" fill="none" stroke="var(--gold)" stroke-width="2" />
+                </svg>
+            </div>
+            <div class="logo-info">
+                <h3>3. The Nexus</h3>
+                <p>Represents integration. Different industrial data streams (manufacturing, construction, AI) converging at a single point of intelligence.</p>
+            </div>
+        </div>
+
+        <!-- Direction 4: The Industrial Monolith -->
+        <div class="logo-card">
+            <div class="logo-preview">
+                <div class="c4-monolith">
+                    <div class="c4-data-lines">
+                        <div class="c4-line"></div>
+                        <div class="c4-line"></div>
+                        <div class="c4-line"></div>
+                        <div class="c4-line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-info">
+                <h3>4. The Monolith</h3>
+                <p>Heavy, solid, and durable. A "server rack" profile that feels like a steel beam. It signals "Industrial Grade" without needing a literal gear.</p>
+            </div>
+        </div>
+
+        <!-- Direction 5: The Symmetry Mark -->
+        <div class="logo-card">
+            <div class="logo-preview">
+                <div class="c5-mark">
+                    m<span>g</span>m
+                </div>
+            </div>
+            <div class="logo-info">
+                <h3>5. The Symmetry Mark</h3>
+                <p>A compressed version of your name. It leans into the "Martiny, Gina Martiny" palindrome with high-end, geometric typography. Purely brand-focused.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer style="margin-top: 80px; color: #475569; font-size: 0.8rem; font-family: 'Fira Code';">
+        [system.log]: 5 NEW CONCEPTS LOADED // STATUS: AWAITING_FEEDBACK
+    </footer>
+
+</body>
+</html>

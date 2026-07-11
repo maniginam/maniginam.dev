@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Baton Rouge Font Preview — maniginam.dev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Playfair+Display:wght@400;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Sancreek&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0c2340;
+    --navy-mid: #1a3a5c;
+    --gold: #d4a843;
+    --gold-light: #f0d68a;
+    --gold-dim: rgba(212,168,67,0.15);
+    --text: #0f1729;
+    --text-mid: #3d4b63;
+    --text-muted: #6b7a8d;
+    --bg: #ffffff;
+    --bg-alt: #f5f7fa;
+    --border: #d5dbe5;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg-alt); color: var(--text); font-family: 'Inter', sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; padding: 2rem 1rem 5rem; }
+  .page-head { max-width: 900px; margin: 0 auto 2.5rem; text-align: center; }
+  .page-head h1 { font-size: 1.6rem; font-weight: 900; color: var(--navy); letter-spacing: -0.02em; margin-bottom: 0.4rem; }
+  .page-head p { color: var(--text-muted); font-size: 0.95rem; }
+
+  .card { max-width: 900px; margin: 0 auto 2rem; background: var(--bg); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(12,35,64,0.06); }
+  .card-head { background: linear-gradient(135deg, var(--navy), var(--navy-mid)); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .card-head .opt-name { color: #fff; font-weight: 700; font-size: 1rem; }
+  .card-head .opt-fonts { color: var(--gold-light); font-size: 0.76rem; font-weight: 500; font-family: 'Space Mono', monospace; }
+  .card-body { padding: 2.5rem; }
+  .vibe { font-size: 0.85rem; color: var(--gold); font-weight: 600; margin-bottom: 1.5rem; font-style: italic; }
+
+  /* shared structure (Bricolage) */
+  .h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.7rem, 4vw, 2.4rem); font-weight: 800; color: var(--navy); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.6rem; }
+  .h1 .accent { color: var(--gold); }
+  .blurb { font-family: 'Inter', sans-serif; color: var(--text-mid); font-size: 1rem; max-width: 600px; margin-bottom: 1.5rem; }
+
+  /* signature zone — the regional font */
+  .sig-zone { border-top: 1px dashed var(--border); padding-top: 1.5rem; margin-top: 0.5rem; }
+  .logo-demo { font-size: 1.7rem; margin-bottom: 1rem; color: var(--navy); }
+  .logo-demo .g { color: var(--gold); }
+  .name-demo { font-size: 2.6rem; color: var(--navy); line-height: 1.1; margin-bottom: 1rem; }
+  .palindrome { display: inline-block; padding: 0.6rem 1.1rem; background: var(--gold-dim); border: 1px solid rgba(212,168,67,0.2); border-radius: 8px; font-size: 1.9rem; color: var(--navy); letter-spacing: 0.08em; }
+  .palindrome .hi { color: var(--gold); }
+
+  /* per-option signature font */
+  .opt-playfair .logo-demo, .opt-playfair .name-demo, .opt-playfair .palindrome { font-family: 'Playfair Display', serif; font-weight: 700; }
+  .opt-cormorant .logo-demo, .opt-cormorant .name-demo, .opt-cormorant .palindrome { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+  .opt-alfa .logo-demo, .opt-alfa .name-demo, .opt-alfa .palindrome { font-family: 'Alfa Slab One', serif; font-weight: 400; }
+  .opt-oswald .logo-demo, .opt-oswald .name-demo, .opt-oswald .palindrome { font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; }
+  .opt-sancreek .logo-demo, .opt-sancreek .name-demo, .opt-sancreek .palindrome { font-family: 'Sancreek', serif; font-weight: 400; }
+</style>
+  <script defer src="https://mgstat.maniginam.workers.dev/b.js"></script>
+</head>
+<body>
+
+  <div class="page-head">
+    <h1>"Baton Rouge" Signature Fonts</h1>
+    <p>Each regional font as the signature (logo · name · palindrome). Structure stays Bricolage, body stays Inter.</p>
+  </div>
+
+  <!-- Playfair -->
+  <div class="card opt-playfair">
+    <div class="card-head">
+      <span class="opt-name">1 · Playfair Display</span>
+      <span class="opt-fonts">French-Louisiana Didone elegance</span>
+    </div>
+    <div class="card-body">
+      <p class="vibe">Antebellum river grandeur · ties to the French name "Baton Rouge"</p>
+      <h1 class="h1">I build systems that <span class="accent">work as hard</span> as you do.</h1>
+      <p class="blurb">Custom software, autonomous agents, and industrial-grade integrations — built to last.</p>
+      <div class="sig-zone">
+        <div class="logo-demo"><span class="g">Mani</span>GinaM<span class="g">.dev</span></div>
+        <div class="name-demo">Gina Martiny</div>
+        <div class="palindrome"><span class="hi">m</span>a<span class="hi">n</span>i<span class="hi">g</span>i<span class="hi">n</span>a<span class="hi">m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cormorant -->
+  <div class="card opt-cormorant">
+    <div class="card-head">
+      <span class="opt-name">2 · Cormorant Garamond</span>
+      <span class="opt-fonts">French Garamond heritage, refined</span>
+    </div>
+    <div class="card-body">
+      <p class="vibe">Delicate French serif · old-world Louisiana, understated</p>
+      <h1 class="h1">I build systems that <span class="accent">work as hard</span> as you do.</h1>
+      <p class="blurb">Custom software, autonomous agents, and industrial-grade integrations — built to last.</p>
+      <div class="sig-zone">
+        <div class="logo-demo"><span class="g">Mani</span>GinaM<span class="g">.dev</span></div>
+        <div class="name-demo">Gina Martiny</div>
+        <div class="palindrome"><span class="hi">m</span>a<span class="hi">n</span>i<span class="hi">g</span>i<span class="hi">n</span>a<span class="hi">m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alfa Slab -->
+  <div class="card opt-alfa">
+    <div class="card-head">
+      <span class="opt-name">3 · Alfa Slab One</span>
+      <span class="opt-fonts">WBR Americana, fat slab</span>
+    </div>
+    <div class="card-body">
+      <p class="vibe">Sugarcane &amp; grain-elevator bold · working-parish vintage</p>
+      <h1 class="h1">I build systems that <span class="accent">work as hard</span> as you do.</h1>
+      <p class="blurb">Custom software, autonomous agents, and industrial-grade integrations — built to last.</p>
+      <div class="sig-zone">
+        <div class="logo-demo"><span class="g">Mani</span>GinaM<span class="g">.dev</span></div>
+        <div class="name-demo">Gina Martiny</div>
+        <div class="palindrome"><span class="hi">m</span>a<span class="hi">n</span>i<span class="hi">g</span>i<span class="hi">n</span>a<span class="hi">m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Oswald -->
+  <div class="card opt-oswald">
+    <div class="card-head">
+      <span class="opt-name">4 · Oswald</span>
+      <span class="opt-fonts">river-corridor industrial / condensed</span>
+    </div>
+    <div class="card-body">
+      <p class="vibe">Shipping-stencil, chemical-corridor utilitarian</p>
+      <h1 class="h1">I build systems that <span class="accent">work as hard</span> as you do.</h1>
+      <p class="blurb">Custom software, autonomous agents, and industrial-grade integrations — built to last.</p>
+      <div class="sig-zone">
+        <div class="logo-demo"><span class="g">Mani</span>GinaM<span class="g">.dev</span></div>
+        <div class="name-demo">Gina Martiny</div>
+        <div class="palindrome"><span class="hi">m</span>a<span class="hi">n</span>i<span class="hi">g</span>i<span class="hi">n</span>a<span class="hi">m</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sancreek -->
+  <div class="card opt-sancreek">
+    <div class="card-head">
+      <span class="opt-name">5 · Sancreek</span>
+      <span class="opt-fonts">vintage Western/saloon (accent-only)</span>
+    </div>
+    <div class="card-body">
+      <p class="vibe">Rural-South vintage signage · kitsch risk, use sparingly</p>
+      <h1 class="h1">I build systems that <span class="accent">work as hard</span> as you do.</h1>
+      <p class="blurb">Custom software, autonomous agents, and industrial-grade integrations — built to last.</p>
+      <div class="sig-zone">
+        <div class="logo-demo"><span class="g">Mani</span>GinaM<span class="g">.dev</span></div>
+        <div class="name-demo">Gina Martiny</div>
+        <div class="palindrome"><span class="hi">m</span>a<span class="hi">n</span>i<span class="hi">g</span>i<span class="hi">n</span>a<span class="hi">m</span></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
