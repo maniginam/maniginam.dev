@@ -27,21 +27,38 @@ function validate(form){
   return ok;
 }
 
+function confirmView(name, date, phone){
+  document.getElementById('inquire-card').innerHTML =
+    `<div class="inquire-ok">
+       <h3>Thanks, ${esc(name)}!</h3>
+       <p class="note">Your catering inquiry for <b>${esc(date)}</b> was received.
+       We'll call you at ${esc(phone)} to plan the menu. For anything urgent, call
+       <a href="tel:2252563897">225.256.3897</a>.</p>
+       <a class="btn btn--gold" href="menu.html" style="margin-top:1rem">Browse the Menu</a>
+     </div>`;
+}
+
 const form = document.getElementById('inquire-form');
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
   e.preventDefault();
   if(!validate(form)) return;
   const name = form.name.value.trim();
   const phone = form.phone.value.trim();
   const date = form.eventDate.value;
-  // TODO: wire to backend/email — POST inquiry to a catering endpoint or send email.
-  // Demo: confirm receipt (no message actually sent yet).
-  document.getElementById('inquire-card').innerHTML =
-    `<div class="inquire-ok">
-       <h3>Thanks, ${esc(name)}!</h3>
-       <p class="note">Your catering inquiry for <b>${esc(date)}</b> was received (demo — nothing sent yet).
-       We'll call you at ${esc(phone)} to plan the menu. For anything urgent, call
-       <a href="tel:2252563897">225.256.3897</a>.</p>
-       <a class="btn btn--gold" href="menu.html" style="margin-top:1rem">Browse the Menu</a>
-     </div>`;
+  const payload = {
+    name, email: form.email.value.trim(), phone, eventDate: date,
+    guests: form.guests.value.trim(), eventType: form.eventType.value,
+    details: form.details.value.trim(),
+  };
+  const btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true; btn.textContent = 'Sending…';
+  try{
+    // Captured server-side when hosted (maniginam.dev Function -> KV -> admin).
+    // Standalone/offline: falls through to the same confirmation.
+    await fetch('/api/catering', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+  }catch(_){ /* offline / standalone demo — still confirm */ }
+  confirmView(name, date, phone);
 });
