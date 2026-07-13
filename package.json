@@ -5,11 +5,12 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "dev": "wrangler pages dev . --kv STATS --kv SIGNUPS"
+    "dev": "wrangler pages dev . --kv STATS --kv SIGNUPS",
+    "deploy": "wrangler pages deploy . --project-name=maniginam-dev --branch=main"
   },
   "devDependencies": {
     "pdfkit": "^0.19.1",
     "vitest": "^2.1.0",
-    "wrangler": "^3.80.0"
+    "wrangler": "^4.110.0"
   }
 }
